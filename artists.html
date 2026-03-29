@@ -60,8 +60,8 @@
         <h1 class="section-title">Artists</h1>
       </div>
       <div class="artists-grid" role="list">
-        <a href="artist-a1.html" class="artist-card" role="listitem">
-          <figure class="artist-card-img"><img src="images/artists/joe-andoe.jpg" alt="Sun Dog" loading="lazy" /></figure>
+        <a href="artist-a1.html" class="artist-card artist-card--featured" role="listitem" data-artist-page="sun-dog">
+          <figure class="artist-card-img"><img src="images/artists/Gemini_Generated_Image_sw19mtsw19mtsw19.png" alt="Sun Dog" width="800" height="800" loading="lazy" /></figure>
           <h2>Sun Dog</h2>
         </a>
         <a href="#" class="artist-card" role="listitem">
@@ -470,31 +470,6 @@
       input.addEventListener('focus', updateHasValue);
       updateHasValue();
     });
-  </script>
-  <script>
-    // Fake content: on remplace les noms d'artistes par des libellés fictifs.
-    (function () {
-      var artistCards = document.querySelectorAll('.artists-grid .artist-card');
-      artistCards.forEach(function (card, idx) {
-        var name = 'Artiste ' + String.fromCharCode(65 + (idx % 26)) + ' ' + (idx + 1);
-        var h2 = card.querySelector('h2');
-        if (h2) h2.textContent = name;
-
-        var img = card.querySelector('img');
-        if (img) img.setAttribute('alt', name);
-      });
-    })();
-  </script>
-
-  <script>
-    // Limiter la grille d'artistes : afficher uniquement 12 cartes.
-    (function () {
-      var max = 12;
-      var cards = document.querySelectorAll('.artists-grid .artist-card');
-      cards.forEach(function (card, idx) {
-        if (idx >= max) card.style.display = 'none';
-      });
-    })();
   </script>
 </body>
 </html>
