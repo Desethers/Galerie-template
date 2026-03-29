@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exhibitions – Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .card-location {
+      border-radius: 4px !important;
+      border: 1px solid #767676 !important;
+      padding: 0 .5em !important;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="exhibitions.html">Exhibitions</a>
+        <a href="artists.html">Artists</a>
+        <a href="#">Fairs</a>
+        <a href="#">News</a>
+        <a href="index.html#about">About</a>
+      </nav>
+      <form class="header-search" role="search" onsubmit="return false" onclick="this.querySelector('input').focus()">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="search" placeholder="" aria-label="Search" />
+        <button type="button" class="header-search-clear" aria-label="Effacer la recherche" tabindex="-1"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+      </form>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-inner">
+        <form class="mobile-search" role="search" onsubmit="return false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search" aria-label="Search" />
+        </form>
+        <a href="exhibitions.html">Exhibitions</a>
+      <a href="artists.html">Artists</a>
+      <a href="#">Fairs</a>
+      <a href="#">News</a>
+      <a href="index.html#about">About</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Barre de filtres expositions -->
+    <div class="exh-filters exh-filters--fixed" id="exhFilters">
+        <div class="exh-filters-card" id="exhFiltersCard" aria-label="Filter exhibitions">
+          <div class="exh-filters-inner">
+            <div class="exh-filters-panel exh-filters-panel--dates" id="exhPanelDates">
+              <div class="exh-filters-group exh-filters-group--status">
+                <button class="exh-pill active" data-filter="status" data-value="current">Current</button>
+                <button class="exh-pill" data-filter="status" data-value="upcoming">Upcoming</button>
+                <div class="exh-past-expand" id="exhPastExpand" role="group" aria-label="Past exhibitions">
+                  <button type="button" class="exh-pill exh-pill--inner" data-filter="status" data-value="past">Past</button>
+                  <div class="year-roulette year-roulette--inline" id="yearRoulette">
+                    <div class="year-roulette-track" id="yearTrack">
+                      <button class="year-item active" data-year="all">All</button>
+                      <button class="year-item" data-year="2026">2026</button>
+                      <button class="year-item" data-year="2025">2025</button>
+                      <button class="year-item" data-year="2024">2024</button>
+                      <button class="year-item" data-year="2023">2023</button>
+                      <button class="year-item" data-year="2022">2022</button>
+                      <button class="year-item" data-year="2021">2021</button>
+                      <button class="year-item" data-year="2020">2020</button>
+                      <button class="year-item" data-year="2019">2019</button>
+                      <button class="year-item" data-year="2018">2018</button>
+                      <button class="year-item" data-year="2017">2017</button>
+                      <button class="year-item" data-year="2016">2016</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grille des expositions -->
+    <section class="content-section" id="exhGrid">
+      <div class="exh-split-layout" aria-label="Exhibitions split">
+        <div class="exh-split-col">
+          <h2 class="section-title">Current Exhibitions</h2>
+          <ul class="cards-grid three-col" role="list" id="exhListCurrent"></ul>
+        </div>
+        <div class="exh-split-col">
+          <h2 class="section-title">Upcoming Exhibitions</h2>
+          <ul class="cards-grid three-col" role="list" id="exhListUpcoming"></ul>
+        </div>
+      </div>
+
+      <div class="exh-past-layout">
+        <h2 class="section-title">Past Exhibitions</h2>
+        <ul class="cards-grid three-col" role="list" id="exhListPast"></ul>
+      </div>
+
+      <!-- Liste "master" : les cartes sont redistribuées en JS dans les 3 grilles ci-dessus -->
+      <ul class="cards-grid three-col" role="list" id="exhListMaster" hidden>
+        <li data-status="current" data-year="2026" data-location="gstaad">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/Exhibition1.png" alt="Exhibition 1" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Gstaad</p>
+              <p class="card-artist">Sun Dog</p>
+              <h3 class="card-title">Still Life, Living Form</h3>
+              <p class="card-date">Feb 12 — Mar 22, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="monaco">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/peter-halley-recent-paintings.jpg" alt="Peter Halley, Recent Paintings" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Monaco</p>
+              <p class="card-artist">Peter Halley</p>
+              <h3 class="card-title">Recent Paintings</h3>
+              <p class="card-date">Jan 28 — Apr 3, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="new york">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/dylan-solomon-kraus.jpg" alt="Dylan Solomon Kraus, The Joys of Sacrifice" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <p class="card-artist">Dylan Solomon Kraus</p>
+              <h3 class="card-title">The Joys of Sacrifice</h3>
+              <p class="card-date">Jan 22 — Mar 11, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="brussels">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/minjung-kim.jpg" alt="Minjung Kim, The Pulse of Ink, Paper, and Fire" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Minjung Kim</p>
+              <h3 class="card-title">The Pulse of Ink, Paper, and Fire</h3>
+              <p class="card-date">Jan 21 — Mar 7, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="new york">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/ali-cherri.jpg" alt="Ali Cherri, Last Watch Before Dawn" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Tribeca</p>
+              <p class="card-artist">Ali Cherri</p>
+              <h3 class="card-title">Last Watch Before Dawn</h3>
+              <p class="card-date">Jan 16 — Feb 28, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="shanghai">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/vivian-springford.jpg" alt="Vivian Springford" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Vivian Springford</p>
+              <p class="card-date">Jan 15 — Mar 7, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="shanghai">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/jean-baptiste-bernadet.jpg" alt="Jean-Baptiste Bernadet, Vetiver (Shanghai)" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Jean-Baptiste Bernadet</p>
+              <h3 class="card-title">Vetiver (Shanghai)</h3>
+              <p class="card-date">Jan 15 — Mar 7, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="paris">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/emily-mason.jpg" alt="Emily Mason, Other Rooms" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Turenne</p>
+              <p class="card-artist">Emily Mason</p>
+              <h3 class="card-title">Other Rooms, Works from 1959–2017</h3>
+              <p class="card-date">Jan 10 — Mar 14, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="paris">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/jean-dewasne.jpg" alt="Jean Dewasne" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Matignon</p>
+              <p class="card-artist">Jean Dewasne</p>
+              <p class="card-date">Jan 10 — Mar 14, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="brussels">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/Exhibition2.png" alt="Artwork, Exposition imaginaire 10" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Erik Lindman &amp; Robert Motherwell</p>
+              <h3 class="card-title">Open Edges</h3>
+              <p class="card-date">Mar 11 — Apr 18, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="new york">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/southpaw.jpg" alt="Southpaw: Gerasimos Floratos &amp; Karel Appel" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Tribeca</p>
+              <p class="card-artist">Gerasimos Floratos &amp; Karel Appel</p>
+              <h3 class="card-title">Southpaw</h3>
+              <p class="card-date">Mar 13 — Apr 25, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="new york">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/youngju-joung.jpg" alt="Youngju Joung, Pause and Flow" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Tribeca</p>
+              <p class="card-artist">Youngju Joung</p>
+              <h3 class="card-title">Pause and Flow</h3>
+              <p class="card-date">Mar 13 — Apr 25, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="shanghai">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/not-vital.jpg" alt="Not Vital, Portraits" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Not Vital</p>
+              <h3 class="card-title">Portraits</h3>
+              <p class="card-date">Mar 20 — May 16, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="paris">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/forming-the-monochrome.jpg" alt="Forming the Monochrome, Masters of Dansaekhwa" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Matignon</p>
+              <p class="card-artist">Masters of Dansaekhwa</p>
+              <h3 class="card-title">Forming the Monochrome — Masters of Dansaekhwa</h3>
+              <p class="card-date">Mar 21 — May 23, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="paris">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/larry-poons.jpg" alt="Larry Poons, Kentucky Cols." loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Turenne</p>
+              <p class="card-artist">Larry Poons</p>
+              <h3 class="card-title">Kentucky Cols.</h3>
+              <p class="card-date">Mar 21 — May 21, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="gstaad" data-year="2025">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/zio-ziegler-six-trees.jpg" alt="Zio Ziegler Six Trees" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Gstaad</p>
+              <p class="card-artist">Zio Ziegler</p>
+              <h3 class="card-title">Six Trees</h3>
+              <p class="card-date">Dec 22, 2025 — Feb 1, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2025">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/oliver-beer-three-nymph-as.jpg" alt="Oliver Beer Three Nymphéas" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Oliver Beer</p>
+              <h3 class="card-title">Three Nymphéas</h3>
+              <p class="card-date">Nov 12, 2025 — Jan 10, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2025">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/brent-wadden-best-before.jpg" alt="Brent Wadden Best Before" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Brent Wadden</p>
+              <h3 class="card-title">Best Before</h3>
+              <p class="card-date">Nov 7, 2025 — Jan 10, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="gstaad" data-year="2024">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/alejandro-cardenas-olympia.jpg" alt="Alejandro Cardenas OLYMPIA" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Gstaad</p>
+              <p class="card-artist">Alejandro Cardenas</p>
+              <h3 class="card-title">OLYMPIA</h3>
+              <p class="card-date">Dec 21, 2024 — Feb 2, 2025</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="monaco" data-year="2024">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/tia-thuy-nguyen-burdening-dream.jpg" alt="Tia-Thuy Nguyen Burdening Dream" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Monaco</p>
+              <p class="card-artist">Tia-Thuy Nguyen</p>
+              <h3 class="card-title">Burdening Dream</h3>
+              <p class="card-date">Dec 10, 2024 — Mar 1, 2025</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="paris" data-year="2024">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/jameson-green-quot-look-back-and-smile-on-per.jpg" alt="Jameson Green — Look back, and smile on perils past" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Turenne</p>
+              <p class="card-artist">Jameson Green</p>
+              <h3 class="card-title">&ldquo;Look back, and smile on perils past&rdquo;</h3>
+              <p class="card-date">Nov 23 — Dec 21, 2024</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="gstaad" data-year="2023">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/picasso-unique-etchings-from-the-crommelynck-.jpg" alt="Picasso: unique etchings from the Crommelynck studio" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Gstaad</p>
+              <h3 class="card-title">Picasso: unique etchings from the Crommelynck studio</h3>
+              <p class="card-date">Dec 21, 2023 — Feb 3, 2024</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2023">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/peter-halley-new-paintings.jpg" alt="Peter Halley New Paintings" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Peter Halley</p>
+              <h3 class="card-title">New Paintings</h3>
+              <p class="card-date">Dec 8, 2023 — Jan 20, 2024</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2023">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/in-s-longevial-pourfendue.jpg" alt="Inès Longevial Pourfendue" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London, Grosvenor Hill</p>
+              <p class="card-artist">Inès Longevial</p>
+              <h3 class="card-title">Pourfendue</h3>
+              <p class="card-date">Nov 22 — Dec 22, 2023</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2022">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/jos-lerma-quieto-quietud-quietudes.jpg" alt="José Lerma Quieto, Quietud, Quietudes" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">José Lerma</p>
+              <h3 class="card-title">Quieto, Quietud, Quietudes</h3>
+              <p class="card-date">Dec 9, 2022 — Jan 7, 2023</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2022">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/john-mcallister-be-delirious-reveries-ringing.jpg" alt="John McAllister be delirious reveries ringing" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">John McAllister</p>
+              <h3 class="card-title">be delirious reveries ringing</h3>
+              <p class="card-date">Dec 8, 2022 — Jan 14, 2023</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2022">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/the-wall-claire-decet-guillaume-gelot-and-jea.jpg" alt="The Wall: Claire Decet, Guillaume Gelot and Jean-Baptiste Bernadet" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <h3 class="card-title">The Wall: Claire Decet, Guillaume Gelot and Jean-Baptiste Bernadet</h3>
+              <p class="card-date">Dec 8, 2022 — Jan 14, 2023</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2021">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/rudolf-polanszky-apeiron.jpg" alt="Rudolf Polanszky Apeiron" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Rudolf Polanszky</p>
+              <h3 class="card-title">Apeiron</h3>
+              <p class="card-date">Dec 10, 2021 — Jan 27, 2022</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2021">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/szabolcs-boz-bus-j-r-s-carnival.jpg" alt="Szabolcs Bozó Busójárás (Carnival)" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Szabolcs Bozó</p>
+              <h3 class="card-title">Busójárás (Carnival)</h3>
+              <p class="card-date">Dec 9, 2021 — Jan 15, 2022</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2021">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/paul-de-flers-take-shelter.jpg" alt="Paul de Flers Take Shelter" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Paul de Flers</p>
+              <h3 class="card-title">Take Shelter</h3>
+              <p class="card-date">Dec 9, 2021 — Jan 15, 2022</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="paris" data-year="2020">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/gerasimos-floratos-psychogeography.jpg" alt="Gerasimos Floratos Psychogeography" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris</p>
+              <p class="card-artist">Gerasimos Floratos</p>
+              <h3 class="card-title">Psychogeography</h3>
+              <p class="card-date">Nov 20, 2020 — Jan 9, 2021</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2020">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/genieve-figgis-imaginary-friends.jpg" alt="Genieve Figgis Imaginary Friends" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London</p>
+              <p class="card-artist">Genieve Figgis</p>
+              <h3 class="card-title">Imaginary Friends</h3>
+              <p class="card-date">Nov 19 — Dec 19, 2020</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="new york" data-year="2020">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/vivian-springford.jpg" alt="Vivian Springford" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <p class="card-artist">Vivian Springford</p>
+              <p class="card-date">Nov 13, 2020 — Jan 13, 2021</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2019">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/erik-lindman-parsifal.jpg" alt="Erik Lindman Parsifal" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London</p>
+              <h3 class="card-title">Erik Lindman<br>Parsifal</h3>
+              <p class="card-date">Nov 27, 2019 — Jan 18, 2020</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="paris" data-year="2019">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/thu-van-tran-trail-dust.jpg" alt="Thu-Van Tran Trail Dust" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris</p>
+              <h3 class="card-title">Thu-Van Tran<br>Trail Dust</h3>
+              <p class="card-date">Nov 23, 2019 — Jan 11, 2020</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2019">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/james-turrell.jpg" alt="James Turrell" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <h3 class="card-title">James Turrell</h3>
+              <p class="card-date">Nov 5 — Dec 21, 2019</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2018">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/todd-bienvenu-slapstick.jpg" alt="Todd Bienvenu Slapstick" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London</p>
+              <h3 class="card-title">Todd Bienvenu<br>Slapstick</h3>
+              <p class="card-date">Nov 24, 2018 — Jan 12, 2019</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="new york" data-year="2018">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/by-fire-ceramic-works.jpg" alt="By Fire, Ceramic Works" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <h3 class="card-title">By Fire, Ceramic Works</h3>
+              <p class="card-date">Oct 31 — Dec 15, 2018</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="château de boisgeloup" data-year="2018">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/claire-tabouret-i-am-crying-because-you-are-n.jpg" alt="Claire Tabouret I am crying because you are not crying" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Château de Boisgeloup, Gisors, France</p>
+              <h3 class="card-title">Claire Tabouret<br>I am crying because you are not crying</h3>
+              <p class="card-date">Oct 27 — Nov 4, 2018</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="paris" data-year="2017">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/ryoji-ikeda-e.jpg" alt="Ryoji Ikeda π, e, ø" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris</p>
+              <h3 class="card-title">Ryoji Ikeda<br>π, e, ø</h3>
+              <p class="card-date">Nov 29 — Dec 21, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="new york" data-year="2017">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/words-without-thoughts-never-to-heaven-go-cur.jpg" alt="WORDS WITHOUT THOUGHTS NEVER TO HEAVEN GO Curated by Dieter Buchhart" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <h3 class="card-title">WORDS WITHOUT THOUGHTS NEVER TO HEAVEN GO<br>Curated by Dieter Buchhart</h3>
+              <p class="card-date">Oct 31 — Dec 16, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="petit palais" data-year="2017">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/johan-creten-fiac-on-site-petit-palais.jpg" alt="Johan Creten FIAC On Site - Petit Palais" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Petit Palais, Paris</p>
+              <h3 class="card-title">Johan Creten<br>FIAC On Site - Petit Palais</h3>
+              <p class="card-date">Oct 18 — 21, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2016">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/peter-peri-uncting.jpg" alt="Peter Peri Uncting" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London, Savile Row</p>
+              <h3 class="card-title">Peter Peri<br>Uncting</h3>
+              <p class="card-date">Nov 22, 2016 — Jan 14, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2016">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/richard-phillips.jpg" alt="Richard Phillips" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <h3 class="card-title">Richard Phillips</h3>
+              <p class="card-date">Nov 17, 2016 — Feb 25, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="new york" data-year="2016">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/calder-and-picasso.jpg" alt="Calder and Picasso" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <h3 class="card-title">Calder and Picasso</h3>
+              <p class="card-date">Oct 28 — Dec 17, 2016</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <p class="exh-empty" id="exhEmpty" hidden>No exhibitions match your filters.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-brand">Galerie</p>
+
+      <nav class="footer-social" aria-label="Follow us">
+        <a href="#" title="Facebook" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="#" title="Instagram" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="#" title="Artsy" aria-label="Artsy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.75 17.5h-1.5v-6h-1.5V10h3v7.5zm-.75-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </a>
+        <a href="#" title="X" aria-label="X (Twitter)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </nav>
+
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#">The Gallery</a>
+        <a href="#">Jobs</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility</a>
+        <span class="footer-copy">© 2026</span>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    toggle?.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      mobileNav.setAttribute('aria-hidden', String(!open));
+    });
+
+    (function () {
+      const masterList = document.getElementById('exhListMaster');
+      const exhGrid = document.getElementById('exhGrid');
+      const listCurrent = document.getElementById('exhListCurrent');
+      const listUpcoming = document.getElementById('exhListUpcoming');
+      const listPast = document.getElementById('exhListPast');
+      const emptyEl = document.getElementById('exhEmpty');
+      const splitLayout = document.querySelector('#exhGrid .exh-split-layout');
+      const currentCol = listCurrent ? listCurrent.closest('.exh-split-col') : null;
+      const upcomingCol = listUpcoming ? listUpcoming.closest('.exh-split-col') : null;
+      const pastLayout = listPast ? listPast.closest('.exh-past-layout') : null;
+      const panelDates = document.getElementById('exhPanelDates');
+      const panelLocation = document.getElementById('exhPanelLocation');
+      const track = document.getElementById('yearTrack');
+      const yearItems = track ? track.querySelectorAll('.year-item') : [];
+
+      let activeStatus = 'current';
+      let activeLocation = 'all';
+      let activeYearValue = 'all';
+
+      // Build robuste des 3 listes :
+      // on clone depuis le master (on ne déplace jamais les nodes), comme ça
+      // les listes ne se retrouvent jamais vides.
+      const masterItems = masterList ? Array.from(masterList.querySelectorAll(':scope > li')) : [];
+      function buildLists() {
+        if (!listCurrent || !listUpcoming || !listPast) return;
+        listCurrent.innerHTML = '';
+        listUpcoming.innerHTML = '';
+        listPast.innerHTML = '';
+
+        masterItems.forEach(li => {
+          const status = li.dataset.status;
+          const clone = li.cloneNode(true);
+          if (status === 'current') listCurrent.appendChild(clone);
+          else if (status === 'upcoming') listUpcoming.appendChild(clone);
+          else listPast.appendChild(clone);
+        });
+      }
+
+      buildLists();
+
+      // Le master n'est qu'une source de clonage : on le vide pour qu'il ne soit jamais affiché.
+      if (masterList) {
+        masterList.style.display = 'none';
+        masterList.innerHTML = '';
+      }
+
+      // (Nettoyage) Onglets Dates/Location supprimés : on ne garde que Current/Upcoming/Past.
+
+      function applyFilters() {
+        let visibleAny = 0;
+        const isCurrentView = activeStatus === 'current';
+        const isUpcomingView = activeStatus === 'upcoming';
+        const isPastView = activeStatus === 'past';
+
+        if (exhGrid) {
+          exhGrid.classList.toggle('is-current-view', isCurrentView);
+          exhGrid.classList.toggle('is-upcoming-view', isUpcomingView);
+          exhGrid.classList.toggle('is-past-view', isPastView);
+        }
+
+        // Vue pilotée par les 3 boutons Current / Upcoming / Past
+        if (splitLayout) splitLayout.style.display = isPastView ? 'none' : '';
+        if (currentCol) currentCol.style.display = isCurrentView ? '' : 'none';
+        if (upcomingCol) upcomingCol.style.display = isUpcomingView ? '' : 'none';
+        if (pastLayout) pastLayout.style.display = isPastView ? '' : 'none';
+
+        // Current : 1 seule carte (la centrée), le reste masqué
+        if (listCurrent) {
+          const currentItems = Array.from(listCurrent.querySelectorAll(':scope > li'));
+          const matched = currentItems.filter(li => activeYearValue === 'all' || li.dataset.year === activeYearValue);
+          const first = matched[0] || currentItems[0] || null;
+          currentItems.forEach(li => {
+            const show = isCurrentView && first && li === first;
+            li.style.display = show ? '' : 'none';
+            if (show) visibleAny++;
+          });
+        }
+
+        // Upcoming : toutes les cartes (carousel si > 1)
+        if (listUpcoming) {
+          const upcomingItems = Array.from(listUpcoming.querySelectorAll(':scope > li'));
+          const visibleUpcoming = upcomingItems.filter(li => activeYearValue === 'all' || li.dataset.year === activeYearValue);
+          const firstUpcoming = visibleUpcoming[0] || upcomingItems[0] || null;
+          listUpcoming.classList.remove('exh-carousel');
+          upcomingItems.forEach(li => {
+            const show = isUpcomingView && firstUpcoming && li === firstUpcoming;
+            li.style.display = show ? '' : 'none';
+            if (show) visibleAny++;
+          });
+        }
+
+        // Past : toutes les cartes
+        if (listPast) {
+          const pastItems = Array.from(listPast.querySelectorAll(':scope > li'));
+          const visiblePast = pastItems.filter(li => activeYearValue === 'all' || li.dataset.year === activeYearValue);
+          pastItems.forEach(li => {
+            const show = isPastView && visiblePast.includes(li);
+            li.style.display = show ? '' : 'none';
+            if (show) visibleAny++;
+          });
+        }
+
+        emptyEl.hidden = visibleAny > 0;
+      }
+
+      // Filtre uniquement Current / Upcoming / Past
+      const pastExpandEl = document.getElementById('exhPastExpand');
+
+      document.querySelectorAll('.exh-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.exh-pill').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeStatus = btn.dataset.value;
+
+          // Past : ouvrir la roue d'années
+          if (pastExpandEl) {
+            const isPast = btn.dataset.value === 'past';
+            if (isPast) {
+              // Toggle (2e clic = fermeture)
+              const nextExpanded = !pastExpandEl.classList.contains('expanded');
+              pastExpandEl.classList.toggle('expanded', nextExpanded);
+              pastExpandEl.classList.toggle('active', nextExpanded);
+            } else {
+              // Quand on choisit Current/Upcoming, on replie la roue Past
+              pastExpandEl.classList.remove('expanded');
+              pastExpandEl.classList.remove('active');
+            }
+          }
+
+          applyFilters();
+        });
+      });
+
+      /* ── Year Roulette ── */
+      if (track && yearItems.length) {
+        let yearClickLock = 0;
+
+        function centerItem(btn) {
+          const trackRect = track.getBoundingClientRect();
+          const btnRect = btn.getBoundingClientRect();
+          const offset = btnRect.left - trackRect.left - (trackRect.width / 2) + (btnRect.width / 2);
+          track.scrollLeft += offset;
+        }
+
+        function updateActiveYear() {
+          if (Date.now() < yearClickLock) return;
+          const trackRect = track.getBoundingClientRect();
+          const center = trackRect.left + trackRect.width / 2;
+          let closest = null;
+          let closestDist = Infinity;
+
+          yearItems.forEach(btn => {
+            const rect = btn.getBoundingClientRect();
+            const mid = rect.left + rect.width / 2;
+            const dist = Math.abs(mid - center);
+            if (dist < closestDist) {
+              closestDist = dist;
+              closest = btn;
+            }
+          });
+
+          if (closest) {
+            yearItems.forEach(b => b.classList.remove('active'));
+            closest.classList.add('active');
+            const newYear = closest.dataset.year;
+            if (newYear !== activeYearValue) {
+              activeYearValue = newYear;
+              applyFilters();
+            }
+          }
+        }
+
+        let yearWasSelected = false;
+
+        yearItems.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const year = btn.dataset.year;
+            yearClickLock = Date.now() + 400;
+            yearItems.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeYearValue = year;
+            yearWasSelected = true;
+            applyFilters();
+            centerItem(btn);
+          });
+        });
+
+        let scrollTimer;
+        track.addEventListener('scroll', () => {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(updateActiveYear, 80);
+        }, { passive: true });
+
+        requestAnimationFrame(() => {
+          const first = track.querySelector('.year-item.active');
+          if (first) centerItem(first);
+        });
+      }
+
+      applyFilters();
+    })();
+  </script>
+  <script>
+    (function () {
+      var header = document.querySelector('.site-header');
+      if (!header) return;
+      var scrollThreshold = 24;
+      var atTopThreshold = 100;
+      function setFilterBarTop() {
+        var h = header.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', h + 'px');
+      }
+      function updateHeader() {
+        var y = window.scrollY;
+        var scrolled = y > scrollThreshold;
+        var atTop = y <= atTopThreshold;
+        header.classList.toggle('scrolled', scrolled);
+        document.body.classList.toggle('header-scrolled', scrolled);
+        document.body.classList.toggle('exh-at-top', atTop);
+        requestAnimationFrame(setFilterBarTop);
+      }
+      window.addEventListener('scroll', function () { updateHeader(); }, { passive: true });
+      window.addEventListener('resize', setFilterBarTop);
+      updateHeader();
+      setFilterBarTop();
+    })();
+  </script>
+  <script>
+    (function () {
+      // Quand on clique sur "Exhibitions" (déjà sur la page), remonter en haut pour afficher la barre de filtres
+      var exhLinks = document.querySelectorAll('a[href="exhibitions.html"], a[href="/exhibitions.html"]');
+      exhLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          if (window.location.pathname.endsWith('exhibitions.html') || window.location.pathname.endsWith('/exhibitions')) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.body.classList.add('exh-at-top');
+          }
+        });
+      });
+    })();
+  </script>
+  <script>
+    document.querySelectorAll('.header-search-clear').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var form = btn.closest('.header-search');
+        var input = form && form.querySelector('input[type="search"]');
+        if (input) {
+          input.value = '';
+          input.focus();
+          form.classList.remove('has-value');
+        }
+      });
+    });
+    document.querySelectorAll('.header-search input[type="search"]').forEach(function (input) {
+      var form = input.closest('.header-search');
+      function updateHasValue() {
+        form.classList.toggle('has-value', input.value.length > 0);
+      }
+      input.addEventListener('input', updateHasValue);
+      input.addEventListener('focus', updateHasValue);
+      updateHasValue();
+    });
+  </script>
+  <script>
+    // Fake content: on remplace les libellés d'expositions/artistes
+    // pour éviter tout lien avec la réalité, tout en conservant les data-*.
+    (function () {
+      var locationNames = {
+        paris: 'Lutetia',
+        'new york': 'Rivière Est',
+        brussels: 'Brumel',
+        shanghai: 'Port-Orient',
+        monaco: 'Roche-Serein',
+        gstaad: 'Alpendale',
+        london: 'Londara'
+      };
+
+      // Renomme les chips de localisation (labels seulement, data-value inchangé)
+      document.querySelectorAll('.exh-chip').forEach(function (btn) {
+        var key = btn.dataset.value;
+        btn.textContent = locationNames[key] || ('Zone ' + key);
+      });
+
+      // Renomme les boutons d'années (labels seulement, data-year inchangé)
+      var yearBtns = document.querySelectorAll('#yearTrack .year-item');
+      yearBtns.forEach(function (btn, idx) {
+        if (btn.dataset.year === 'all') btn.textContent = 'Tous';
+        else btn.textContent = btn.dataset.year;
+      });
+
+      // Renomme les cartes dans les 3 grilles
+      var items = document.querySelectorAll('#exhListCurrent > li, #exhListUpcoming > li, #exhListPast > li');
+      items.forEach(function (li, idx) {
+        var locKey = li.dataset.location;
+        var locName = locationNames[locKey];
+        if (!locName) locName = 'Zone ' + (idx + 1);
+
+        var locEl = li.querySelector('.card-location');
+        if (locEl) {
+          // Spécifique : premier bloc Current Exhibitions -> "Paris"
+          if (idx === 0) locEl.textContent = 'Paris';
+          else locEl.textContent = locName;
+        }
+
+        var artistEl = li.querySelector('.card-artist');
+        if (artistEl) {
+          if (idx === 0) artistEl.textContent = 'Sun Dog';
+          else artistEl.textContent = 'Artiste ' + String.fromCharCode(65 + (idx % 26)) + ' ' + (idx + 1);
+        }
+
+        var titleEl = li.querySelector('.card-title');
+        if (titleEl) {
+          // Spécifique : premier titre de la vue Current Exhibitions
+          if (idx === 0) titleEl.textContent = 'Your friends';
+          else titleEl.textContent = 'Exposition imaginaire ' + (idx + 1);
+        }
+
+        var dateEl = li.querySelector('.card-date');
+        // Laisse la date réelle (déjà présente dans le HTML) pour ne pas afficher "Période X — Période Y".
+
+        var img = li.querySelector('img');
+        if (img) {
+          var a = artistEl ? artistEl.textContent : 'Artwork';
+          var t = titleEl ? titleEl.textContent : '';
+          img.setAttribute('alt', t ? (a + ', ' + t) : a);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
+

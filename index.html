@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Galerie: Contemporary &amp; Modern Art Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ── HEADER ────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="./exhibitions.html">Exhibitions</a>
+        <a href="./artists.html">Artists</a>
+        <a href="#">Fairs</a>
+        <a href="#">News</a>
+        <a href="#about">About</a>
+      </nav>
+      <form class="header-search" role="search" onsubmit="return false" onclick="this.querySelector('input').focus()">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="search" placeholder="" aria-label="Search" />
+        <button type="button" class="header-search-clear" aria-label="Effacer la recherche" tabindex="-1"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+      </form>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-inner">
+        <form class="mobile-search" role="search" onsubmit="return false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search" aria-label="Search" />
+        </form>
+        <a href="./exhibitions.html">Exhibitions</a>
+        <a href="./artists.html">Artists</a>
+        <a href="#">Fairs</a>
+        <a href="#">News</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ── HIGHLIGHTS (image fixe) ───────────────────────── -->
+    <section class="highlights-carousel" aria-label="Highlights">
+      <div class="carousel-track" id="carouselTrack">
+        <a
+          href="#"
+          class="banner-slide active"
+          data-theme="dark"
+          aria-label="Gallery highlights"
+        >
+          <img
+            src="images/hero-custom@2x.png"
+            srcset="images/hero-custom@2x.png 1x"
+            sizes="100vw"
+            alt="Exhibition 1"
+            loading="eager"
+          />
+          <div class="banner-caption">
+            <p class="banner-label">Lumen District</p>
+            <h2 class="banner-artist">Artiste Alpha</h2>
+            <h3 class="banner-title">Recent Studies</h3>
+            <p class="banner-date">Jan 12 — Feb 22, 2026</p>
+            <span class="banner-cta">Learn more</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── EXHIBITIONS ───────────────────────────────── -->
+    <section class="content-section" id="exhibitions">
+      <div class="section-head">
+        <h2 class="section-title">Exhibitions</h2>
+        <a href="./exhibitions.html" class="view-all">view all</a>
+      </div>
+      <ul class="cards-grid three-col" role="list">
+      <li>
+          <a href="./exhibitions.html" class="card">
+            <figure class="card-img">
+              <img
+                src="images/exh-emily-mason.jpg"
+                alt="Emily Mason, Other Rooms"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Turenne</p>
+              <p class="card-artist">Emily Mason</p>
+              <h3 class="card-title">Other Rooms, Works from 1959–2017</h3>
+              <p class="card-date">Jan 10 — Mar 14, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="./exhibitions.html" class="card">
+            <figure class="card-img">
+              <img
+                src="images/exh-jean-baptiste-bernadet.jpg"
+                alt="Jean-Baptiste Bernadet, Vetiver"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Jean-Baptiste Bernadet</p>
+              <h3 class="card-title">Vetiver (Shanghai)</h3>
+              <p class="card-date">Jan 15 — Mar 7, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="./exhibitions.html" class="card">
+            <figure class="card-img">
+              <img
+                src="images/exh-minjung-kim.jpg"
+                alt="Minjung Kim, The Pulse of Ink"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Minjung Kim</p>
+              <h3 class="card-title">The Pulse of Ink, Paper, and Fire</h3>
+              <p class="card-date">Jan 21 — Mar 7, 2026</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── FOCUS ─────────────────────────────────────── -->
+    <section class="content-section content-section--alt" id="focus">
+      <div class="section-head">
+        <h2 class="section-title">Focus</h2>
+        <a href="#" class="view-all">view all</a>
+      </div>
+      <ul class="cards-grid three-col" role="list">
+        <li>
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img
+                src="images/focus-claire-tabouret.jpg"
+                alt="Claire Tabouret, Weaving Waters"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Museum Voorlinden, Wassenaar, Netherlands</p>
+              <p class="card-artist">Claire Tabouret</p>
+              <h3 class="card-title">Weaving Waters, Weaving Gestures</h3>
+              <p class="card-date">Jan 31 — May 25, 2026</p>
+              <span class="card-link">Learn more →</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img
+                src="images/focus-john-giorno.jpg"
+                alt="John Giorno, The Performative Word"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">MAMbo – Museo d'Arte Moderna di Bologna, Italy</p>
+              <p class="card-artist">John Giorno</p>
+              <h3 class="card-title">The Performative Word</h3>
+              <p class="card-date">Feb 5 — May 3, 2026</p>
+              <span class="card-link">Learn more →</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img
+                src="images/focus-frieze-la.jpg"
+                alt="Frieze Los Angeles"
+                loading="lazy"
+              />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Booth D09</p>
+              <h3 class="card-title">Frieze Los Angeles</h3>
+              <p class="card-date">Feb 27 — Mar 1, 2026</p>
+              <span class="card-link">Learn more →</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── NEWSLETTER ─────────────────────────────────── -->
+    <section class="newsletter-section">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h2>Be the first to know</h2>
+          <p>Join our mailing list to never miss upcoming exhibitions, art fairs, news, events, films &amp; more.</p>
+        </div>
+        <a href="#" class="btn-outline">Subscribe</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <p class="footer-brand">Galerie</p>
+
+      <nav class="footer-social" aria-label="Follow us">
+        <a href="#" title="Facebook" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="#" title="Instagram" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="#" title="Artsy" aria-label="Artsy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.75 17.5h-1.5v-6h-1.5V10h3v7.5zm-.75-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </a>
+        <a href="#" title="X" aria-label="X (Twitter)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </nav>
+
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#">The Gallery</a>
+        <a href="#">Jobs</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility</a>
+        <span class="footer-copy">© 2026</span>
+      </nav>
+
+    </div>
+  </footer>
+
+  <script>
+    /* Mobile nav */
+    const toggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    toggle?.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      mobileNav.setAttribute('aria-hidden', String(!open));
+    });
+  </script>
+  <script>
+    // Fake content: on remplace dynamiquement les textes d'artistes/expositions
+    // pour éviter tout lien avec le réel.
+    (function () {
+      var bannerCaption = document.querySelector('.banner-caption');
+      if (bannerCaption) {
+        var label = bannerCaption.querySelector('.banner-label');
+        var artist = bannerCaption.querySelector('.banner-artist');
+        var title = bannerCaption.querySelector('.banner-title');
+        var dates = bannerCaption.querySelector('.banner-date');
+        if (label) label.textContent = 'Lumen District';
+        if (artist) artist.textContent = 'Artiste Alpha';
+        if (title) title.textContent = 'Recent Studies';
+        if (dates) dates.textContent = 'Jan 12 — Feb 22, 2026';
+      }
+
+      var cards = document.querySelectorAll('.cards-grid .card');
+      cards.forEach(function (card, idx) {
+        var loc = card.querySelector('.card-location');
+        var artist = card.querySelector('.card-artist');
+        var title = card.querySelector('.card-title');
+        var date = card.querySelector('.card-date');
+
+        if (loc) loc.textContent = 'Quartier ' + (idx + 1);
+        if (artist) artist.textContent = 'Artiste ' + String.fromCharCode(65 + (idx % 26)) + (idx + 1);
+        if (title) title.textContent = 'Exposition imaginaire ' + (idx + 1);
+        if (date) date.textContent = 'Feb 0' + ((idx % 9) + 1) + ' — Apr 0' + (((idx + 2) % 9) + 1) + ', 2026';
+
+        var img = card.querySelector('img');
+        if (img && (artist || title)) {
+          img.setAttribute('alt', (artist ? artist.textContent : 'Artwork') + ', ' + (title ? title.textContent : ''));
+        }
+      });
+
+      var newsTitles = document.querySelectorAll('.news-title');
+      newsTitles.forEach(function (el, idx) {
+        el.textContent = 'Annonce ' + (idx + 1) + ': Œuvre de saison';
+      });
+      var newsSubtitles = document.querySelectorAll('.news-subtitle');
+      newsSubtitles.forEach(function (el, idx) {
+        el.textContent = 'Conférence privée | Édition ' + (idx + 1);
+      });
+      var newsExcerpts = document.querySelectorAll('.news-excerpt');
+      newsExcerpts.forEach(function (el, idx) {
+        el.textContent = 'Une nouvelle lecture fictive, pensée pour accompagner l’exposition et guider la visite à travers des récits inédits.';
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var header = document.querySelector('.site-header');
+      if (!header) return;
+      var scrollThreshold = 24;
+      function updateHeader() {
+        header.classList.toggle('scrolled', window.scrollY > scrollThreshold);
+      }
+      window.addEventListener('scroll', function () { updateHeader(); }, { passive: true });
+      updateHeader();
+    })();
+  </script>
+  <script>
+    document.querySelectorAll('.header-search-clear').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var form = btn.closest('.header-search');
+        var input = form && form.querySelector('input[type="search"]');
+        if (input) {
+          input.value = '';
+          input.focus();
+          form.classList.remove('has-value');
+        }
+      });
+    });
+    document.querySelectorAll('.header-search input[type="search"]').forEach(function (input) {
+      var form = input.closest('.header-search');
+      function updateHasValue() {
+        form.classList.toggle('has-value', input.value.length > 0);
+      }
+      input.addEventListener('input', updateHasValue);
+      input.addEventListener('focus', updateHasValue);
+      updateHasValue();
+    });
+  </script>
+</body>
+</html>

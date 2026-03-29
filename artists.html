@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Artists – Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .card-location {
+      border-radius: 4px !important;
+      border: 1px solid #767676 !important;
+      padding: 0 .5em !important;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="exhibitions.html">Exhibitions</a>
+        <a href="artists.html">Artists</a>
+        <a href="#">Fairs</a>
+        <a href="#">News</a>
+        <a href="index.html#about">About</a>
+      </nav>
+      <form class="header-search" role="search" onsubmit="return false" onclick="this.querySelector('input').focus()">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="search" placeholder="" aria-label="Search" />
+        <button type="button" class="header-search-clear" aria-label="Effacer la recherche" tabindex="-1"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+      </form>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-inner">
+        <form class="mobile-search" role="search" onsubmit="return false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search" aria-label="Search" />
+        </form>
+        <a href="exhibitions.html">Exhibitions</a>
+      <a href="artists.html">Artists</a>
+      <a href="#">Fairs</a>
+      <a href="#">News</a>
+      <a href="index.html#about">About</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="content-section">
+      <div class="section-head">
+        <h1 class="section-title">Artists</h1>
+      </div>
+      <div class="artists-grid" role="list">
+        <a href="artist-a1.html" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/joe-andoe.jpg" alt="Sun Dog" loading="lazy" /></figure>
+          <h2>Sun Dog</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/joel-andrianomearisoa.jpg" alt="Joël Andrianomearisoa" loading="lazy" /></figure>
+          <h2>Joël Andrianomearisoa</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/karel-appel.jpg" alt="Karel Appel" loading="lazy" /></figure>
+          <h2>The estate of Karel Appel</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/john-m-armleder.jpg" alt="John M Armleder" loading="lazy" /></figure>
+          <h2>John M Armleder</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/farah-atassi.jpg" alt="Farah Atassi" loading="lazy" /></figure>
+          <h2>Farah Atassi</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/miquel-barcelo.jpg" alt="Miquel Barceló" loading="lazy" /></figure>
+          <h2>Miquel Barceló</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/oliver-beer.jpg" alt="Oliver Beer" loading="lazy" /></figure>
+          <h2>Oliver Beer</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/jean-baptiste-bernadet.jpg" alt="Jean-Baptiste Bernadet" loading="lazy" /></figure>
+          <h2>Jean-Baptiste Bernadet</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/jenny-brosinski.jpg" alt="Jenny Brosinski" loading="lazy" /></figure>
+          <h2>Jenny Brosinski</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/alexander-calder.jpg" alt="Alexander Calder" loading="lazy" /></figure>
+          <h2>Alexander Calder</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/javier-calleja.jpg" alt="Javier Calleja" loading="lazy" /></figure>
+          <h2>Javier Calleja</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/brian-calvin.jpg" alt="Brian Calvin" loading="lazy" /></figure>
+          <h2>Brian Calvin</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/alejandro-cardenas.jpg" alt="Alejandro Cardenas" loading="lazy" /></figure>
+          <h2>Alejandro Cardenas</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/ali-cherri.jpg" alt="Ali Cherri" loading="lazy" /></figure>
+          <h2>Ali Cherri</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/ha-chong-hyun.jpg" alt="Ha Chong-Hyun" loading="lazy" /></figure>
+          <h2>Ha Chong-Hyun</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/johan-creten.jpg" alt="Johan Creten" loading="lazy" /></figure>
+          <h2>Johan Creten</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/roby-dwi-antono.jpg" alt="Roby Dwi Antono" loading="lazy" /></figure>
+          <h2>Roby Dwi Antono</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/sasha-ferre.jpg" alt="Sasha Ferré" loading="lazy" /></figure>
+          <h2>Sasha Ferré</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/genieve-figgis.jpg" alt="Genieve Figgis" loading="lazy" /></figure>
+          <h2>Genieve Figgis</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/paul-de-flers.jpg" alt="Paul de Flers" loading="lazy" /></figure>
+          <h2>Paul de Flers</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/gerasimos-floratos.jpg" alt="Gerasimos Floratos" loading="lazy" /></figure>
+          <h2>Gerasimos Floratos</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/gunther-forg.jpg" alt="Günther Förg" loading="lazy" /></figure>
+          <h2>Günther Förg</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/mehdi-ghadyanloo.jpg" alt="Mehdi Ghadyanloo" loading="lazy" /></figure>
+          <h2>Mehdi Ghadyanloo</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/daniel-gibson.jpg" alt="Daniel Gibson" loading="lazy" /></figure>
+          <h2>Daniel Gibson</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/john-giorno.jpg" alt="John Giorno" loading="lazy" /></figure>
+          <h2>The estate of John Giorno</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/jameson-green.jpg" alt="Jameson Green" loading="lazy" /></figure>
+          <h2>Jameson Green</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/peter-halley.jpg" alt="Peter Halley" loading="lazy" /></figure>
+          <h2>Peter Halley</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/gregor-hildebrandt.jpg" alt="Gregor Hildebrandt" loading="lazy" /></figure>
+          <h2>Gregor Hildebrandt</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/ryoji-ikeda.jpg" alt="Ryoji Ikeda" loading="lazy" /></figure>
+          <h2>Ryoji Ikeda</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/alex-israel.jpg" alt="Alex Israel" loading="lazy" /></figure>
+          <h2>Alex Israel</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/carlos-jacanamijoy.jpg" alt="Carlos Jacanamijoy" loading="lazy" /></figure>
+          <h2>Carlos Jacanamijoy</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/allen-jones.jpg" alt="Allen Jones" loading="lazy" /></figure>
+          <h2>Allen Jones</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/haley-josephs.jpg" alt="Haley Josephs" loading="lazy" /></figure>
+          <h2>Haley Josephs</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/youngju-joung.jpg" alt="Youngju Joung" loading="lazy" /></figure>
+          <h2>Youngju Joung</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/ewa-juszkiewicz.jpg" alt="Ewa Juszkiewicz" loading="lazy" /></figure>
+          <h2>Ewa Juszkiewicz</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/michael-kagan.jpg" alt="Michael Kagan" loading="lazy" /></figure>
+          <h2>Michael Kagan</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/minjung-kim.jpg" alt="Minjung Kim" loading="lazy" /></figure>
+          <h2>Minjung Kim</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/leelee-kimmel.jpg" alt="Leelee Kimmel" loading="lazy" /></figure>
+          <h2>Leelee Kimmel</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/jeff-koons.jpg" alt="Jeff Koons" loading="lazy" /></figure>
+          <h2>Jeff Koons</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/joseph-kosuth.jpg" alt="Joseph Kosuth" loading="lazy" /></figure>
+          <h2>Joseph Kosuth</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/christopher-le-brun.jpg" alt="Christopher Le Brun" loading="lazy" /></figure>
+          <h2>Christopher Le Brun</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/alexandre-lenoir.jpg" alt="Alexandre Lenoir" loading="lazy" /></figure>
+          <h2>Alexandre Lenoir</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/erik-lindman.jpg" alt="Erik Lindman" loading="lazy" /></figure>
+          <h2>Erik Lindman</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/ines-longevial.jpg" alt="Inès Longevial" loading="lazy" /></figure>
+          <h2>Inès Longevial</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/markus-lupertz.jpg" alt="Markus Lüpertz" loading="lazy" /></figure>
+          <h2>Markus Lüpertz</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/heinz-mack.jpg" alt="Heinz Mack" loading="lazy" /></figure>
+          <h2>Heinz Mack</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/tomokazu-matsuyama.jpg" alt="Tomokazu Matsuyama" loading="lazy" /></figure>
+          <h2>Tomokazu Matsuyama</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/john-mcallister.jpg" alt="John McAllister" loading="lazy" /></figure>
+          <h2>John McAllister</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/sam-mckinniss.jpg" alt="Sam McKinniss" loading="lazy" /></figure>
+          <h2>Sam McKinniss</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/jean-miotte.jpg" alt="Jean Miotte" loading="lazy" /></figure>
+          <h2>The estate of Jean Miotte</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/keita-morimoto.jpg" alt="Keita Morimoto" loading="lazy" /></figure>
+          <h2>Keita Morimoto</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/tia-thuy-nguyen.jpg" alt="Tia-Thuy Nguyen" loading="lazy" /></figure>
+          <h2>Tia-Thuy Nguyen</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/gwen-oneil.jpg" alt="Gwen O'Neil" loading="lazy" /></figure>
+          <h2>Gwen O'Neil</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/hans-op-de-beeck.jpg" alt="Hans Op de Beeck" loading="lazy" /></figure>
+          <h2>Hans Op de Beeck</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/pablo-picasso.jpg" alt="Pablo Picasso" loading="lazy" /></figure>
+          <h2>Pablo Picasso</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/serge-poliakoff.jpg" alt="Serge Poliakoff" loading="lazy" /></figure>
+          <h2>The estate of Serge Poliakoff</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/larry-poons.jpg" alt="Larry Poons" loading="lazy" /></figure>
+          <h2>Larry Poons</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/richard-prince.jpg" alt="Richard Prince" loading="lazy" /></figure>
+          <h2>Richard Prince</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/li-qing.jpg" alt="Li Qing" loading="lazy" /></figure>
+          <h2>Li Qing</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/nathaniel-mary-quinn.jpg" alt="Nathaniel Mary Quinn" loading="lazy" /></figure>
+          <h2>Nathaniel Mary Quinn</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/umar-rashid.jpg" alt="Umar Rashid" loading="lazy" /></figure>
+          <h2>Umar Rashid</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/kenny-scharf.jpg" alt="Kenny Scharf" loading="lazy" /></figure>
+          <h2>Kenny Scharf</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/ryan-schneider.jpg" alt="Ryan Schneider" loading="lazy" /></figure>
+          <h2>Ryan Schneider</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/laurie-simmons.jpg" alt="Laurie Simmons" loading="lazy" /></figure>
+          <h2>Laurie Simmons</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/taryn-simon.jpg" alt="Taryn Simon" loading="lazy" /></figure>
+          <h2>Taryn Simon</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/vaughn-spann.jpg" alt="Vaughn Spann" loading="lazy" /></figure>
+          <h2>Vaughn Spann</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/vivian-springford.jpg" alt="Vivian Springford" loading="lazy" /></figure>
+          <h2>Vivian Springford</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/claire-tabouret.jpg" alt="Claire Tabouret" loading="lazy" /></figure>
+          <h2>Claire Tabouret</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/genesis-tramaine.jpg" alt="Genesis Tramaine" loading="lazy" /></figure>
+          <h2>Genesis Tramaine</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/thu-van-tran.jpg" alt="Thu-Van Tran" loading="lazy" /></figure>
+          <h2>Thu-Van Tran</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/kim-tschang-yeul.jpg" alt="Kim Tschang-Yeul" loading="lazy" /></figure>
+          <h2>The estate of Kim Tschang-Yeul</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/james-turrell.jpg" alt="James Turrell" loading="lazy" /></figure>
+          <h2>James Turrell</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/de-wain-valentine.jpg" alt="De Wain Valentine" loading="lazy" /></figure>
+          <h2>The estate of De Wain Valentine</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/jess-valice.jpg" alt="Jess Valice" loading="lazy" /></figure>
+          <h2>Jess Valice</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/francesco-vezzoli.jpg" alt="Francesco Vezzoli" loading="lazy" /></figure>
+          <h2>Francesco Vezzoli</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/brent-wadden.jpg" alt="Brent Wadden" loading="lazy" /></figure>
+          <h2>Brent Wadden</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/amanda-wall.jpg" alt="Amanda Wall" loading="lazy" /></figure>
+          <h2>Amanda Wall</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/tom-wesselmann.jpg" alt="Tom Wesselmann" loading="lazy" /></figure>
+          <h2>The estate of Tom Wesselmann</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/chloe-wise.jpg" alt="Chloe Wise" loading="lazy" /></figure>
+          <h2>Chloe Wise</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/ji-xin.jpg" alt="Ji Xin" loading="lazy" /></figure>
+          <h2>Ji Xin</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/huang-yuxing.jpg" alt="Huang Yuxing" loading="lazy" /></figure>
+          <h2>Huang Yuxing</h2>
+        </a>
+        <a href="#" class="artist-card" role="listitem">
+          <figure class="artist-card-img"><img src="images/artists/zio-ziegler.jpg" alt="Zio Ziegler" loading="lazy" /></figure>
+          <h2>Zio Ziegler</h2>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER (identique à l’accueil) ───────────────── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <p class="footer-brand">Galerie</p>
+
+      <nav class="footer-social" aria-label="Follow us">
+        <a href="#" title="Facebook" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="#" title="Instagram" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="#" title="Artsy" aria-label="Artsy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.75 17.5h-1.5v-6h-1.5V10h3v7.5zm-.75-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </a>
+        <a href="#" title="X" aria-label="X (Twitter)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </nav>
+
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#">The Gallery</a>
+        <a href="#">Jobs</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility</a>
+        <span class="footer-copy">© 2026</span>
+      </nav>
+
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    toggle?.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      mobileNav.setAttribute('aria-hidden', String(!open));
+    });
+  </script>
+  <script>
+    (function () {
+      var header = document.querySelector('.site-header');
+      if (!header) return;
+      var scrollThreshold = 24;
+      function updateHeader() {
+        header.classList.toggle('scrolled', window.scrollY > scrollThreshold);
+      }
+      window.addEventListener('scroll', function () { updateHeader(); }, { passive: true });
+      updateHeader();
+    })();
+  </script>
+  <script>
+    document.querySelectorAll('.header-search-clear').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var form = btn.closest('.header-search');
+        var input = form && form.querySelector('input[type="search"]');
+        if (input) {
+          input.value = '';
+          input.focus();
+          form.classList.remove('has-value');
+        }
+      });
+    });
+    document.querySelectorAll('.header-search input[type="search"]').forEach(function (input) {
+      var form = input.closest('.header-search');
+      function updateHasValue() {
+        form.classList.toggle('has-value', input.value.length > 0);
+      }
+      input.addEventListener('input', updateHasValue);
+      input.addEventListener('focus', updateHasValue);
+      updateHasValue();
+    });
+  </script>
+  <script>
+    // Fake content: on remplace les noms d'artistes par des libellés fictifs.
+    (function () {
+      var artistCards = document.querySelectorAll('.artists-grid .artist-card');
+      artistCards.forEach(function (card, idx) {
+        var name = 'Artiste ' + String.fromCharCode(65 + (idx % 26)) + ' ' + (idx + 1);
+        var h2 = card.querySelector('h2');
+        if (h2) h2.textContent = name;
+
+        var img = card.querySelector('img');
+        if (img) img.setAttribute('alt', name);
+      });
+    })();
+  </script>
+
+  <script>
+    // Limiter la grille d'artistes : afficher uniquement 12 cartes.
+    (function () {
+      var max = 12;
+      var cards = document.querySelectorAll('.artists-grid .artist-card');
+      cards.forEach(function (card, idx) {
+        if (idx >= max) card.style.display = 'none';
+      });
+    })();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,564 @@
+        <li data-status="current" data-year="2026" data-location="gstaad">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/still-life-living-form.jpg" alt="Still Life, Living Form" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Gstaad</p>
+              <h3 class="card-title">Still Life, Living Form</h3>
+              <p class="card-date">Feb 12 — Mar 22, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="monaco">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/peter-halley-recent-paintings.jpg" alt="Peter Halley, Recent Paintings" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Monaco</p>
+              <p class="card-artist">Peter Halley</p>
+              <h3 class="card-title">Recent Paintings</h3>
+              <p class="card-date">Jan 28 — Apr 3, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="new york">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/dylan-solomon-kraus.jpg" alt="Dylan Solomon Kraus, The Joys of Sacrifice" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <p class="card-artist">Dylan Solomon Kraus</p>
+              <h3 class="card-title">The Joys of Sacrifice</h3>
+              <p class="card-date">Jan 22 — Mar 11, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="brussels">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/minjung-kim.jpg" alt="Minjung Kim, The Pulse of Ink, Paper, and Fire" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Minjung Kim</p>
+              <h3 class="card-title">The Pulse of Ink, Paper, and Fire</h3>
+              <p class="card-date">Jan 21 — Mar 7, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="new york">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/ali-cherri.jpg" alt="Ali Cherri, Last Watch Before Dawn" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Tribeca</p>
+              <p class="card-artist">Ali Cherri</p>
+              <h3 class="card-title">Last Watch Before Dawn</h3>
+              <p class="card-date">Jan 16 — Feb 28, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="shanghai">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/vivian-springford.jpg" alt="Vivian Springford" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Vivian Springford</p>
+              <p class="card-date">Jan 15 — Mar 7, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="shanghai">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/jean-baptiste-bernadet.jpg" alt="Jean-Baptiste Bernadet, Vetiver (Shanghai)" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Jean-Baptiste Bernadet</p>
+              <h3 class="card-title">Vetiver (Shanghai)</h3>
+              <p class="card-date">Jan 15 — Mar 7, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="paris">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/emily-mason.jpg" alt="Emily Mason, Other Rooms" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Turenne</p>
+              <p class="card-artist">Emily Mason</p>
+              <h3 class="card-title">Other Rooms, Works from 1959–2017</h3>
+              <p class="card-date">Jan 10 — Mar 14, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="current" data-year="2026" data-location="paris">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/jean-dewasne.jpg" alt="Jean Dewasne" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Matignon</p>
+              <p class="card-artist">Jean Dewasne</p>
+              <p class="card-date">Jan 10 — Mar 14, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="brussels">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/open-edges.jpg" alt="Open Edges: Erik Lindman &amp; Robert Motherwell" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <h3 class="card-title">Open Edges: Erik Lindman &amp; Robert Motherwell</h3>
+              <p class="card-date">Mar 11 — Apr 18, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="new york">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/southpaw.jpg" alt="Southpaw: Gerasimos Floratos &amp; Karel Appel" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Tribeca</p>
+              <h3 class="card-title">Southpaw: Gerasimos Floratos &amp; Karel Appel</h3>
+              <p class="card-date">Mar 13 — Apr 25, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="new york">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/youngju-joung.jpg" alt="Youngju Joung, Pause and Flow" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Tribeca</p>
+              <p class="card-artist">Youngju Joung</p>
+              <h3 class="card-title">Pause and Flow</h3>
+              <p class="card-date">Mar 13 — Apr 25, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="shanghai">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/not-vital.jpg" alt="Not Vital, Portraits" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Not Vital</p>
+              <h3 class="card-title">Portraits</h3>
+              <p class="card-date">Mar 20 — May 16, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="paris">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/forming-the-monochrome.jpg" alt="Forming the Monochrome, Masters of Dansaekhwa" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Matignon</p>
+              <h3 class="card-title">Forming the Monochrome — Masters of Dansaekhwa</h3>
+              <p class="card-date">Mar 21 — May 23, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="upcoming" data-year="2026" data-location="paris">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/larry-poons.jpg" alt="Larry Poons, Kentucky Cols." loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Turenne</p>
+              <p class="card-artist">Larry Poons</p>
+              <h3 class="card-title">Kentucky Cols.</h3>
+              <p class="card-date">Mar 21 — May 21, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="gstaad" data-year="2025">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/zio-ziegler-six-trees.jpg" alt="Zio Ziegler Six Trees" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Gstaad</p>
+              <p class="card-artist">Zio Ziegler</p>
+              <h3 class="card-title">Six Trees</h3>
+              <p class="card-date">Dec 22, 2025 — Feb 1, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2025">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/oliver-beer-three-nymph-as.jpg" alt="Oliver Beer Three Nymphéas" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Oliver Beer</p>
+              <h3 class="card-title">Three Nymphéas</h3>
+              <p class="card-date">Nov 12, 2025 — Jan 10, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2025">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/brent-wadden-best-before.jpg" alt="Brent Wadden Best Before" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Brent Wadden</p>
+              <h3 class="card-title">Best Before</h3>
+              <p class="card-date">Nov 7, 2025 — Jan 10, 2026</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="gstaad" data-year="2024">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/alejandro-cardenas-olympia.jpg" alt="Alejandro Cardenas OLYMPIA" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Gstaad</p>
+              <p class="card-artist">Alejandro Cardenas</p>
+              <h3 class="card-title">OLYMPIA</h3>
+              <p class="card-date">Dec 21, 2024 — Feb 2, 2025</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="monaco" data-year="2024">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/tia-thuy-nguyen-burdening-dream.jpg" alt="Tia-Thuy Nguyen Burdening Dream" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Monaco</p>
+              <p class="card-artist">Tia-Thuy Nguyen</p>
+              <h3 class="card-title">Burdening Dream</h3>
+              <p class="card-date">Dec 10, 2024 — Mar 1, 2025</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="paris" data-year="2024">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/jameson-green-quot-look-back-and-smile-on-per.jpg" alt="Jameson Green — Look back, and smile on perils past" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris, Turenne</p>
+              <p class="card-artist">Jameson Green</p>
+              <h3 class="card-title">&ldquo;Look back, and smile on perils past&rdquo;</h3>
+              <p class="card-date">Nov 23 — Dec 21, 2024</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="gstaad" data-year="2023">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/picasso-unique-etchings-from-the-crommelynck-.jpg" alt="Picasso: unique etchings from the Crommelynck studio" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Gstaad</p>
+              <h3 class="card-title">Picasso: unique etchings from the Crommelynck studio</h3>
+              <p class="card-date">Dec 21, 2023 — Feb 3, 2024</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2023">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/peter-halley-new-paintings.jpg" alt="Peter Halley New Paintings" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Peter Halley</p>
+              <h3 class="card-title">New Paintings</h3>
+              <p class="card-date">Dec 8, 2023 — Jan 20, 2024</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2023">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/in-s-longevial-pourfendue.jpg" alt="Inès Longevial Pourfendue" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London, Grosvenor Hill</p>
+              <p class="card-artist">Inès Longevial</p>
+              <h3 class="card-title">Pourfendue</h3>
+              <p class="card-date">Nov 22 — Dec 22, 2023</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2022">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/jos-lerma-quieto-quietud-quietudes.jpg" alt="José Lerma Quieto, Quietud, Quietudes" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">José Lerma</p>
+              <h3 class="card-title">Quieto, Quietud, Quietudes</h3>
+              <p class="card-date">Dec 9, 2022 — Jan 7, 2023</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2022">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/john-mcallister-be-delirious-reveries-ringing.jpg" alt="John McAllister be delirious reveries ringing" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">John McAllister</p>
+              <h3 class="card-title">be delirious reveries ringing</h3>
+              <p class="card-date">Dec 8, 2022 — Jan 14, 2023</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2022">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/the-wall-claire-decet-guillaume-gelot-and-jea.jpg" alt="The Wall: Claire Decet, Guillaume Gelot and Jean-Baptiste Bernadet" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <h3 class="card-title">The Wall: Claire Decet, Guillaume Gelot and Jean-Baptiste Bernadet</h3>
+              <p class="card-date">Dec 8, 2022 — Jan 14, 2023</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2021">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/rudolf-polanszky-apeiron.jpg" alt="Rudolf Polanszky Apeiron" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <p class="card-artist">Rudolf Polanszky</p>
+              <h3 class="card-title">Apeiron</h3>
+              <p class="card-date">Dec 10, 2021 — Jan 27, 2022</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2021">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/szabolcs-boz-bus-j-r-s-carnival.jpg" alt="Szabolcs Bozó Busójárás (Carnival)" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Szabolcs Bozó</p>
+              <h3 class="card-title">Busójárás (Carnival)</h3>
+              <p class="card-date">Dec 9, 2021 — Jan 15, 2022</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2021">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/paul-de-flers-take-shelter.jpg" alt="Paul de Flers Take Shelter" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <p class="card-artist">Paul de Flers</p>
+              <h3 class="card-title">Take Shelter</h3>
+              <p class="card-date">Dec 9, 2021 — Jan 15, 2022</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="paris" data-year="2020">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/gerasimos-floratos-psychogeography.jpg" alt="Gerasimos Floratos Psychogeography" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris</p>
+              <p class="card-artist">Gerasimos Floratos</p>
+              <h3 class="card-title">Psychogeography</h3>
+              <p class="card-date">Nov 20, 2020 — Jan 9, 2021</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2020">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/genieve-figgis-imaginary-friends.jpg" alt="Genieve Figgis Imaginary Friends" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London</p>
+              <p class="card-artist">Genieve Figgis</p>
+              <h3 class="card-title">Imaginary Friends</h3>
+              <p class="card-date">Nov 19 — Dec 19, 2020</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="new york" data-year="2020">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/vivian-springford.jpg" alt="Vivian Springford" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <p class="card-artist">Vivian Springford</p>
+              <p class="card-date">Nov 13, 2020 — Jan 13, 2021</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2019">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/erik-lindman-parsifal.jpg" alt="Erik Lindman Parsifal" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London</p>
+              <h3 class="card-title">Erik Lindman<br>Parsifal</h3>
+              <p class="card-date">Nov 27, 2019 — Jan 18, 2020</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="paris" data-year="2019">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/thu-van-tran-trail-dust.jpg" alt="Thu-Van Tran Trail Dust" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris</p>
+              <h3 class="card-title">Thu-Van Tran<br>Trail Dust</h3>
+              <p class="card-date">Nov 23, 2019 — Jan 11, 2020</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="shanghai" data-year="2019">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/james-turrell.jpg" alt="James Turrell" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Shanghai</p>
+              <h3 class="card-title">James Turrell</h3>
+              <p class="card-date">Nov 5 — Dec 21, 2019</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2018">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/todd-bienvenu-slapstick.jpg" alt="Todd Bienvenu Slapstick" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London</p>
+              <h3 class="card-title">Todd Bienvenu<br>Slapstick</h3>
+              <p class="card-date">Nov 24, 2018 — Jan 12, 2019</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="new york" data-year="2018">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/by-fire-ceramic-works.jpg" alt="By Fire, Ceramic Works" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <h3 class="card-title">By Fire, Ceramic Works</h3>
+              <p class="card-date">Oct 31 — Dec 15, 2018</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="château de boisgeloup" data-year="2018">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/claire-tabouret-i-am-crying-because-you-are-n.jpg" alt="Claire Tabouret I am crying because you are not crying" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Château de Boisgeloup, Gisors, France</p>
+              <h3 class="card-title">Claire Tabouret<br>I am crying because you are not crying</h3>
+              <p class="card-date">Oct 27 — Nov 4, 2018</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="paris" data-year="2017">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/ryoji-ikeda-e.jpg" alt="Ryoji Ikeda π, e, ø" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Paris</p>
+              <h3 class="card-title">Ryoji Ikeda<br>π, e, ø</h3>
+              <p class="card-date">Nov 29 — Dec 21, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="new york" data-year="2017">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/words-without-thoughts-never-to-heaven-go-cur.jpg" alt="WORDS WITHOUT THOUGHTS NEVER TO HEAVEN GO Curated by Dieter Buchhart" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <h3 class="card-title">WORDS WITHOUT THOUGHTS NEVER TO HEAVEN GO<br>Curated by Dieter Buchhart</h3>
+              <p class="card-date">Oct 31 — Dec 16, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="petit palais" data-year="2017">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/johan-creten-fiac-on-site-petit-palais.jpg" alt="Johan Creten FIAC On Site - Petit Palais" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Petit Palais, Paris</p>
+              <h3 class="card-title">Johan Creten<br>FIAC On Site - Petit Palais</h3>
+              <p class="card-date">Oct 18 — 21, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="london" data-year="2016">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/peter-peri-uncting.jpg" alt="Peter Peri Uncting" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">London, Savile Row</p>
+              <h3 class="card-title">Peter Peri<br>Uncting</h3>
+              <p class="card-date">Nov 22, 2016 — Jan 14, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="brussels" data-year="2016">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/richard-phillips.jpg" alt="Richard Phillips" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">Brussels</p>
+              <h3 class="card-title">Richard Phillips</h3>
+              <p class="card-date">Nov 17, 2016 — Feb 25, 2017</p>
+            </div>
+          </a>
+        </li>
+        <li data-status="past" data-location="new york" data-year="2016">
+          <a href="#" class="card">
+            <figure class="card-img">
+              <img src="images/exhibitions/calder-and-picasso.jpg" alt="Calder and Picasso" loading="lazy" />
+            </figure>
+            <div class="card-body">
+              <p class="card-location">New York, Upper East Side</p>
+              <h3 class="card-title">Calder and Picasso</h3>
+              <p class="card-date">Oct 28 — Dec 17, 2016</p>
+            </div>
+          </a>
+        </li>
