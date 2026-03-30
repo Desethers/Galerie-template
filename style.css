@@ -565,9 +565,17 @@ a.site-logo:hover {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 3rem var(--gutter) 3.5rem;
+  /* Aligné sur .header-inner : colonne max-width centrée + même retrait que la navbar */
+  --banner-pad-x: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter)));
+  padding: 3rem var(--banner-pad-x) 3.5rem;
   background: none;
   color: var(--caption-color);
+}
+@media (max-width: 1024px) {
+  /* Sous 1025px le header ajoute un retrait horizontal sur .site-header + .header-inner */
+  .banner-caption {
+    --banner-pad-x: max(calc(var(--gutter) * 2), calc((100% - var(--max)) / 2 + var(--gutter)));
+  }
 }
 
 /* Dégradé protecteur adapté au thème */
@@ -750,9 +758,23 @@ main:has>(.exh-filters--fixed) {
 #exhGrid {
   border-bottom: none;
 }
+/* Grille expositions : moins d’espace sous le bloc (le .content-section met 2rem / 2.8rem partout) */
+#exhGrid {
+  padding-bottom: 1rem;
+}
+@media (min-width: 1025px) {
+  #exhGrid {
+    padding-bottom: 1.5rem;
+  }
+}
 
 /* Page Artists : pas de filet sous la section liste */
 .content-section:has(.artists-grid) {
+  border-bottom: none;
+}
+
+/* Page exposition (œuvres) : pas de filet sous la section (ex. après Painting 10) */
+.content-section.exh-exhibition-works {
   border-bottom: none;
 }
 
@@ -975,7 +997,7 @@ section#exhGrid .card-body h3 {
 #exhGrid .card-artist {
   color: var(--text);
   font-size: 1.28rem;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   line-height: 1.32;
   margin-bottom: .2rem;
@@ -1080,7 +1102,7 @@ section#exhGrid .card-body h3 {
 
 .card-artist {
   font-size: .92rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.3;
   margin-bottom: .2rem;
 }
@@ -1174,7 +1196,7 @@ section#exhGrid .card-body h3 {
 
 .news-title {
   font-size: .97rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.4;
   margin-bottom: .3rem;
   max-width: 72ch;
@@ -1233,7 +1255,7 @@ section#exhGrid .card-body h3 {
 
 .newsletter-text h2 {
   font-size: 1.05rem;
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: .35rem;
   color: var(--white);
 }
@@ -1327,7 +1349,7 @@ section#exhGrid .card-body h3 {
 
 .footer-heading {
   font-size: 0.65rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1498,7 +1520,7 @@ section#exhGrid .card-body h3 {
 
 .artist-card h2 {
   font-size: .9rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.35;
   margin: 0;
   padding: 0;
@@ -2090,10 +2112,9 @@ body.header-scrolled .exh-filters {
   /* dots déjà stylisés via ::after dans la règle de base */
 }
 
-/* 3. Banner caption : padding gauche simplifié sur mobile */
+/* 3. Banner caption : retrait horizontal inchangé (voir --banner-pad-x ci-dessus) */
 @media (max-width: 640px) {
   .banner-caption {
-    padding-left: var(--gutter);
     padding-bottom: 2.5rem;
   }
   .banner-artist { font-size: 1.35rem; }

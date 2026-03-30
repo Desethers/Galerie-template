@@ -54,23 +54,24 @@
     <section class="highlights-carousel" aria-label="Highlights">
       <div class="carousel-track" id="carouselTrack">
         <a
-          href="#"
+          href="./exhibition-your-friends.html"
           class="banner-slide active"
           data-theme="dark"
-          aria-label="Gallery highlights"
+          aria-label="Sun Dog — Your friends"
         >
           <img
-            src="images/hero-custom@2x.png"
-            srcset="images/hero-custom@2x.png 1x"
-            sizes="100vw"
-            alt="Exhibition 1"
+            src="images/exhibitions/Exhibition1.png"
+            alt="Sun Dog, Your friends"
+            width="1600"
+            height="1067"
             loading="eager"
+            decoding="async"
           />
           <div class="banner-caption">
-            <p class="banner-label">Lumen District</p>
-            <h2 class="banner-artist">Artiste Alpha</h2>
-            <h3 class="banner-title">Recent Studies</h3>
-            <p class="banner-date">Jan 12 — Feb 22, 2026</p>
+            <p class="banner-label">Paris</p>
+            <h2 class="banner-artist">Sun Dog</h2>
+            <h3 class="banner-title">Your friends</h3>
+            <p class="banner-date">Feb 12 — Mar 22, 2026</p>
             <span class="banner-cta">Learn more</span>
           </div>
         </a>
@@ -261,18 +262,6 @@
     // Fake content: on remplace dynamiquement les textes d'artistes/expositions
     // pour éviter tout lien avec le réel.
     (function () {
-      var bannerCaption = document.querySelector('.banner-caption');
-      if (bannerCaption) {
-        var label = bannerCaption.querySelector('.banner-label');
-        var artist = bannerCaption.querySelector('.banner-artist');
-        var title = bannerCaption.querySelector('.banner-title');
-        var dates = bannerCaption.querySelector('.banner-date');
-        if (label) label.textContent = 'Lumen District';
-        if (artist) artist.textContent = 'Artiste Alpha';
-        if (title) title.textContent = 'Recent Studies';
-        if (dates) dates.textContent = 'Jan 12 — Feb 22, 2026';
-      }
-
       var cards = document.querySelectorAll('.cards-grid .card');
       cards.forEach(function (card, idx) {
         var loc = card.querySelector('.card-location');

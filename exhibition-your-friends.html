@@ -42,7 +42,6 @@
       border-top: none;
       padding-top: 1.25rem;
       padding-bottom: 2.25rem;
-      border-bottom: 1px solid var(--border);
     }
 
     .exh-page-hero {
@@ -122,91 +121,280 @@
       padding-top: 0;
       padding-bottom: 0;
     }
-    .exh-page-section-head {
-      margin-bottom: 1.5rem;
-    }
-    .exh-viewing-room .exh-page-section-head {
-      margin-bottom: 1rem;
-      padding-top: 2.5rem;
-      padding-bottom: 1.25rem;
+    /* Œuvres : déroulé type page exposition (image + légende, sans sous-bloc commercial) */
+    .content-section.exh-exhibition-works {
+      padding: 0;
+      background: var(--white);
     }
 
-    /* Viewing room — fond blanc, une œuvre par bloc, quote + inquiry au choix */
-    .content-section.exh-viewing-room {
-      padding: 0;
-      background: #fff;
-      border-top: 1px solid var(--border);
+    .exh-exhibition-statement {
+      padding-top: clamp(2.25rem, 4.5vw, 3.25rem);
+      padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+      text-align: center;
     }
-    .exh-viewing-room .vr-intro {
-      margin: 0.5rem 0 0;
-      max-width: 40rem;
+    .exh-exhibition-statement__heading {
+      margin: 0 0 1rem;
+    }
+    .exh-exhibition-statement__lead {
       font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin: 0 auto 1.1rem;
+      max-width: 52ch;
+      text-wrap: balance;
+    }
+    .exh-exhibition-statement__details {
+      margin: 0 auto;
+      border: none;
+      max-width: 52ch;
+      text-align: center;
+    }
+    /* Ouvert : le texte d’abord, le contrôle (summary) en dessous */
+    .exh-exhibition-statement__details[open] {
+      display: flex;
+      flex-direction: column;
+    }
+    .exh-exhibition-statement__details[open] .exh-exhibition-statement__more {
+      order: 1;
+      padding-top: 0;
+    }
+    .exh-exhibition-statement__details[open] summary {
+      order: 2;
+      margin-top: 1rem;
+    }
+    .exh-exhibition-statement__details summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      user-select: none;
+    }
+    .exh-exhibition-statement__details summary::-webkit-details-marker {
+      display: none;
+    }
+    .exh-exhibition-statement__details summary::after {
+      content: ' ↓';
+      font-size: 0.75rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 0.15em;
+      transition: transform 0.2s ease;
+    }
+    .exh-exhibition-statement__details[open] summary::after {
+      transform: rotate(-180deg);
+    }
+    .exh-exhibition-statement__details summary:hover {
+      color: var(--black);
+    }
+    .exh-exhibition-statement__more {
+      padding-top: 1rem;
+      text-align: center;
+    }
+    .exh-exhibition-statement__more p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin: 0 auto 0.9rem;
+      max-width: 52ch;
+    }
+    .exh-exhibition-statement__more p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Une seule rangée en 2 colonnes (05 + 06), puis œuvres pleine largeur */
+    .exh-works-grid--pair {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2rem, 4vw, 2.75rem);
+      padding-bottom: clamp(0.5rem, 1.5vw, 1rem);
+    }
+    @media (min-width: 768px) {
+      .exh-works-grid--pair {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 1.5rem;
+        row-gap: 0;
+      }
+    }
+    @media (min-width: 1025px) {
+      .exh-works-grid--pair {
+        column-gap: 2rem;
+      }
+    }
+    .exh-works-grid--pair .exh-work {
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: var(--white);
+    }
+    .exh-work--pair-with-quote {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-self: stretch;
+      min-height: 0;
+    }
+    .exh-pair-quote {
+      margin: 0;
+      padding: 0 clamp(0.5rem, 2vw, 1rem);
+      max-width: min(100%, 22ch);
+      border: none;
+      text-align: center;
+      font-size: 1.76rem;
+      font-style: italic;
+      font-weight: 400;
       line-height: 1.55;
       color: var(--text);
     }
-    .vr-piece {
+    .exh-pair-quote p {
       margin: 0;
-      padding-top: clamp(2.5rem, 5vw, 4rem);
-      padding-bottom: clamp(2.5rem, 5vw, 4rem);
-      border-bottom: 1px solid var(--border);
-      background: #fff;
     }
-    .vr-piece:last-of-type {
-      border-bottom: none;
+    .exh-pair-quote cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
-    .vr-piece__frame {
+
+    /* Citation plein conteneur (au-dessus d’un bloc œuvres) */
+    .exh-work-full-quote {
+      margin: 0;
+      padding-top: clamp(2rem, 4vw, 3rem);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+      background: var(--white);
+      text-align: center;
+    }
+    .exh-work-full-quote__inner {
+      margin: 0 auto;
+      max-width: 100%;
+      border: none;
+      padding: 0;
+    }
+    .exh-work-full-quote__inner p {
+      margin: 0;
+      font-size: clamp(1.25rem, 5vw, 42px);
+      line-height: 1.3;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      text-wrap: balance;
+    }
+    .exh-work-full-quote__inner cite {
+      display: block;
+      margin-top: 1.25rem;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .exh-work--full {
+      margin: 0;
+      padding-top: clamp(2rem, 4vw, 3rem);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+      background: var(--white);
+    }
+    .exh-work__figure {
       margin: 0;
       padding: 0;
-      background: #fff;
-      line-height: 0;
+      background: var(--white);
     }
-    .vr-piece__frame img {
+    .exh-work__figure img {
       width: 100%;
       height: auto;
       display: block;
     }
-    .vr-piece__caption {
-      margin-top: 1.25rem;
-      max-width: 40rem;
+    .exh-work__figure--stack > img + img {
+      margin-top: clamp(0.75rem, 2vw, 1.25rem);
     }
-    .vr-piece__title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--black);
-      margin: 0 0 0.25rem;
-      letter-spacing: -0.01em;
-    }
-    .vr-piece__meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.45;
-    }
-    .vr-piece__quote {
-      margin: 1.75rem 0 0;
-      padding: 0 0 0 1.1rem;
-      border-left: 2px solid var(--border);
-      font-size: 0.95rem;
-      font-style: italic;
-      line-height: 1.65;
-      color: var(--text);
-      max-width: 38rem;
-    }
-    .vr-piece__quote cite {
+    /* Légende sous une vue d’installation (bloc stack, avant l’œuvre suivante) */
+    .exh-work__install-caption {
       display: block;
-      margin-top: 0.65rem;
-      font-size: 0.75rem;
-      font-style: normal;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-size: 0.78rem;
       color: var(--muted);
+      line-height: 1.45;
+      margin: clamp(0.5rem, 1.5vw, 0.75rem) 0 clamp(0.75rem, 2vw, 1.25rem);
+      max-width: 42rem;
     }
-    .vr-piece__actions {
-      margin-top: 1.35rem;
+    .exh-work__figure figcaption {
+      margin-top: 1rem;
+      max-width: 42rem;
+      /* Même corps pour artiste et ligne titre + date */
+      --exh-caption-primary-size: 0.8rem;
+    }
+    .exh-work__artist {
+      display: block;
+      font-size: var(--exh-caption-primary-size);
+      font-weight: 400;
+      color: var(--text);
+      margin: 0 0 0.15rem;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    /* Ligne sous l’artiste : titre, date — puis médium, dimensions */
+    .exh-work__title-line {
+      margin: 0 0 0.35rem;
+      font-size: var(--exh-caption-primary-size);
+      font-weight: 400;
+      color: var(--black);
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+    }
+    .exh-work__title-line .exh-work__title {
+      display: inline;
+      margin: 0;
+      font-weight: 400;
+    }
+    .exh-work__title-sep {
+      font-weight: 400;
+    }
+    .exh-work__date {
+      display: inline;
+      font-size: inherit;
+      font-weight: 400;
+      color: var(--black);
+    }
+    .exh-work__medium,
+    .exh-work__dimensions {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+    .exh-work__medium {
+      margin-bottom: 0.08rem;
+    }
+    .exh-work__caption-head {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem 1rem;
+      margin-top: 0;
+      margin-bottom: 0.35rem;
+    }
+    .exh-work__caption-head .exh-work__title-line {
+      margin: 0;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .exh-work__figure .exh-work__inquiry.btn-outline {
+      margin-left: auto;
+      min-height: 0;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .exh-page-footer-cta {
@@ -215,7 +403,6 @@
       flex-wrap: wrap;
       gap: 0.75rem;
       align-items: center;
-      border-top: 1px solid var(--border);
     }
   </style>
 </head>
@@ -309,98 +496,123 @@
       <img src="images/exhibitions/Exhibition1.png" alt="Sun Dog, Your friends" width="1600" height="1067" loading="eager" decoding="async" />
     </figure>
 
-    <section class="content-section exh-page-section exh-viewing-room" aria-labelledby="vr-heading">
-      <div class="exh-page__column exh-page-section-head">
-        <h2 id="vr-heading" class="section-title">Viewing room</h2>
-        <p class="vr-intro">Selected works from the exhibition. White ground, slow pacing—scroll to move through the space.</p>
+    <section class="content-section exh-page-section exh-exhibition-works" aria-label="Works in this exhibition">
+      <div class="exh-page__column exh-exhibition-statement">
+        <h2 class="section-title exh-exhibition-statement__heading">Exhibition text</h2>
+        <p class="exh-exhibition-statement__lead">
+          Presented as one continuous sequence, the works below extend the show’s themes—friendship, memory, and light—into individual canvases and works on paper, each conceived for this installation.
+        </p>
+        <details class="exh-exhibition-statement__details">
+          <summary>Full exhibition text</summary>
+          <div class="exh-exhibition-statement__more">
+            <p>
+              The hanging follows the rhythm of the gallery: broader fields alternate with tighter formats, so the visit unfolds like a walk through connected rooms rather than a checklist of objects.
+              Color is held deliberately low, letting surface and edge carry the emotional register of the title <em>Your friends</em>.
+            </p>
+            <p>
+              Checklist, installation photography, and press requests are available from the gallery. For documentation and visiting hours, please refer to the venue details above or contact the front desk.
+            </p>
+          </div>
+        </details>
       </div>
 
-      <article class="vr-piece">
+      <article class="exh-work exh-work--full">
         <div class="exh-page__column">
-          <figure class="vr-piece__frame">
-            <img src="images/Pieces/painting-05.jpg" alt="Sun Dog, Painting 05, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+          <figure class="exh-work__figure">
+            <img src="images/Pieces/painting-02.png" alt="Sun Dog, Untitled, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+            <figcaption>
+              <p class="exh-work__artist">Sun Dog</p>
+              <p class="exh-work__title-line">
+                <span class="exh-work__title">Untitled</span><span class="exh-work__title-sep">, </span><span class="exh-work__date">2025</span>
+              </p>
+              <p class="exh-work__medium">Work on paper,</p>
+              <p class="exh-work__dimensions">56 x 76 cm</p>
+            </figcaption>
           </figure>
-          <div class="vr-piece__caption">
-            <p class="vr-piece__title">Painting 05</p>
-            <p class="vr-piece__meta">Sun Dog · 2025 · oil on canvas</p>
-          </div>
-          <blockquote class="vr-piece__quote" cite="Sun Dog">
-            A corridor is never only a passage—it holds the temperature of everyone who walked it before you.
+        </div>
+      </article>
+
+      <div class="exh-page__column exh-works-grid--pair">
+        <article class="exh-work">
+          <figure class="exh-work__figure">
+            <img src="images/Pieces/portrait2.jpg" alt="Sun Dog, Untitled, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+            <figcaption>
+              <p class="exh-work__artist">Sun Dog</p>
+              <div class="exh-work__caption-head">
+                <p class="exh-work__title-line">
+                  <span class="exh-work__title">Untitled</span><span class="exh-work__title-sep">, </span><span class="exh-work__date">2025</span>
+                </p>
+                <a class="btn-outline exh-work__inquiry" href="mailto:inquiry@galerie.com?subject=Inquiry%20%E2%80%94%20Untitled%20%E2%80%94%20Your%20friends">Inquiry</a>
+              </div>
+              <p class="exh-work__medium">Acrylic on canvas,</p>
+              <p class="exh-work__dimensions">120 x 120 cm</p>
+            </figcaption>
+          </figure>
+        </article>
+        <article class="exh-work exh-work--pair-with-quote">
+          <blockquote class="exh-pair-quote" cite="Sun Dog">
+            <p>Shared light is the simplest form of friendship—what falls on the wall falls on us both.</p>
             <cite>Sun Dog</cite>
           </blockquote>
-          <div class="vr-piece__actions">
-            <a class="btn-outline" href="mailto:contact@galerie.example?subject=Inquiry%3A%20Painting%2005">Inquiry</a>
-          </div>
+        </article>
+      </div>
+
+      <article class="exh-work exh-work--full">
+        <div class="exh-page__column">
+          <figure class="exh-work__figure">
+            <img src="images/Pieces/painting-01.png" alt="Sun Dog, Untitled, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+            <figcaption>
+              <p class="exh-work__artist">Sun Dog</p>
+              <p class="exh-work__title-line">
+                <span class="exh-work__title">Untitled</span><span class="exh-work__title-sep">, </span><span class="exh-work__date">2024</span>
+              </p>
+              <p class="exh-work__medium">Graphite and wash,</p>
+              <p class="exh-work__dimensions">42 x 59 cm</p>
+            </figcaption>
+          </figure>
         </div>
       </article>
 
-      <article class="vr-piece">
+      <div class="exh-work-full-quote">
         <div class="exh-page__column">
-          <figure class="vr-piece__frame">
-            <img src="images/Pieces/painting-06.png" alt="Sun Dog, Painting 06, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
-          </figure>
-          <div class="vr-piece__caption">
-            <p class="vr-piece__title">Painting 06</p>
-            <p class="vr-piece__meta">Sun Dog · 2025 · oil on canvas</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="vr-piece">
-        <div class="exh-page__column">
-          <figure class="vr-piece__frame">
-            <img src="images/Pieces/painting-07.jpg" alt="Sun Dog, Painting 07, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
-          </figure>
-          <div class="vr-piece__caption">
-            <p class="vr-piece__title">Painting 07</p>
-            <p class="vr-piece__meta">Sun Dog · 2025 · work on paper</p>
-          </div>
-          <blockquote class="vr-piece__quote">
-            Shared light is the simplest form of friendship—what falls on the wall falls on us both.
-            <cite>From the artist’s notes</cite>
+          <blockquote class="exh-work-full-quote__inner" cite="Sun Dog">
+            <p>What the room holds is only half the story—the rest is who stands beside you in it.</p>
+            <cite>Sun Dog</cite>
           </blockquote>
-          <div class="vr-piece__actions">
-            <a class="btn-outline" href="mailto:contact@galerie.example?subject=Inquiry%3A%20Painting%2007">Inquiry</a>
-          </div>
+        </div>
+      </div>
+
+      <article class="exh-work exh-work--full">
+        <div class="exh-page__column">
+          <figure class="exh-work__figure exh-work__figure--stack">
+            <img src="images/exhibitions/Exhibition2.png" alt="Installation view, Sun Dog : Your friends, Galerie, Paris, 2026" width="1600" height="1067" loading="lazy" decoding="async" />
+            <p class="exh-work__install-caption">Installation view, Sun Dog : <em>Your friends</em>, Galerie, Paris, 2026</p>
+            <img src="images/Pieces/painting-09.png" alt="Sun Dog, Untitled, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+            <figcaption>
+              <p class="exh-work__artist">Sun Dog</p>
+              <p class="exh-work__title-line">
+                <span class="exh-work__title">Untitled</span><span class="exh-work__title-sep">, </span><span class="exh-work__date">2025</span>
+              </p>
+              <p class="exh-work__medium">Acrylic on linen,</p>
+              <p class="exh-work__dimensions">95 x 120 cm</p>
+            </figcaption>
+          </figure>
         </div>
       </article>
 
-      <article class="vr-piece">
+      <article class="exh-work exh-work--full">
         <div class="exh-page__column">
-          <figure class="vr-piece__frame">
-            <img src="images/Pieces/painting-08.jpg" alt="Sun Dog, Painting 08, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+          <figure class="exh-work__figure">
+            <img src="images/Pieces/painting-10.jpg" alt="Sun Dog, Untitled, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+            <figcaption>
+              <p class="exh-work__artist">Sun Dog</p>
+              <p class="exh-work__title-line">
+                <span class="exh-work__title">Untitled</span><span class="exh-work__title-sep">, </span><span class="exh-work__date">2026</span>
+              </p>
+              <p class="exh-work__medium">Oil on canvas,</p>
+              <p class="exh-work__dimensions">180 x 140 cm</p>
+            </figcaption>
           </figure>
-          <div class="vr-piece__caption">
-            <p class="vr-piece__title">Painting 08</p>
-            <p class="vr-piece__meta">Sun Dog · 2024 · graphite and wash</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="vr-piece">
-        <div class="exh-page__column">
-          <figure class="vr-piece__frame">
-            <img src="images/Pieces/painting-09.png" alt="Sun Dog, Painting 09, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
-          </figure>
-          <div class="vr-piece__caption">
-            <p class="vr-piece__title">Painting 09</p>
-            <p class="vr-piece__meta">Sun Dog · 2025 · acrylic on linen</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="vr-piece">
-        <div class="exh-page__column">
-          <figure class="vr-piece__frame">
-            <img src="images/Pieces/painting-10.jpg" alt="Sun Dog, Painting 10, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
-          </figure>
-          <div class="vr-piece__caption">
-            <p class="vr-piece__title">Painting 10</p>
-            <p class="vr-piece__meta">Sun Dog · 2026 · oil on canvas</p>
-          </div>
-          <div class="vr-piece__actions">
-            <a class="btn-outline" href="mailto:contact@galerie.example?subject=Inquiry%3A%20Painting%2010">Inquiry</a>
-          </div>
         </div>
       </article>
     </section>
