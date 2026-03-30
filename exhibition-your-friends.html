@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your friends – Sun Dog – Exhibitions – Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Your friends — Sun Dog. Current exhibition at Galerie, Paris." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Page exposition — une seule colonne (même largeur que header / grilles du site) */
+    .exh-page__column {
+      width: 100%;
+      max-width: var(--max);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+      box-sizing: border-box;
+    }
+
+    .exh-page {
+      padding-bottom: 2rem;
+    }
+    .exh-page-breadcrumb {
+      padding-top: calc(var(--header-height, 4rem) + 0.75rem);
+      padding-bottom: 1rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .exh-page-breadcrumb a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .exh-page-breadcrumb a:hover { color: var(--black); }
+
+    /* Intro en premier : texte / méta, puis image héros */
+    .exh-page-intro {
+      border-top: none;
+      padding-top: 1.25rem;
+      padding-bottom: 2.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exh-page-hero {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    .exh-page-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .exh-page-split {
+      display: grid;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media (min-width: 900px) {
+      .exh-page-split {
+        grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+        gap: 3.5rem;
+      }
+    }
+
+    .exh-page-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--black);
+      margin: 0 0 1.25rem;
+    }
+
+    .exh-page-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .exh-page-aside-label {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.2rem;
+    }
+    .exh-page-aside p { margin: 0; }
+    .exh-page-aside a.artist-link {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: var(--black);
+    }
+    .exh-page-aside-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .exh-page-lede {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--text);
+      margin: 0 0 1.25rem;
+    }
+    .exh-page-body p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin: 0 0 1rem;
+      max-width: 52ch;
+    }
+
+    .exh-page-section {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .exh-page-section-head {
+      margin-bottom: 1.5rem;
+    }
+    .exh-viewing-room .exh-page-section-head {
+      margin-bottom: 1rem;
+      padding-top: 2.5rem;
+      padding-bottom: 1.25rem;
+    }
+
+    /* Viewing room — fond blanc, une œuvre par bloc, quote + inquiry au choix */
+    .content-section.exh-viewing-room {
+      padding: 0;
+      background: #fff;
+      border-top: 1px solid var(--border);
+    }
+    .exh-viewing-room .vr-intro {
+      margin: 0.5rem 0 0;
+      max-width: 40rem;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .vr-piece {
+      margin: 0;
+      padding-top: clamp(2.5rem, 5vw, 4rem);
+      padding-bottom: clamp(2.5rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+    .vr-piece:last-of-type {
+      border-bottom: none;
+    }
+    .vr-piece__frame {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      line-height: 0;
+    }
+    .vr-piece__frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .vr-piece__caption {
+      margin-top: 1.25rem;
+      max-width: 40rem;
+    }
+    .vr-piece__title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--black);
+      margin: 0 0 0.25rem;
+      letter-spacing: -0.01em;
+    }
+    .vr-piece__meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.45;
+    }
+    .vr-piece__quote {
+      margin: 1.75rem 0 0;
+      padding: 0 0 0 1.1rem;
+      border-left: 2px solid var(--border);
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--text);
+      max-width: 38rem;
+    }
+    .vr-piece__quote cite {
+      display: block;
+      margin-top: 0.65rem;
+      font-size: 0.75rem;
+      font-style: normal;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .vr-piece__actions {
+      margin-top: 1.35rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .exh-page-footer-cta {
+      padding-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body class="exh-page">
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">Galerie</a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="exhibitions.html">Exhibitions</a>
+        <a href="artists.html">Artists</a>
+        <a href="#">Fairs</a>
+        <a href="#">News</a>
+        <a href="index.html#about">About</a>
+      </nav>
+      <form class="header-search" role="search" onsubmit="return false" onclick="this.querySelector('input').focus()">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="search" placeholder="" aria-label="Search" />
+        <button type="button" class="header-search-clear" aria-label="Effacer la recherche" tabindex="-1"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+      </form>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-inner">
+        <form class="mobile-search" role="search" onsubmit="return false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search" aria-label="Search" />
+        </form>
+        <a href="exhibitions.html">Exhibitions</a>
+        <a href="artists.html">Artists</a>
+        <a href="#">Fairs</a>
+        <a href="#">News</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="exh-page__column exh-page-breadcrumb" aria-label="Breadcrumb">
+      <a href="exhibitions.html">Exhibitions</a>
+      <span aria-hidden="true"> — </span>
+      <span>Your friends</span>
+    </nav>
+
+    <section class="content-section exh-page-intro" aria-labelledby="exh-title">
+      <div class="exh-page__column exh-page-split">
+        <aside class="exh-page-aside" aria-label="Exhibition details">
+          <div>
+            <p class="exh-page-aside-label">Artist</p>
+            <p><a class="artist-link" href="artist-a1.html">Sun Dog</a></p>
+          </div>
+          <div>
+            <p class="exh-page-aside-label">Venue</p>
+            <p>Paris</p>
+          </div>
+          <div>
+            <p class="exh-page-aside-label">Dates</p>
+            <p>Feb 12 — Mar 22, 2026</p>
+          </div>
+          <div class="exh-page-aside-actions">
+            <a class="btn-outline" href="exhibitions.html">All exhibitions</a>
+            <a class="btn-outline" href="artist-a1.html">View artist</a>
+          </div>
+        </aside>
+
+        <div class="exh-page-main">
+          <h1 id="exh-title" class="exh-page-title">Your friends</h1>
+          <p class="exh-page-lede">
+            A presentation of recent paintings and works on paper exploring friendship, memory, and shared light.
+            The exhibition brings together a focused selection of pieces conceived as a single environment.
+          </p>
+          <div class="exh-page-body">
+            <p>
+              Arranged as a sequence of rooms, the works invite a slow reading: color fields, soft gradients, and
+              restrained surfaces echo the quiet of the gallery itself. The title <em>Your friends</em> signals
+              intimacy without anecdote—an open field for the viewer to inhabit.
+            </p>
+            <p>
+              For press images, checklist, and inquiries, please contact the gallery.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <figure class="exh-page__column exh-page-hero">
+      <img src="images/exhibitions/Exhibition1.png" alt="Sun Dog, Your friends" width="1600" height="1067" loading="eager" decoding="async" />
+    </figure>
+
+    <section class="content-section exh-page-section exh-viewing-room" aria-labelledby="vr-heading">
+      <div class="exh-page__column exh-page-section-head">
+        <h2 id="vr-heading" class="section-title">Viewing room</h2>
+        <p class="vr-intro">Selected works from the exhibition. White ground, slow pacing—scroll to move through the space.</p>
+      </div>
+
+      <article class="vr-piece">
+        <div class="exh-page__column">
+          <figure class="vr-piece__frame">
+            <img src="images/Pieces/painting-05.jpg" alt="Sun Dog, Painting 05, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+          </figure>
+          <div class="vr-piece__caption">
+            <p class="vr-piece__title">Painting 05</p>
+            <p class="vr-piece__meta">Sun Dog · 2025 · oil on canvas</p>
+          </div>
+          <blockquote class="vr-piece__quote" cite="Sun Dog">
+            A corridor is never only a passage—it holds the temperature of everyone who walked it before you.
+            <cite>Sun Dog</cite>
+          </blockquote>
+          <div class="vr-piece__actions">
+            <a class="btn-outline" href="mailto:contact@galerie.example?subject=Inquiry%3A%20Painting%2005">Inquiry</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="vr-piece">
+        <div class="exh-page__column">
+          <figure class="vr-piece__frame">
+            <img src="images/Pieces/painting-06.png" alt="Sun Dog, Painting 06, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+          </figure>
+          <div class="vr-piece__caption">
+            <p class="vr-piece__title">Painting 06</p>
+            <p class="vr-piece__meta">Sun Dog · 2025 · oil on canvas</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="vr-piece">
+        <div class="exh-page__column">
+          <figure class="vr-piece__frame">
+            <img src="images/Pieces/painting-07.jpg" alt="Sun Dog, Painting 07, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+          </figure>
+          <div class="vr-piece__caption">
+            <p class="vr-piece__title">Painting 07</p>
+            <p class="vr-piece__meta">Sun Dog · 2025 · work on paper</p>
+          </div>
+          <blockquote class="vr-piece__quote">
+            Shared light is the simplest form of friendship—what falls on the wall falls on us both.
+            <cite>From the artist’s notes</cite>
+          </blockquote>
+          <div class="vr-piece__actions">
+            <a class="btn-outline" href="mailto:contact@galerie.example?subject=Inquiry%3A%20Painting%2007">Inquiry</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="vr-piece">
+        <div class="exh-page__column">
+          <figure class="vr-piece__frame">
+            <img src="images/Pieces/painting-08.jpg" alt="Sun Dog, Painting 08, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+          </figure>
+          <div class="vr-piece__caption">
+            <p class="vr-piece__title">Painting 08</p>
+            <p class="vr-piece__meta">Sun Dog · 2024 · graphite and wash</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="vr-piece">
+        <div class="exh-page__column">
+          <figure class="vr-piece__frame">
+            <img src="images/Pieces/painting-09.png" alt="Sun Dog, Painting 09, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+          </figure>
+          <div class="vr-piece__caption">
+            <p class="vr-piece__title">Painting 09</p>
+            <p class="vr-piece__meta">Sun Dog · 2025 · acrylic on linen</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="vr-piece">
+        <div class="exh-page__column">
+          <figure class="vr-piece__frame">
+            <img src="images/Pieces/painting-10.jpg" alt="Sun Dog, Painting 10, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
+          </figure>
+          <div class="vr-piece__caption">
+            <p class="vr-piece__title">Painting 10</p>
+            <p class="vr-piece__meta">Sun Dog · 2026 · oil on canvas</p>
+          </div>
+          <div class="vr-piece__actions">
+            <a class="btn-outline" href="mailto:contact@galerie.example?subject=Inquiry%3A%20Painting%2010">Inquiry</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="exh-page__column exh-page-footer-cta">
+      <a class="btn-outline" href="exhibitions.html">← Back to exhibitions</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-brand">Galerie</p>
+      <nav class="footer-social" aria-label="Follow us">
+        <a href="#" title="Facebook" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="#" title="Instagram" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="#" title="Artsy" aria-label="Artsy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.75 17.5h-1.5v-6h-1.5V10h3v7.5zm-.75-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </a>
+        <a href="#" title="X" aria-label="X (Twitter)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </nav>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#">The Gallery</a>
+        <a href="#">Jobs</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility</a>
+        <span class="footer-copy">© 2026</span>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    toggle?.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      mobileNav.setAttribute('aria-hidden', String(!open));
+    });
+  </script>
+  <script>
+    (function () {
+      var header = document.querySelector('.site-header');
+      if (!header) return;
+      function setHeaderVar() {
+        document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+      }
+      function updateHeader() {
+        header.classList.toggle('scrolled', window.scrollY > 24);
+      }
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      window.addEventListener('resize', setHeaderVar);
+      updateHeader();
+      setHeaderVar();
+    })();
+  </script>
+  <script>
+    document.querySelectorAll('.header-search-clear').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var form = btn.closest('.header-search');
+        var input = form && form.querySelector('input[type="search"]');
+        if (input) {
+          input.value = '';
+          input.focus();
+          form.classList.remove('has-value');
+        }
+      });
+    });
+    document.querySelectorAll('.header-search input[type="search"]').forEach(function (input) {
+      var form = input.closest('.header-search');
+      function updateHasValue() {
+        form.classList.toggle('has-value', input.value.length > 0);
+      }
+      input.addEventListener('input', updateHasValue);
+      input.addEventListener('focus', updateHasValue);
+      updateHasValue();
+    });
+  </script>
+</body>
+</html>
