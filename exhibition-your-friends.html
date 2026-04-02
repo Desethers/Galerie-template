@@ -40,6 +40,7 @@
     /* Intro en premier : texte / méta, puis image héros */
     .exh-page-intro {
       border-top: none;
+      border-bottom: none;
       padding-top: 1.25rem;
       padding-bottom: 2.25rem;
     }
@@ -52,6 +53,22 @@
       width: 100%;
       height: auto;
       display: block;
+    }
+    .exh-page-hero__caption {
+      display: block;
+      margin: 0.65rem 0 0;
+      padding: 0;
+      font-size: 11px;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: normal;
+      text-transform: none;
+      line-height: 1.45;
+      color: var(--muted);
+      max-width: 42rem;
+    }
+    .exh-page-hero__caption em {
+      font-style: italic;
     }
     .exh-page-split {
       display: grid;
@@ -72,6 +89,10 @@
       line-height: 1.15;
       color: var(--black);
       margin: 0 0 1.25rem;
+    }
+    .exh-page-title em {
+      font-style: italic;
+      font-weight: inherit;
     }
 
     .exh-page-aside {
@@ -101,6 +122,39 @@
       flex-wrap: wrap;
       gap: 0.75rem;
       margin-top: 0.5rem;
+    }
+    .exh-page-aside-actions--primary {
+      margin-top: 0.75rem;
+    }
+    .exh-page-intro .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 6px 1.75rem;
+      border: 1px solid var(--black);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      background: var(--black);
+      color: var(--white);
+      transition: background 0.15s, color 0.15s;
+    }
+    .exh-page-intro .btn-primary:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+    .exh-page-aside-back {
+      margin: 0.85rem 0 0;
+      font-size: 0.82rem;
+    }
+    .exh-page-aside-back a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .exh-page-aside-back a:hover {
+      color: var(--black);
     }
 
     .exh-page-lede {
@@ -143,65 +197,163 @@
       max-width: 52ch;
       text-wrap: balance;
     }
-    .exh-exhibition-statement__details {
-      margin: 0 auto;
-      border: none;
-      max-width: 52ch;
-      text-align: center;
+    .exh-exhibition-statement__cta {
+      margin: 0.35rem auto 0;
+      display: flex;
+      justify-content: center;
     }
-    /* Ouvert : le texte d’abord, le contrôle (summary) en dessous */
-    .exh-exhibition-statement__details[open] {
+    /* Modale texte d’exposition — même principe que la biographie (page artiste) */
+    .bio-modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 4vw, 2rem);
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.38s ease,
+        background-color 0.38s ease,
+        visibility 0s linear 0.38s;
+    }
+    .bio-modal-overlay.open {
+      background: rgba(0, 0, 0, 0.52);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition:
+        opacity 0.38s ease,
+        background-color 0.38s ease,
+        visibility 0s linear 0s;
+    }
+    .bio-modal {
+      position: relative;
       display: flex;
       flex-direction: column;
+      background: var(--white);
+      border-radius: clamp(26px, 5vw, 40px);
+      overflow: hidden;
+      width: min(94vw, 620px);
+      max-width: 620px;
+      min-height: min(
+        92vh,
+        max(68vh, calc(min(94vw, 620px) * 1.34))
+      );
+      max-height: min(92vh, 1100px);
+      border: none;
+      padding: 0;
+      color: var(--text);
+      box-sizing: border-box;
+      box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.14),
+        0 12px 24px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+      transform: scale(0.94) translateY(18px);
+      opacity: 0;
+      transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.4s ease;
     }
-    .exh-exhibition-statement__details[open] .exh-exhibition-statement__more {
-      order: 1;
-      padding-top: 0;
+    .bio-modal-scroll {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: clamp(2.25rem, 5vw, 3rem) clamp(2rem, 4.5vw, 2.75rem)
+        clamp(2.5rem, 5vw, 3.25rem);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
     }
-    .exh-exhibition-statement__details[open] summary {
-      order: 2;
-      margin-top: 1rem;
+    .bio-modal-scroll::-webkit-scrollbar {
+      width: 6px;
     }
-    .exh-exhibition-statement__details summary {
-      list-style: none;
+    .bio-modal-scroll::-webkit-scrollbar-track {
+      margin: clamp(8px, 1.5vw, 14px) 2px clamp(8px, 1.5vw, 14px) 0;
+      background: transparent;
+    }
+    .bio-modal-scroll::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.14);
+      border-radius: 999px;
+      border: 10px solid transparent;
+      border-left-width: 2px;
+      border-right-width: 2px;
+      background-clip: padding-box;
+    }
+    .bio-modal-scroll::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 0, 0, 0.26);
+    }
+    .bio-modal-overlay.open .bio-modal {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bio-modal-overlay,
+      .bio-modal {
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .bio-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.9);
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .bio-modal-close:hover {
+      color: rgba(0, 0, 0, 0.85);
+      border-color: rgba(0, 0, 0, 0.2);
+      background: var(--white);
+    }
+    .bio-modal-close:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+    .bio-modal-content {
+      font-size: 1rem;
+      line-height: 1.625;
+      padding-right: 0.25rem;
+    }
+    .bio-modal-header {
+      margin-bottom: 1.35rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-right: 2.5rem;
+    }
+    .bio-modal-name {
+      font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin: 0 0 0.45rem;
+      color: var(--text);
+    }
+    .bio-modal-meta {
       font-size: 0.82rem;
-      color: var(--text);
-      letter-spacing: 0.04em;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      user-select: none;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin: 0;
+      line-height: 1.5;
     }
-    .exh-exhibition-statement__details summary::-webkit-details-marker {
-      display: none;
-    }
-    .exh-exhibition-statement__details summary::after {
-      content: ' ↓';
-      font-size: 0.75rem;
-      text-decoration: none;
-      display: inline-block;
-      margin-left: 0.15em;
-      transition: transform 0.2s ease;
-    }
-    .exh-exhibition-statement__details[open] summary::after {
-      transform: rotate(-180deg);
-    }
-    .exh-exhibition-statement__details summary:hover {
-      color: var(--black);
-    }
-    .exh-exhibition-statement__more {
-      padding-top: 1rem;
-      text-align: center;
-    }
-    .exh-exhibition-statement__more p {
-      font-size: 0.92rem;
-      line-height: 1.65;
-      color: var(--text);
-      margin: 0 auto 0.9rem;
-      max-width: 52ch;
-    }
-    .exh-exhibition-statement__more p:last-child {
-      margin-bottom: 0;
+    .bio-modal-content p + p {
+      margin-top: 1rem;
     }
 
     /* Une seule rangée en 2 colonnes (05 + 06), puis œuvres pleine largeur */
@@ -262,6 +414,16 @@
       text-transform: uppercase;
       color: var(--muted);
     }
+    /* Colonne citation (paire) : gris, tout noir au survol */
+    .exh-work--pair-with-quote .exh-pair-quote,
+    .exh-work--pair-with-quote .exh-pair-quote cite {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    .exh-work--pair-with-quote:hover .exh-pair-quote,
+    .exh-work--pair-with-quote:hover .exh-pair-quote cite {
+      color: var(--black);
+    }
 
     /* Citation plein conteneur (au-dessus d’un bloc œuvres) */
     .exh-work-full-quote {
@@ -319,7 +481,7 @@
     /* Légende sous une vue d’installation (bloc stack, avant l’œuvre suivante) */
     .exh-work__install-caption {
       display: block;
-      font-size: 0.78rem;
+      font-size: 11px;
       color: var(--muted);
       line-height: 1.45;
       margin: clamp(0.5rem, 1.5vw, 0.75rem) 0 clamp(0.75rem, 2vw, 1.25rem);
@@ -328,13 +490,13 @@
     .exh-work__figure figcaption {
       margin-top: 1rem;
       max-width: 42rem;
-      /* Même corps pour artiste et ligne titre + date */
-      --exh-caption-primary-size: 0.8rem;
+      /* Légendes œuvres : corps unique 11px (aligné sur exh-work__figcaption--inquiry) */
+      --exh-caption-primary-size: 11px;
     }
     .exh-work__artist {
       display: block;
       font-size: var(--exh-caption-primary-size);
-      font-weight: 400;
+      font-weight: 500;
       color: var(--text);
       margin: 0 0 0.15rem;
       letter-spacing: 0.02em;
@@ -352,7 +514,7 @@
     .exh-work__title-line .exh-work__title {
       display: inline;
       margin: 0;
-      font-weight: 400;
+      font-weight: 500;
     }
     .exh-work__title-sep {
       font-weight: 400;
@@ -360,13 +522,13 @@
     .exh-work__date {
       display: inline;
       font-size: inherit;
-      font-weight: 400;
+      font-weight: 500;
       color: var(--black);
     }
     .exh-work__medium,
     .exh-work__dimensions {
       display: block;
-      font-size: 0.78rem;
+      font-size: var(--exh-caption-primary-size);
       color: var(--muted);
       line-height: 1.45;
       margin: 0;
@@ -374,27 +536,35 @@
     .exh-work__medium {
       margin-bottom: 0.08rem;
     }
-    .exh-work__caption-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.5rem 1rem;
-      margin-top: 0;
-      margin-bottom: 0.35rem;
+    /*
+      Bouton inquiry : positionné en haut à droite du figcaption (top: 0), indépendant du flux texte.
+      padding-right réserve la zone pour éviter le chevauchement avec artiste / titre longs.
+    */
+    .exh-work__figure figcaption.exh-work__figcaption--inquiry {
+      position: relative;
+      display: block;
+      padding-right: clamp(6.5rem, 30%, 9.5rem);
+      box-sizing: border-box;
     }
-    .exh-work__caption-head .exh-work__title-line {
+    .exh-work__figcaption--inquiry .exh-work__inquiry {
+      position: absolute;
+      top: 0;
+      right: 0;
       margin: 0;
-      flex: 1 1 auto;
-      min-width: 0;
+      z-index: 1;
     }
-    .exh-work__figure .exh-work__inquiry.btn-outline {
-      margin-left: auto;
+    .exh-work__figure .exh-work__figcaption--inquiry .exh-work__inquiry.btn-outline {
       min-height: 0;
-      padding: 0.3rem 0.85rem;
-      font-size: 0.72rem;
+      padding: 10px 50px;
+      border-radius: 2px;
+      border-color: rgba(255, 194, 194, 1);
+      font-size: 11px;
       letter-spacing: 0.06em;
-      text-transform: uppercase;
+    }
+    .exh-work__figure .exh-work__figcaption--inquiry .exh-work__inquiry.btn-outline:hover {
+      background: transparent;
+      color: var(--black);
+      border-color: var(--black);
     }
 
     .exh-page-footer-cta {
@@ -403,6 +573,26 @@
       flex-wrap: wrap;
       gap: 0.75rem;
       align-items: center;
+    }
+    .exh-page-footer-cta__link {
+      display: inline;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      text-decoration: none;
+      border: none;
+      background: none;
+      padding: 0;
+      min-height: 0;
+    }
+    .exh-page-footer-cta__link:hover {
+      color: var(--black);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .exh-page-footer-cta__link:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 3px;
     }
   </style>
 </head>
@@ -459,24 +649,32 @@
             <p><a class="artist-link" href="artist-a1.html">Sun Dog</a></p>
           </div>
           <div>
-            <p class="exh-page-aside-label">Venue</p>
-            <p>Paris</p>
-          </div>
-          <div>
             <p class="exh-page-aside-label">Dates</p>
             <p>Feb 12 — Mar 22, 2026</p>
           </div>
+          <div>
+            <p class="exh-page-aside-label">Location</p>
+            <p>Galerie, Paris — Turenne</p>
+          </div>
+          <div class="exh-page-aside-actions exh-page-aside-actions--primary">
+            <a
+              class="btn-primary"
+              href="mailto:inquiry@galerie.com?subject=Inquire%20%E2%80%94%20Your%20friends%20%E2%80%94%20Sun%20Dog"
+              >Artwork Inquiry</a
+            >
+          </div>
           <div class="exh-page-aside-actions">
-            <a class="btn-outline" href="exhibitions.html">All exhibitions</a>
             <a class="btn-outline" href="artist-a1.html">View artist</a>
           </div>
+          <p class="exh-page-aside-back"><a href="exhibitions.html">All exhibitions</a></p>
         </aside>
 
         <div class="exh-page-main">
-          <h1 id="exh-title" class="exh-page-title">Your friends</h1>
+          <h1 id="exh-title" class="exh-page-title">Sun Dog — <em>Your friends</em></h1>
           <p class="exh-page-lede">
             A presentation of recent paintings and works on paper exploring friendship, memory, and shared light.
             The exhibition brings together a focused selection of pieces conceived as a single environment.
+            New and recent pieces are brought together here for the first time as one installation.
           </p>
           <div class="exh-page-body">
             <p>
@@ -485,7 +683,11 @@
               intimacy without anecdote—an open field for the viewer to inhabit.
             </p>
             <p>
-              For press images, checklist, and inquiries, please contact the gallery.
+              Private viewing and availability:
+              <a class="artist-link" href="mailto:inquiry@galerie.com?subject=Private%20viewing%20%E2%80%94%20Your%20friends">contact the gallery</a>.
+            </p>
+            <p>
+              For press images, checklist, and media inquiries, please contact the gallery.
             </p>
           </div>
         </div>
@@ -494,6 +696,7 @@
 
     <figure class="exh-page__column exh-page-hero">
       <img src="images/exhibitions/Exhibition1.png" alt="Sun Dog, Your friends" width="1600" height="1067" loading="eager" decoding="async" />
+      <figcaption class="exh-page-hero__caption">Installation view, Sun Dog : <em>Your friends</em>, Galerie, Paris, 2026</figcaption>
     </figure>
 
     <section class="content-section exh-page-section exh-exhibition-works" aria-label="Works in this exhibition">
@@ -502,18 +705,18 @@
         <p class="exh-exhibition-statement__lead">
           Presented as one continuous sequence, the works below extend the show’s themes—friendship, memory, and light—into individual canvases and works on paper, each conceived for this installation.
         </p>
-        <details class="exh-exhibition-statement__details">
-          <summary>Full exhibition text</summary>
-          <div class="exh-exhibition-statement__more">
-            <p>
-              The hanging follows the rhythm of the gallery: broader fields alternate with tighter formats, so the visit unfolds like a walk through connected rooms rather than a checklist of objects.
-              Color is held deliberately low, letting surface and edge carry the emotional register of the title <em>Your friends</em>.
-            </p>
-            <p>
-              Checklist, installation photography, and press requests are available from the gallery. For documentation and visiting hours, please refer to the venue details above or contact the front desk.
-            </p>
-          </div>
-        </details>
+        <div class="exh-exhibition-statement__cta">
+          <a href="#exhibition-text" class="btn-outline">read full exhibition text</a>
+        </div>
+        <div id="exhibitionTextSource" hidden aria-hidden="true">
+          <p>
+            The hanging follows the rhythm of the gallery: broader fields alternate with tighter formats, so the visit unfolds like a walk through connected rooms rather than a checklist of objects.
+            Color is held deliberately low, letting surface and edge carry the emotional register of the title <em>Your friends</em>.
+          </p>
+          <p>
+            Checklist, installation photography, and press requests are available from the gallery. For documentation and visiting hours, please refer to the venue details above or contact the front desk.
+          </p>
+        </div>
       </div>
 
       <article class="exh-work exh-work--full">
@@ -536,14 +739,12 @@
         <article class="exh-work">
           <figure class="exh-work__figure">
             <img src="images/Pieces/portrait2.jpg" alt="Sun Dog, Untitled, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
-            <figcaption>
+            <figcaption class="exh-work__figcaption--inquiry">
               <p class="exh-work__artist">Sun Dog</p>
-              <div class="exh-work__caption-head">
-                <p class="exh-work__title-line">
-                  <span class="exh-work__title">Untitled</span><span class="exh-work__title-sep">, </span><span class="exh-work__date">2025</span>
-                </p>
-                <a class="btn-outline exh-work__inquiry" href="mailto:inquiry@galerie.com?subject=Inquiry%20%E2%80%94%20Untitled%20%E2%80%94%20Your%20friends">Inquiry</a>
-              </div>
+              <a class="btn-outline exh-work__inquiry" href="mailto:inquiry@galerie.com?subject=Inquire%20%E2%80%94%20Untitled%20%E2%80%94%20Your%20friends">Inquire</a>
+              <p class="exh-work__title-line">
+                <span class="exh-work__title">Untitled</span><span class="exh-work__title-sep">, </span><span class="exh-work__date">2025</span>
+              </p>
               <p class="exh-work__medium">Acrylic on canvas,</p>
               <p class="exh-work__dimensions">120 x 120 cm</p>
             </figcaption>
@@ -618,9 +819,19 @@
     </section>
 
     <div class="exh-page__column exh-page-footer-cta">
-      <a class="btn-outline" href="exhibitions.html">← Back to exhibitions</a>
+      <a class="exh-page-footer-cta__link" href="exhibitions.html">← Back to exhibitions</a>
     </div>
   </main>
+
+  <!-- Texte d’exposition (même schéma que « read full biography » sur la page artiste) -->
+  <div class="bio-modal-overlay" id="exhibitionTextModalOverlay" role="presentation" aria-hidden="true">
+    <div class="bio-modal" role="dialog" aria-modal="true" aria-labelledby="exhibitionTextModalTitle">
+      <button type="button" class="bio-modal-close" id="exhibitionTextModalClose" aria-label="Close exhibition text">&times;</button>
+      <div class="bio-modal-scroll">
+        <div class="bio-modal-content" id="exhibitionTextModalContent"></div>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="footer-inner">
@@ -698,6 +909,104 @@
       input.addEventListener('focus', updateHasValue);
       updateHasValue();
     });
+  </script>
+  <script>
+    (function () {
+      var overlay = document.getElementById('exhibitionTextModalOverlay');
+      var closeBtn = document.getElementById('exhibitionTextModalClose');
+      var content = document.getElementById('exhibitionTextModalContent');
+      var source = document.getElementById('exhibitionTextSource');
+      var link = document.querySelector('.exh-exhibition-statement__cta a[href="#exhibition-text"]');
+      var titleEl = document.getElementById('exh-title');
+      var dialogPanel = overlay && overlay.querySelector('.bio-modal');
+
+      if (!overlay || !closeBtn || !content || !source || !link) return;
+
+      function exhibitionMeta() {
+        var parts = [];
+        var aside = document.querySelector('.exh-page-aside');
+        if (!aside) return '';
+        aside.querySelectorAll(':scope > div').forEach(function (block) {
+          var label = block.querySelector('.exh-page-aside-label');
+          var val = block.querySelector('a, p:not(.exh-page-aside-label)');
+          if (label && val && /Artist|Venue|Dates|Location/.test(label.textContent.trim())) {
+            parts.push(val.textContent.trim());
+          }
+        });
+        return parts.join(' · ');
+      }
+
+      function openModal() {
+        content.replaceChildren();
+        if (titleEl) {
+          var header = document.createElement('div');
+          header.className = 'bio-modal-header';
+          var title = document.createElement('h2');
+          title.className = 'bio-modal-name';
+          title.id = 'exhibitionTextModalTitle';
+          title.textContent = titleEl.textContent.trim();
+          header.appendChild(title);
+          var meta = exhibitionMeta();
+          if (meta) {
+            var metaP = document.createElement('p');
+            metaP.className = 'bio-modal-meta';
+            metaP.textContent = meta;
+            header.appendChild(metaP);
+          }
+          content.appendChild(header);
+        }
+        content.insertAdjacentHTML('beforeend', source.innerHTML);
+        if (dialogPanel && titleEl) {
+          dialogPanel.setAttribute('aria-label', titleEl.textContent.trim() + ' — exhibition text');
+        } else if (dialogPanel) {
+          dialogPanel.setAttribute('aria-label', 'Exhibition text');
+        }
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        window.setTimeout(function () {
+          closeBtn.focus();
+        }, 50);
+      }
+
+      function closeModal() {
+        if (window.location.hash === '#exhibition-text') {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function syncHash() {
+        var base = window.location.pathname + window.location.search;
+        if (window.location.hash !== '#exhibition-text') {
+          history.replaceState(null, '', base + '#exhibition-text');
+        }
+      }
+
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal();
+        syncHash();
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+      });
+
+      window.addEventListener('hashchange', function () {
+        if (window.location.hash === '#exhibition-text') openModal();
+      });
+
+      if (window.location.hash === '#exhibition-text') openModal();
+    })();
   </script>
 </body>
 </html>

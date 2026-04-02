@@ -81,7 +81,7 @@
     <!-- ── EXHIBITIONS ───────────────────────────────── -->
     <section class="content-section" id="exhibitions">
       <div class="section-head">
-        <h2 class="section-title">Exhibitions</h2>
+        <h2 class="section-title">Past exhibitions</h2>
         <a href="./exhibitions.html" class="view-all">view all</a>
       </div>
       <ul class="cards-grid three-col" role="list">
@@ -89,14 +89,14 @@
           <a href="./exhibitions.html" class="card">
             <figure class="card-img">
               <img
-                src="images/exh-emily-mason.jpg"
-                alt="Emily Mason, Other Rooms"
+                src="images/Pieces/artwork-02.png"
+                alt="Clémence Rivière, Other Rooms"
                 loading="lazy"
               />
             </figure>
             <div class="card-body">
-              <p class="card-location">Paris, Turenne</p>
-              <p class="card-artist">Emily Mason</p>
+              <p class="card-location">Paris</p>
+              <p class="card-artist">Clémence Rivière</p>
               <h3 class="card-title">Other Rooms, Works from 1959–2017</h3>
               <p class="card-date">Jan 10 — Mar 14, 2026</p>
             </div>
@@ -106,14 +106,14 @@
           <a href="./exhibitions.html" class="card">
             <figure class="card-img">
               <img
-                src="images/exh-jean-baptiste-bernadet.jpg"
-                alt="Jean-Baptiste Bernadet, Vetiver"
+                src="images/Pieces/judd-wall-stack.png"
+                alt="Jonas Mehler, Judd wall"
                 loading="lazy"
               />
             </figure>
             <div class="card-body">
-              <p class="card-location">Shanghai</p>
-              <p class="card-artist">Jean-Baptiste Bernadet</p>
+              <p class="card-location">Paris</p>
+              <p class="card-artist">Jonas Mehler</p>
               <h3 class="card-title">Vetiver (Shanghai)</h3>
               <p class="card-date">Jan 15 — Mar 7, 2026</p>
             </div>
@@ -124,13 +124,13 @@
             <figure class="card-img">
               <img
                 src="images/exh-minjung-kim.jpg"
-                alt="Minjung Kim, The Pulse of Ink"
+                alt="Sofia Castellanos, The Pulse of Ink"
                 loading="lazy"
               />
             </figure>
             <div class="card-body">
-              <p class="card-location">Brussels</p>
-              <p class="card-artist">Minjung Kim</p>
+              <p class="card-location">Paris</p>
+              <p class="card-artist">Sofia Castellanos</p>
               <h3 class="card-title">The Pulse of Ink, Paper, and Fire</h3>
               <p class="card-date">Jan 21 — Mar 7, 2026</p>
             </div>
@@ -142,7 +142,7 @@
     <!-- ── FOCUS ─────────────────────────────────────── -->
     <section class="content-section content-section--alt" id="focus">
       <div class="section-head">
-        <h2 class="section-title">Focus</h2>
+        <h2 class="section-title">News</h2>
         <a href="#" class="view-all">view all</a>
       </div>
       <ul class="cards-grid three-col" role="list">
@@ -150,14 +150,14 @@
           <a href="#" class="card">
             <figure class="card-img">
               <img
-                src="images/focus-claire-tabouret.jpg"
-                alt="Claire Tabouret, Weaving Waters"
+                src="images/Pieces/shoes-exhibition.png"
+                alt="Amélie Corbin, Shoes exhibition"
                 loading="lazy"
               />
             </figure>
             <div class="card-body">
               <p class="card-location">Museum Voorlinden, Wassenaar, Netherlands</p>
-              <p class="card-artist">Claire Tabouret</p>
+              <p class="card-artist">Amélie Corbin</p>
               <h3 class="card-title">Weaving Waters, Weaving Gestures</h3>
               <p class="card-date">Jan 31 — May 25, 2026</p>
               <span class="card-link">Learn more →</span>
@@ -168,14 +168,14 @@
           <a href="#" class="card">
             <figure class="card-img">
               <img
-                src="images/focus-john-giorno.jpg"
-                alt="John Giorno, The Performative Word"
+                src="images/Pieces/judd-floor-boxes.png"
+                alt="Jonas Mehler, Judd floor"
                 loading="lazy"
               />
             </figure>
             <div class="card-body">
               <p class="card-location">MAMbo – Museo d'Arte Moderna di Bologna, Italy</p>
-              <p class="card-artist">John Giorno</p>
+              <p class="card-artist">Jonas Mehler</p>
               <h3 class="card-title">The Performative Word</h3>
               <p class="card-date">Feb 5 — May 3, 2026</p>
               <span class="card-link">Learn more →</span>
@@ -186,14 +186,14 @@
           <a href="#" class="card">
             <figure class="card-img">
               <img
-                src="images/focus-frieze-la.jpg"
-                alt="Frieze Los Angeles"
+                src="images/Pieces/frieze-newyork-booth.png"
+                alt="Frieze New York"
                 loading="lazy"
               />
             </figure>
             <div class="card-body">
-              <p class="card-location">Booth D09</p>
-              <h3 class="card-title">Frieze Los Angeles</h3>
+              <p class="card-location">New York</p>
+              <h3 class="card-title">Frieze New York</h3>
               <p class="card-date">Feb 27 — Mar 1, 2026</p>
               <span class="card-link">Learn more →</span>
             </div>
@@ -259,27 +259,8 @@
     });
   </script>
   <script>
-    // Fake content: on remplace dynamiquement les textes d'artistes/expositions
-    // pour éviter tout lien avec le réel.
+    // Les cartes (expositions, focus) utilisent le contenu statique du HTML.
     (function () {
-      var cards = document.querySelectorAll('.cards-grid .card');
-      cards.forEach(function (card, idx) {
-        var loc = card.querySelector('.card-location');
-        var artist = card.querySelector('.card-artist');
-        var title = card.querySelector('.card-title');
-        var date = card.querySelector('.card-date');
-
-        if (loc) loc.textContent = 'Quartier ' + (idx + 1);
-        if (artist) artist.textContent = 'Artiste ' + String.fromCharCode(65 + (idx % 26)) + (idx + 1);
-        if (title) title.textContent = 'Exposition imaginaire ' + (idx + 1);
-        if (date) date.textContent = 'Feb 0' + ((idx % 9) + 1) + ' — Apr 0' + (((idx + 2) % 9) + 1) + ', 2026';
-
-        var img = card.querySelector('img');
-        if (img && (artist || title)) {
-          img.setAttribute('alt', (artist ? artist.textContent : 'Artwork') + ', ' + (title ? title.textContent : ''));
-        }
-      });
-
       var newsTitles = document.querySelectorAll('.news-title');
       newsTitles.forEach(function (el, idx) {
         el.textContent = 'Annonce ' + (idx + 1) + ': Œuvre de saison';
