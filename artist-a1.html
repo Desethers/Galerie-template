@@ -704,6 +704,80 @@
       justify-content: center;
       background: var(--white);
     }
+    /* View in room : intérieur + œuvre au mur (fond remplaçable : images/viewing-room-bg.jpg ou URL ci-dessous) */
+    .work-lightbox-room-wrap {
+      display: none;
+      width: 100%;
+      max-width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+    .work-lightbox-media.work-lightbox-media--room .work-lightbox-img {
+      display: none;
+    }
+    .work-lightbox-media.work-lightbox-media--room .work-lightbox-room-wrap {
+      display: flex;
+    }
+    .work-lightbox-room {
+      position: relative;
+      width: 100%;
+      max-width: min(
+        calc(100vw - 2rem - 40px - min(340px, 34vw) - 48px),
+        calc(96vw - 40px - min(340px, 34vw))
+      );
+      aspect-ratio: 4 / 3;
+      min-height: 200px;
+      max-height: min(85vh, calc(92vh - 48px));
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #c4bcb4;
+      background-image: url("https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center 35%;
+    }
+    @media (min-width: 768px) and (max-width: 1536px),
+      (min-width: 768px) and (max-height: 900px) {
+      .work-lightbox-room {
+        max-width: min(
+          calc(100vw - 1.25rem - 40px - min(280px, 28vw) - 36px),
+          calc(94vw - 40px - min(280px, 28vw))
+        );
+        max-height: min(68vh, calc(86vh - 44px));
+      }
+    }
+    @media (max-width: 767px) {
+      .work-lightbox-room {
+        max-width: 100%;
+        max-height: min(52vh, calc(100vw - 48px));
+      }
+    }
+    .work-lightbox-room-art {
+      position: absolute;
+      top: 14%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      height: auto;
+      max-width: min(32%, 220px);
+      max-height: min(50%, 42vh);
+      min-width: 48px;
+      min-height: 48px;
+      object-fit: contain;
+      object-position: center top;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.35);
+      border-radius: 2px;
+      z-index: 1;
+    }
+    .work-lightbox-overlay.is-landscape .work-lightbox-room-art {
+      max-width: min(28%, 240px);
+      max-height: min(48%, 40vh);
+      top: 12%;
+    }
+    .work-lightbox-overlay.is-portrait .work-lightbox-room-art {
+      max-width: min(36%, 200px);
+      max-height: min(52%, 44vh);
+      top: 16%;
+    }
     .work-lightbox-img {
       display: block;
       width: auto;
@@ -820,9 +894,11 @@
     .work-lightbox-details .work-card-detail-line + .work-card-detail-line {
       margin-top: 0.25rem;
     }
-    .work-lightbox-inquire {
+    a.btn-outline.work-lightbox-inquire {
       margin-top: 0.35rem;
       align-self: flex-start;
+      border-radius: 5px;
+      padding: 4px 1.75rem 6px;
     }
     .work-lightbox-actions {
       display: flex;
@@ -876,18 +952,66 @@
       outline: 2px solid var(--text);
       outline-offset: 2px;
     }
+    .work-lightbox-share-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: stretch;
+    }
+    .work-lightbox-share-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 5;
+      min-width: 11.5rem;
+      margin: 0.35rem 0 0;
+      padding: 0.35rem 0;
+      list-style: none;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .work-lightbox-share-menu[hidden] {
+      display: none !important;
+    }
+    .work-lightbox-share-menu li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .work-lightbox-share-item {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-align: left;
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.12s ease;
+    }
+    .work-lightbox-share-item:hover,
+    .work-lightbox-share-item:focus-visible {
+      background: rgba(0, 0, 0, 0.05);
+      outline: none;
+    }
     .work-lightbox-close {
       position: absolute;
       top: 0.65rem;
       right: 0.65rem;
       z-index: 2;
-      width: 40px;
-      height: 40px;
+      width: 26px;
+      height: 26px;
       border-radius: 999px;
       border: 1px solid rgba(0, 0, 0, 0.12);
       background: rgba(255, 255, 255, 0.95);
       color: rgba(0, 0, 0, 0.55);
-      font-size: 1.25rem;
+      font-size: 0.95rem;
       font-weight: 300;
       line-height: 1;
       cursor: pointer;
@@ -895,7 +1019,7 @@
       align-items: center;
       justify-content: center;
       transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: none;
     }
     .work-lightbox-close:hover {
       color: rgba(0, 0, 0, 0.85);
@@ -1001,8 +1125,13 @@
       <div class="work-lightbox" role="dialog" aria-modal="true" aria-labelledby="workLightboxTitle" aria-label="Artwork details">
         <button type="button" class="work-lightbox-close" id="workLightboxClose" aria-label="Close">&times;</button>
         <div class="work-lightbox-inner">
-          <div class="work-lightbox-media">
+          <div class="work-lightbox-media" id="workLightboxMedia">
             <img src="" alt="" class="work-lightbox-img" id="workLightboxImg" width="800" height="1000" decoding="async" />
+            <div class="work-lightbox-room-wrap" id="workLightboxRoomWrap" aria-hidden="true">
+              <div class="work-lightbox-room">
+                <img src="" alt="" class="work-lightbox-room-art" id="workLightboxRoomArt" decoding="async" />
+              </div>
+            </div>
           </div>
           <aside class="work-lightbox-sidebar">
             <p class="work-lightbox-artist" id="workLightboxArtist"></p>
@@ -1010,21 +1139,60 @@
             <div class="work-lightbox-details" id="workLightboxDetails"></div>
             <a class="btn-outline work-lightbox-inquire" id="workLightboxInquire" href="mailto:inquiry@galerie.com">Inquire</a>
             <div class="work-lightbox-actions">
-              <button type="button" class="work-lightbox-action work-lightbox-action--room" id="workLightboxViewRoom" aria-label="View in room">
+              <button
+                type="button"
+                class="work-lightbox-action work-lightbox-action--room"
+                id="workLightboxViewRoom"
+                aria-label="View in room"
+                aria-pressed="false"
+              >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
                 <span>View in room</span>
               </button>
-              <button type="button" class="work-lightbox-action work-lightbox-action--share" id="workLightboxShare" aria-label="Share artwork">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                  <polyline points="16 6 12 2 8 6" />
-                  <line x1="12" y1="2" x2="12" y2="15" />
-                </svg>
-                <span>Share</span>
-              </button>
+              <div class="work-lightbox-share-wrap">
+                <button
+                  type="button"
+                  class="work-lightbox-action work-lightbox-action--share"
+                  id="workLightboxShare"
+                  aria-label="Share artwork"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-controls="workLightboxShareMenu"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                    <polyline points="16 6 12 2 8 6" />
+                    <line x1="12" y1="2" x2="12" y2="15" />
+                  </svg>
+                  <span>Share</span>
+                </button>
+                <ul class="work-lightbox-share-menu" id="workLightboxShareMenu" role="menu" hidden aria-label="Partager sur">
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="facebook">Facebook</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="x">X</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="pinterest">Pinterest</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="linkedin">LinkedIn</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="whatsapp">WhatsApp</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="email">E-mail</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="copy">Copier le lien</button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </aside>
         </div>
@@ -1502,9 +1670,51 @@
       var titleEl = document.getElementById('workLightboxTitle');
       var detailsEl = document.getElementById('workLightboxDetails');
       var inquireEl = document.getElementById('workLightboxInquire');
+      var mediaEl = document.getElementById('workLightboxMedia');
+      var roomWrap = document.getElementById('workLightboxRoomWrap');
+      var roomArt = document.getElementById('workLightboxRoomArt');
       if (!panel || !overlay || !imgEl || !closeBtn) return;
 
       var lastFocus = null;
+      var roomMode = false;
+
+      function setRoomMode(on) {
+        roomMode = !!on;
+        if (mediaEl) {
+          mediaEl.classList.toggle('work-lightbox-media--room', roomMode);
+        }
+        if (roomWrap) {
+          roomWrap.setAttribute('aria-hidden', roomMode ? 'false' : 'true');
+        }
+        var vr = document.getElementById('workLightboxViewRoom');
+        if (vr) {
+          vr.setAttribute('aria-pressed', roomMode ? 'true' : 'false');
+          var vrSpan = vr.querySelector('span');
+          if (vrSpan) vrSpan.textContent = roomMode ? 'Artwork only' : 'View in room';
+          vr.setAttribute('aria-label', roomMode ? 'Show artwork only' : 'View in room');
+        }
+        if (roomMode && imgEl && roomArt) {
+          /* Toujours utiliser la résolution réelle du navigateur (getAttribute peut être vide) */
+          var artUrl = imgEl.currentSrc || imgEl.src;
+          if (!artUrl) {
+            var attr = imgEl.getAttribute('src');
+            if (attr) {
+              try {
+                artUrl = new URL(attr, window.location.href).href;
+              } catch (err) {
+                artUrl = attr;
+              }
+            }
+          }
+          if (artUrl) {
+            roomArt.src = artUrl;
+            roomArt.alt = imgEl.alt ? imgEl.alt + ', in a room setting' : 'Artwork in a room setting';
+          }
+        } else if (!roomMode && roomArt) {
+          roomArt.removeAttribute('src');
+          roomArt.alt = '';
+        }
+      }
 
       function syncLightboxOrientation() {
         var w = imgEl.naturalWidth;
@@ -1525,6 +1735,7 @@
         var src = thumb.getAttribute('src');
         var alt = thumb.getAttribute('alt') || '';
         if (!src) return;
+        setRoomMode(false);
         lastFocus = document.activeElement;
         overlay.classList.remove('is-landscape', 'is-portrait');
         var a = card.querySelector('.work-card-artist');
@@ -1551,6 +1762,8 @@
       }
 
       function closeLightbox() {
+        closeShareMenu();
+        setRoomMode(false);
         if (!overlay.classList.contains('open')) return;
         overlay.classList.remove('open');
         overlay.classList.remove('is-landscape', 'is-portrait');
@@ -1583,31 +1796,135 @@
         if (e.target === overlay) closeLightbox();
       });
 
+      var shareBtn = document.getElementById('workLightboxShare');
+      var shareMenu = document.getElementById('workLightboxShareMenu');
+      var shareWrap = shareBtn ? shareBtn.closest('.work-lightbox-share-wrap') : null;
+      var outsideShareClickHandler = null;
+
+      function getShareContext() {
+        var title = titleEl && titleEl.textContent ? titleEl.textContent.trim() : 'Œuvre';
+        var url = window.location.href;
+        var imageSrc = imgEl && imgEl.getAttribute('src') ? imgEl.getAttribute('src') : '';
+        var imageUrl = '';
+        try {
+          imageUrl = imageSrc ? new URL(imageSrc, window.location.href).href : '';
+        } catch (err) {
+          imageUrl = '';
+        }
+        return { title: title, url: url, imageUrl: imageUrl };
+      }
+
+      function closeShareMenu() {
+        if (!shareMenu || !shareBtn) return;
+        shareMenu.hidden = true;
+        shareBtn.setAttribute('aria-expanded', 'false');
+        if (outsideShareClickHandler) {
+          document.removeEventListener('click', outsideShareClickHandler);
+          outsideShareClickHandler = null;
+        }
+      }
+
+      function openShareMenu() {
+        if (!shareMenu || !shareBtn) return;
+        shareMenu.hidden = false;
+        shareBtn.setAttribute('aria-expanded', 'true');
+        if (outsideShareClickHandler) {
+          document.removeEventListener('click', outsideShareClickHandler);
+        }
+        outsideShareClickHandler = function (ev) {
+          if (shareWrap && !shareWrap.contains(ev.target)) {
+            closeShareMenu();
+          }
+        };
+        setTimeout(function () {
+          document.addEventListener('click', outsideShareClickHandler);
+        }, 0);
+      }
+
+      function toggleShareMenu() {
+        if (!shareMenu) return;
+        if (shareMenu.hidden) {
+          openShareMenu();
+        } else {
+          closeShareMenu();
+        }
+      }
+
+      function runShare(kind) {
+        var ctx = getShareContext();
+        var u = encodeURIComponent(ctx.url);
+        var t = encodeURIComponent(ctx.title);
+        var img = encodeURIComponent(ctx.imageUrl || '');
+        var href = '';
+        switch (kind) {
+          case 'facebook':
+            href = 'https://www.facebook.com/sharer/sharer.php?u=' + u;
+            break;
+          case 'x':
+            href = 'https://twitter.com/intent/tweet?url=' + u + '&text=' + t;
+            break;
+          case 'pinterest':
+            href =
+              'https://www.pinterest.com/pin/create/button/?url=' +
+              u +
+              '&description=' +
+              t +
+              (ctx.imageUrl ? '&media=' + img : '');
+            break;
+          case 'linkedin':
+            href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + u;
+            break;
+          case 'whatsapp':
+            href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(ctx.title + ' — ' + ctx.url);
+            break;
+          case 'email':
+            href =
+              'mailto:?subject=' + t + '&body=' + encodeURIComponent(ctx.title + '\n\n' + ctx.url);
+            window.location.href = href;
+            return;
+          case 'copy':
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(ctx.url).catch(function () {});
+            }
+            return;
+          default:
+            return;
+        }
+        if (href) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        }
+      }
+
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && overlay.classList.contains('open')) {
+          if (shareMenu && !shareMenu.hidden) {
+            e.preventDefault();
+            closeShareMenu();
+            return;
+          }
           e.preventDefault();
           closeLightbox();
         }
       });
 
       var viewRoomBtn = document.getElementById('workLightboxViewRoom');
-      var shareBtn = document.getElementById('workLightboxShare');
       if (viewRoomBtn) {
         viewRoomBtn.addEventListener('click', function (e) {
           e.stopPropagation();
-          /* Emplacement pour intégration « vue salon » / AR */
+          setRoomMode(!roomMode);
         });
       }
-      if (shareBtn) {
+      if (shareBtn && shareMenu) {
         shareBtn.addEventListener('click', function (e) {
           e.stopPropagation();
-          var title = titleEl && titleEl.textContent ? titleEl.textContent.trim() : 'Artwork';
-          var url = window.location.href;
-          if (navigator.share) {
-            navigator.share({ title: title, text: title, url: url }).catch(function () {});
-          } else if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(url).catch(function () {});
-          }
+          toggleShareMenu();
+        });
+        shareMenu.addEventListener('click', function (e) {
+          var item = e.target.closest('[data-share]');
+          if (!item || !shareMenu.contains(item)) return;
+          e.stopPropagation();
+          runShare(item.getAttribute('data-share'));
+          closeShareMenu();
         });
       }
     })();

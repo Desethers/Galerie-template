@@ -10,6 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
     /* Page exposition — une seule colonne (même largeur que header / grilles du site) */
     .exh-page__column {
       width: 100%;
@@ -120,7 +131,8 @@
     .exh-page-aside-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      align-items: flex-start;
+      gap: 0.5rem;
       margin-top: 0.5rem;
     }
     .exh-page-aside-actions--primary {
@@ -130,12 +142,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
-      padding: 6px 1.75rem;
+      min-height: 36px;
+      padding: 4px 1.2rem;
       border: 1px solid var(--black);
       border-radius: 999px;
-      font-size: 0.82rem;
-      letter-spacing: 0.03em;
+      font-size: 0.76rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
       background: var(--black);
       color: var(--white);
       transition: background 0.15s, color 0.15s;
@@ -143,6 +156,17 @@
     .exh-page-intro .btn-primary:hover {
       background: var(--white);
       color: var(--black);
+    }
+    .exh-page-aside-actions .btn-primary,
+    .exh-page-aside-actions .btn-outline {
+      width: 100%;
+      max-width: 12.5rem;
+      box-sizing: border-box;
+      min-height: 36px;
+      padding: 4px 1.2rem;
+      font-size: 0.76rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
     }
     .exh-page-aside-back {
       margin: 0.85rem 0 0;
@@ -157,18 +181,20 @@
       color: var(--black);
     }
 
-    .exh-page-lede {
-      font-size: 1.05rem;
-      line-height: 1.55;
-      color: var(--text);
-      margin: 0 0 1.25rem;
-    }
-    .exh-page-body p {
+    .exh-page-main p {
       font-size: 0.95rem;
       line-height: 1.65;
       color: var(--text);
-      margin: 0 0 1rem;
+    }
+    .exh-page-lede {
+      margin: 0 0 1.25rem;
       max-width: 52ch;
+    }
+    .exh-page-body {
+      max-width: 52ch;
+    }
+    .exh-page-body p {
+      margin: 0 0 1rem;
     }
 
     .exh-page-section {
@@ -491,7 +517,7 @@
       margin-top: 1rem;
       max-width: 42rem;
       /* Légendes œuvres : corps unique 11px (aligné sur exh-work__figcaption--inquiry) */
-      --exh-caption-primary-size: 11px;
+      --exh-caption-primary-size: 12px;
     }
     .exh-work__artist {
       display: block;
@@ -593,6 +619,208 @@
     .exh-page-footer-cta__link:focus-visible {
       outline: 2px solid var(--text);
       outline-offset: 3px;
+    }
+
+    /* Modale inquiry œuvre (mock formulaire) */
+    .inquiry-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 4vw, 2rem);
+      background: rgba(0, 0, 0, 0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.35s ease,
+        background-color 0.35s ease,
+        visibility 0s linear 0.35s;
+    }
+    .inquiry-modal-overlay.open {
+      background: rgba(0, 0, 0, 0.55);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition:
+        opacity 0.35s ease,
+        background-color 0.35s ease,
+        visibility 0s linear 0s;
+    }
+    .inquiry-modal {
+      position: relative;
+      width: min(94vw, 520px);
+      max-height: min(92vh, 720px);
+      overflow: auto;
+      background: var(--white);
+      color: var(--black);
+      padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.25rem);
+      box-sizing: border-box;
+      box-shadow:
+        0 28px 56px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+      transform: scale(0.96) translateY(12px);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+    }
+    .inquiry-modal-overlay.open .inquiry-modal {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .inquiry-modal-overlay,
+      .inquiry-modal {
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .inquiry-modal__close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin: 0;
+      padding: 0.25rem 0;
+      border: none;
+      background: none;
+      font: inherit;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .inquiry-modal__close span[aria-hidden="true"] {
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1;
+      opacity: 0.75;
+    }
+    .inquiry-modal__close:hover {
+      color: var(--black);
+    }
+    .inquiry-modal__close:focus-visible {
+      outline: 2px solid var(--black);
+      outline-offset: 3px;
+    }
+    .inquiry-modal__title {
+      margin: 0 2.5rem 0.65rem 0;
+      font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--black);
+    }
+    .inquiry-modal__lead {
+      margin: 0 0 1.75rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .inquiry-modal__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.1rem 1.25rem;
+    }
+    @media (min-width: 480px) {
+      .inquiry-modal__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .inquiry-line-field {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.4rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #d4d4d4;
+    }
+    .inquiry-line-field input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      padding: 0 0 0.1rem;
+      margin: 0;
+      background: transparent;
+      font: inherit;
+      font-size: 0.88rem;
+      color: var(--black);
+    }
+    .inquiry-line-field input::placeholder {
+      color: #8a8a8a;
+    }
+    .inquiry-line-field input:focus {
+      outline: none;
+    }
+    .inquiry-line-field:focus-within {
+      border-bottom-color: var(--black);
+    }
+    .inquiry-line-field__star {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      color: #8a8a8a;
+      line-height: 1;
+      padding-bottom: 0.15rem;
+    }
+    .inquiry-modal__textarea-wrap {
+      margin-top: 1.35rem;
+    }
+    .inquiry-modal__textarea-wrap textarea {
+      display: block;
+      width: 100%;
+      min-height: 7.5rem;
+      margin: 0;
+      padding: 0.65rem 0.75rem;
+      box-sizing: border-box;
+      border: 1px solid #d4d4d4;
+      border-radius: 2px;
+      font: inherit;
+      font-size: 0.88rem;
+      color: var(--black);
+      resize: vertical;
+    }
+    .inquiry-modal__textarea-wrap textarea::placeholder {
+      color: #8a8a8a;
+    }
+    .inquiry-modal__textarea-wrap textarea:focus {
+      outline: none;
+      border-color: #9ca3af;
+    }
+    .inquiry-modal__counter {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+      color: #9ca3af;
+    }
+    .inquiry-modal__actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+    .inquiry-modal__submit {
+      min-width: 7.5rem;
+      padding: 0.45rem 1.5rem;
+      border: 2px solid #3b6ea5;
+      border-radius: 5px;
+      background: #f0f4fa;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      color: #b0b8c4;
+      cursor: not-allowed;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .inquiry-modal__submit:not(:disabled) {
+      color: var(--black);
+      cursor: pointer;
+    }
+    .inquiry-modal__submit:not(:disabled):hover {
+      background: #e4ecf6;
+      border-color: #2d5a8a;
     }
   </style>
 </head>
@@ -741,7 +969,15 @@
             <img src="images/Pieces/portrait2.jpg" alt="Sun Dog, Untitled, Your friends" width="1200" height="1600" loading="lazy" decoding="async" />
             <figcaption class="exh-work__figcaption--inquiry">
               <p class="exh-work__artist">Sun Dog</p>
-              <a class="btn-outline exh-work__inquiry" href="mailto:inquiry@galerie.com?subject=Inquire%20%E2%80%94%20Untitled%20%E2%80%94%20Your%20friends">Inquire</a>
+              <a
+                class="btn-outline exh-work__inquiry"
+                href="#inquire"
+                role="button"
+                data-inquiry-artist="Sun Dog"
+                data-inquiry-work="Untitled"
+                data-inquiry-exhibition="Your friends"
+                >Inquire</a
+              >
               <p class="exh-work__title-line">
                 <span class="exh-work__title">Untitled</span><span class="exh-work__title-sep">, </span><span class="exh-work__date">2025</span>
               </p>
@@ -830,6 +1066,62 @@
       <div class="bio-modal-scroll">
         <div class="bio-modal-content" id="exhibitionTextModalContent"></div>
       </div>
+    </div>
+  </div>
+
+  <div class="inquiry-modal-overlay" id="artworkInquiryModalOverlay" role="presentation" aria-hidden="true">
+    <div
+      class="inquiry-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="inquiryModalTitle"
+      aria-describedby="inquiryModalLead"
+    >
+      <button type="button" class="inquiry-modal__close" id="artworkInquiryModalClose" aria-label="Close inquiry form">
+        <span aria-hidden="true">×</span> Close
+      </button>
+      <h2 id="inquiryModalTitle" class="inquiry-modal__title">Interested in this work?</h2>
+      <p id="inquiryModalLead" class="inquiry-modal__lead">
+        To learn more about this artwork, please provide your contact information.
+      </p>
+      <form class="inquiry-modal__form" id="artworkInquiryForm" novalidate>
+        <div class="inquiry-modal__grid">
+          <label class="inquiry-line-field">
+            <span class="visually-hidden">First Name</span>
+            <input type="text" name="firstName" id="inquiryFirstName" placeholder="First Name" autocomplete="given-name" required />
+            <span class="inquiry-line-field__star" aria-hidden="true">*</span>
+          </label>
+          <label class="inquiry-line-field">
+            <span class="visually-hidden">Last Name</span>
+            <input type="text" name="lastName" id="inquiryLastName" placeholder="Last Name" autocomplete="family-name" required />
+            <span class="inquiry-line-field__star" aria-hidden="true">*</span>
+          </label>
+          <label class="inquiry-line-field">
+            <span class="visually-hidden">Email</span>
+            <input type="email" name="email" id="inquiryEmail" placeholder="Email" autocomplete="email" required />
+            <span class="inquiry-line-field__star" aria-hidden="true">*</span>
+          </label>
+          <label class="inquiry-line-field">
+            <span class="visually-hidden">Phone Number</span>
+            <input type="tel" name="phone" id="inquiryPhone" placeholder="Phone Number" autocomplete="tel" required />
+            <span class="inquiry-line-field__star" aria-hidden="true">*</span>
+          </label>
+        </div>
+        <div class="inquiry-modal__textarea-wrap">
+          <label class="visually-hidden" for="inquiryComments">Comments &amp; Additional Interests</label>
+          <textarea
+            id="inquiryComments"
+            name="comments"
+            maxlength="300"
+            placeholder="Comments &amp; Additional Interests"
+            rows="5"
+          ></textarea>
+          <span class="inquiry-modal__counter" id="inquiryCharCount" aria-live="polite">300 characters remaining</span>
+        </div>
+        <div class="inquiry-modal__actions">
+          <button type="submit" class="inquiry-modal__submit" id="inquiryModalSubmit" disabled>Inquire</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -1006,6 +1298,158 @@
       });
 
       if (window.location.hash === '#exhibition-text') openModal();
+    })();
+  </script>
+  <script>
+    (function () {
+      var overlay = document.getElementById('artworkInquiryModalOverlay');
+      var closeBtn = document.getElementById('artworkInquiryModalClose');
+      var form = document.getElementById('artworkInquiryForm');
+      var titleEl = document.getElementById('inquiryModalTitle');
+      var submitBtn = document.getElementById('inquiryModalSubmit');
+      var textarea = document.getElementById('inquiryComments');
+      var counter = document.getElementById('inquiryCharCount');
+      var lastInquiry = { artist: '', work: '', exhibition: '' };
+
+      if (!overlay || !closeBtn || !form || !textarea || !counter) return;
+
+      var inquireLinks = document.querySelectorAll('a.exh-work__inquiry[href="#inquire"]');
+      var maxChars = 300;
+
+      function openInquiryModal(ctx) {
+        lastInquiry = ctx;
+        if (titleEl) {
+          titleEl.textContent = ctx.artist
+            ? 'Interested in ' + ctx.artist + '?'
+            : 'Interested in this work?';
+        }
+        form.reset();
+        counter.textContent = maxChars + ' characters remaining';
+        if (submitBtn) submitBtn.disabled = true;
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        window.setTimeout(function () {
+          closeBtn.focus();
+        }, 50);
+      }
+
+      function closeInquiryModal() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (window.location.hash === '#inquire') {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      }
+
+      function updateCharCount() {
+        var left = maxChars - textarea.value.length;
+        counter.textContent =
+          left + ' character' + (left === 1 ? '' : 's') + ' remaining';
+      }
+
+      function checkRequired() {
+        var ids = ['inquiryFirstName', 'inquiryLastName', 'inquiryEmail', 'inquiryPhone'];
+        var ok = ids.every(function (id) {
+          var el = document.getElementById(id);
+          return el && el.value.trim().length > 0;
+        });
+        if (submitBtn) submitBtn.disabled = !ok;
+      }
+
+      inquireLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          openInquiryModal({
+            artist: link.getAttribute('data-inquiry-artist') || '',
+            work: link.getAttribute('data-inquiry-work') || '',
+            exhibition: link.getAttribute('data-inquiry-exhibition') || '',
+          });
+          var base = window.location.pathname + window.location.search;
+          history.replaceState(null, '', base + '#inquire');
+        });
+      });
+
+      textarea.addEventListener('input', function () {
+        updateCharCount();
+      });
+
+      ['inquiryFirstName', 'inquiryLastName', 'inquiryEmail', 'inquiryPhone'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('input', checkRequired);
+      });
+
+      closeBtn.addEventListener('click', closeInquiryModal);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeInquiryModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeInquiryModal();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (submitBtn && submitBtn.disabled) return;
+        var fd = new FormData(form);
+        var first = (fd.get('firstName') || '').toString().trim();
+        var last = (fd.get('lastName') || '').toString().trim();
+        var email = (fd.get('email') || '').toString().trim();
+        var phone = (fd.get('phone') || '').toString().trim();
+        var comments = (fd.get('comments') || '').toString().trim();
+        var subj =
+          'Inquire — ' +
+          (lastInquiry.work || 'Work') +
+          (lastInquiry.exhibition ? ' — ' + lastInquiry.exhibition : '');
+        var body =
+          'Work: ' +
+          (lastInquiry.work || '') +
+          '\nExhibition: ' +
+          (lastInquiry.exhibition || '') +
+          '\nArtist: ' +
+          (lastInquiry.artist || '') +
+          '\n\nName: ' +
+          first +
+          ' ' +
+          last +
+          '\nEmail: ' +
+          email +
+          '\nPhone: ' +
+          phone +
+          (comments ? '\n\n' + comments : '');
+        window.location.href =
+          'mailto:inquiry@galerie.com?subject=' +
+          encodeURIComponent(subj) +
+          '&body=' +
+          encodeURIComponent(body);
+        closeInquiryModal();
+      });
+
+      function openInquiryFromFirstLink() {
+        var link = document.querySelector('a.exh-work__inquiry[href="#inquire"]');
+        if (link) {
+          openInquiryModal({
+            artist: link.getAttribute('data-inquiry-artist') || '',
+            work: link.getAttribute('data-inquiry-work') || '',
+            exhibition: link.getAttribute('data-inquiry-exhibition') || '',
+          });
+        }
+      }
+
+      window.addEventListener('hashchange', function () {
+        if (window.location.hash === '#inquire' && !overlay.classList.contains('open')) {
+          openInquiryFromFirstLink();
+        }
+        if (window.location.hash !== '#inquire' && overlay.classList.contains('open')) {
+          closeInquiryModal();
+        }
+      });
+
+      if (window.location.hash === '#inquire') {
+        openInquiryFromFirstLink();
+      }
     })();
   </script>
 </body>
