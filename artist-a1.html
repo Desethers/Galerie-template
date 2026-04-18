@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sun Dog – Galerie</title>
+  <title>Sacha Elron – Galerie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,7 +31,7 @@
     @media (min-width: 1025px) {
       .artist-hero-inner {
         grid-template-columns: 380px 1fr;
-        gap: 4rem;
+        gap: 10rem;
       }
     }
 
@@ -44,6 +44,11 @@
 
     .artist-info {
       padding-top: .5rem;
+    }
+    @media (min-width: 1025px) and (max-width: 1440px) {
+      .artist-info {
+        padding-left: 30px;
+      }
     }
     .artist-info h1 {
       font-size: clamp(1.6rem, 3vw, 2.6rem);
@@ -62,7 +67,7 @@
       font-size: .88rem;
       line-height: 1.7;
       color: var(--text);
-      max-width: 52ch;
+      max-width: 64ch;
     }
     .artist-bio p + p {
       margin-top: 1rem;
@@ -180,6 +185,9 @@
     #panel-works .work-card:hover figure img {
       border-radius: 4px;
     }
+    #panel-news .work-card:hover img {
+      transform: none;
+    }
     .work-card img {
       width: 100%;
       height: 100%;
@@ -188,7 +196,7 @@
       transition: transform .4s ease;
     }
     .work-card:hover img {
-      transform: scale(1.03);
+      transform: none;
     }
     .work-card-body {
       padding: 0;
@@ -207,7 +215,7 @@
       font-weight: 400;
       color: var(--text);
       letter-spacing: 0.04em;
-      margin: 0 0 0.3rem;
+      margin: 0 0 0.35rem;
       line-height: 1.3;
     }
     /* Date sur la même ligne : « titre, date » */
@@ -231,10 +239,51 @@
       line-height: 1.45;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.1rem;
     }
     #panel-works .work-card-detail .work-card-detail-line {
       display: block;
+    }
+
+    /* ── NEWS : même style que Press (bordure, arrondi, texte hiérarchisé) ── */
+    #panel-news .work-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    #panel-news .work-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(0,0,0,.08);
+      background-color: var(--white);
+    }
+    #panel-news .work-card figure {
+      border-radius: 8px;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+    #panel-news .work-card-body {
+      padding: 1.1rem 1.35rem 1.4rem;
+    }
+    #panel-news .work-card-title {
+      font-size: clamp(.95rem, 1.4vw, 1.15rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -.025em;
+      color: var(--text);
+      margin: 0 0 .55rem;
+      font-style: normal;
+    }
+    #panel-news .work-card-detail {
+      font-size: .8rem;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text);
+      letter-spacing: -.01em;
+      margin: 0;
+      font-style: normal;
     }
 
     /* ── PRESS : cartes type “metric card” (héros + air + sous-titre + corps) ── */
@@ -703,80 +752,37 @@
       align-items: center;
       justify-content: center;
       background: var(--white);
+      position: relative;
     }
-    /* View in room : intérieur + œuvre au mur (fond remplaçable : images/viewing-room-bg.jpg ou URL ci-dessous) */
+    /* View in room : superposé exactement sur la zone image, sans changer la taille de la modale */
     .work-lightbox-room-wrap {
       display: none;
-      width: 100%;
-      max-width: 100%;
-      align-items: center;
-      justify-content: center;
-    }
-    .work-lightbox-media.work-lightbox-media--room .work-lightbox-img {
-      display: none;
-    }
-    .work-lightbox-media.work-lightbox-media--room .work-lightbox-room-wrap {
-      display: flex;
-    }
-    .work-lightbox-room {
-      position: relative;
-      width: 100%;
-      max-width: min(
-        calc(100vw - 2rem - 40px - min(340px, 34vw) - 48px),
-        calc(96vw - 40px - min(340px, 34vw))
-      );
-      aspect-ratio: 4 / 3;
-      min-height: 200px;
-      max-height: min(85vh, calc(92vh - 48px));
+      position: absolute;
+      inset: 20px;
       border-radius: 8px;
       overflow: hidden;
-      background-color: #c4bcb4;
-      background-image: url("https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1600&q=80");
+    }
+    .work-lightbox-media.work-lightbox-media--room .work-lightbox-img {
+      visibility: hidden;
+    }
+    .work-lightbox-media.work-lightbox-media--room .work-lightbox-room-wrap {
+      display: block;
+    }
+    .work-lightbox-room {
+      position: absolute;
+      inset: 0;
+      background-color: #e8e2d8;
+      background-image: url("images/room-bg.png");
       background-size: cover;
-      background-position: center 35%;
-    }
-    @media (min-width: 768px) and (max-width: 1536px),
-      (min-width: 768px) and (max-height: 900px) {
-      .work-lightbox-room {
-        max-width: min(
-          calc(100vw - 1.25rem - 40px - min(280px, 28vw) - 36px),
-          calc(94vw - 40px - min(280px, 28vw))
-        );
-        max-height: min(68vh, calc(86vh - 44px));
-      }
-    }
-    @media (max-width: 767px) {
-      .work-lightbox-room {
-        max-width: 100%;
-        max-height: min(52vh, calc(100vw - 48px));
-      }
+      background-position: center 20%;
     }
     .work-lightbox-room-art {
       position: absolute;
-      top: 14%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: auto;
-      height: auto;
-      max-width: min(32%, 220px);
-      max-height: min(50%, 42vh);
-      min-width: 48px;
-      min-height: 48px;
-      object-fit: contain;
-      object-position: center top;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.35);
-      border-radius: 2px;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       z-index: 1;
-    }
-    .work-lightbox-overlay.is-landscape .work-lightbox-room-art {
-      max-width: min(28%, 240px);
-      max-height: min(48%, 40vh);
-      top: 12%;
-    }
-    .work-lightbox-overlay.is-portrait .work-lightbox-room-art {
-      max-width: min(36%, 200px);
-      max-height: min(52%, 44vh);
-      top: 16%;
     }
     .work-lightbox-img {
       display: block;
@@ -890,6 +896,7 @@
     }
     .work-lightbox-details .work-card-detail-line {
       display: block;
+      color: #999;
     }
     .work-lightbox-details .work-card-detail-line + .work-card-detail-line {
       margin-top: 0.25rem;
@@ -898,7 +905,10 @@
       margin-top: 0.35rem;
       align-self: flex-start;
       border-radius: 5px;
-      padding: 4px 1.75rem 6px;
+      padding: 4px 1.5rem 5px;
+      font-size: 0.78rem;
+      min-height: unset;
+      line-height: 1.6;
     }
     .work-lightbox-actions {
       display: flex;
@@ -1078,7 +1088,7 @@
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="artists.html">Artists</a>
       <span>/</span>
-      Sun Dog
+      Sacha Elron
     </nav>
 
     <!-- ── HERO: Portrait + Bio ────────────────────────── -->
@@ -1086,15 +1096,15 @@
       <div class="artist-hero-inner">
         <img
           src="images/artists/Gemini_Generated_Image_sw19mtsw19mtsw19.png"
-          alt="Portrait of Sun Dog"
+          alt="Portrait of Sacha Elron"
           class="artist-portrait"
           loading="eager"
         />
         <div class="artist-info">
-          <h1>Sun Dog</h1>
+          <h1>Sacha Elron</h1>
           <p class="artist-meta">Born 1960, Oklahoma, USA — Lives and works in New York</p>
         <div class="artist-bio" id="bio">
-            <p>Sun Dog explores the boundaries of landscape and abstraction through a deeply personal visual vocabulary. His paintings, often rendered in rich, saturated color fields, evoke a contemplative stillness that hovers between representation and pure sensation.</p>
+            <p>Sacha Elron explores the boundaries of landscape and abstraction through a deeply personal visual vocabulary. His paintings, often rendered in rich, saturated color fields, evoke a contemplative stillness that hovers between representation and pure sensation.</p>
             <p>Working primarily with oil on canvas, his practice distills nature into its most essential forms — solitary trees, expansive skies, and luminous horizons emerge from layers of pigment with an almost meditative quality. The work invites a prolonged encounter, rewarding patience with subtle shifts in tone and light.</p>
           </div>
           <div id="bioExtended" class="bio-extended-source" hidden aria-hidden="true">
@@ -1220,10 +1230,10 @@
 
         <a href="#" class="work-card">
           <figure>
-            <img src="images/Pieces/ChatGPT Image 26 mars 2026, 19_42_09.png" alt="Untitled (Horizon), 2024" width="800" height="1000" fetchpriority="high" loading="eager" decoding="async" />
+            <img src="images/Pieces/painting-11.png" alt="Untitled (Horizon), 2024" width="800" height="1000" fetchpriority="high" loading="eager" decoding="async" />
           </figure>
           <div class="work-card-body">
-            <p class="work-card-artist">Sun Dog</p>
+            <p class="work-card-artist">Sacha Elron</p>
             <p class="work-card-title">Untitled (Horizon), <span class="work-card-date">2024</span></p>
             <p class="work-card-detail"><span class="work-card-detail-line">Oil on canvas</span><span class="work-card-detail-line">152 × 122 cm</span></p>
           </div>
@@ -1231,10 +1241,10 @@
 
         <a href="#" class="work-card">
           <figure>
-            <img src="images/Pieces/ChatGPT Image 26 mars 2026, 19_43_32.png" alt="Dawn Study No. 7, 2023" width="800" height="1000" loading="eager" decoding="async" />
+            <img src="images/Pieces/painting-12.png" alt="Dawn Study No. 7, 2023" width="800" height="1000" loading="eager" decoding="async" />
           </figure>
           <div class="work-card-body">
-            <p class="work-card-artist">Sun Dog</p>
+            <p class="work-card-artist">Sacha Elron</p>
             <p class="work-card-title">Dawn Study No. 7, <span class="work-card-date">2023</span></p>
             <p class="work-card-detail"><span class="work-card-detail-line">Oil on canvas</span><span class="work-card-detail-line">183 × 152 cm</span></p>
           </div>
@@ -1242,10 +1252,10 @@
 
         <a href="#" class="work-card">
           <figure>
-            <img src="images/Pieces/ChatGPT Image 26 mars 2026, 19_45_19.png" alt="Evening Field, 2023" width="800" height="1000" loading="eager" decoding="async" />
+            <img src="images/Pieces/painting-13.png" alt="Evening Field, 2023" width="800" height="1000" loading="eager" decoding="async" />
           </figure>
           <div class="work-card-body">
-            <p class="work-card-artist">Sun Dog</p>
+            <p class="work-card-artist">Sacha Elron</p>
             <p class="work-card-title">Evening Field, <span class="work-card-date">2023</span></p>
             <p class="work-card-detail"><span class="work-card-detail-line">Oil on canvas</span><span class="work-card-detail-line">122 × 91 cm</span></p>
           </div>
@@ -1256,7 +1266,7 @@
             <img src="images/Pieces/painting-01.png" alt="Tree (After Rain), 2022" width="1200" height="1600" loading="lazy" decoding="async" />
           </figure>
           <div class="work-card-body">
-            <p class="work-card-artist">Sun Dog</p>
+            <p class="work-card-artist">Sacha Elron</p>
             <p class="work-card-title">Tree (After Rain), <span class="work-card-date">2022</span></p>
             <p class="work-card-detail"><span class="work-card-detail-line">Oil on canvas</span><span class="work-card-detail-line">213 × 152 cm</span></p>
           </div>
@@ -1267,7 +1277,7 @@
             <img src="images/Pieces/painting-02.png" alt="Blue Interior, 2022" width="1200" height="1600" loading="lazy" decoding="async" />
           </figure>
           <div class="work-card-body">
-            <p class="work-card-artist">Sun Dog</p>
+            <p class="work-card-artist">Sacha Elron</p>
             <p class="work-card-title">Blue Interior, <span class="work-card-date">2022</span></p>
             <p class="work-card-detail"><span class="work-card-detail-line">Oil on canvas</span><span class="work-card-detail-line">91 × 76 cm</span></p>
           </div>
@@ -1278,7 +1288,7 @@
             <img src="images/Pieces/painting-03.jpg" alt="Solstice, 2021" width="1200" height="1600" loading="lazy" decoding="async" />
           </figure>
           <div class="work-card-body">
-            <p class="work-card-artist">Sun Dog</p>
+            <p class="work-card-artist">Sacha Elron</p>
             <p class="work-card-title">Solstice, <span class="work-card-date">2021</span></p>
             <p class="work-card-detail"><span class="work-card-detail-line">Oil on linen</span><span class="work-card-detail-line">168 × 137 cm</span></p>
           </div>
@@ -1323,7 +1333,7 @@
           <div class="works-grid">
             <a href="#" class="work-card">
               <figure>
-                <img src="images/jpg web/013.jpg" alt="Sun Dog, painting detail" width="800" height="1000" loading="lazy" decoding="async" />
+                <img src="images/artists/news1.png" alt="Sacha Elron, painting detail" width="800" height="1000" loading="lazy" decoding="async" />
               </figure>
               <div class="work-card-body">
                 <p class="work-card-title">In conversation with the gallery</p>
@@ -1332,7 +1342,7 @@
             </a>
             <a href="#" class="work-card">
               <figure>
-                <img src="images/jpg web/014.jpg" alt="Sun Dog, studio work in progress" width="800" height="1000" loading="lazy" decoding="async" />
+                <img src="images/artist-page/studio-visit.png" alt="Sacha Elron, studio work in progress" width="800" height="1000" loading="lazy" decoding="async" />
               </figure>
               <div class="work-card-body">
                 <p class="work-card-title">Studio visit: new canvases ahead of “Recent Studies”</p>
@@ -1341,10 +1351,10 @@
             </a>
             <a href="#" class="work-card">
               <figure>
-                <img src="images/jpg web/015.jpg" alt="Sun Dog, exhibition view" width="800" height="1000" loading="lazy" decoding="async" />
+                <img src="images/artist-page/Mamco.jpg" alt="Sacha Elron, exhibition view" width="800" height="1000" loading="lazy" decoding="async" />
               </figure>
               <div class="work-card-body">
-                <p class="work-card-title">Winter programming in Paris &amp; London</p>
+                <p class="work-card-title">New exhibition: works from 2023–2025, now in Geneva</p>
                 <p class="work-card-detail">Galerie — Dec 2025</p>
               </div>
             </a>
@@ -1357,23 +1367,23 @@
               <div class="press-card-inner">
                 <p class="press-card-hero">Quiet Paintings: a painter tuned to silence</p>
                 <span class="press-card-spacer" aria-hidden="true"></span>
-                <p class="press-card-subtitle">The New York Times · Apr 2025</p>
-                <p class="press-card-excerpt">In his latest New York show, Sun Dog slows the eye down until color seems to breathe. Layers of oil read as weather as much as pigment.</p>
+                <p class="press-card-subtitle">Artforum · Apr 2025</p>
+                <p class="press-card-excerpt">In his latest New York show, Sacha Elron slows the eye down until color seems to breathe. Layers of oil read as weather as much as pigment.</p>
               </div>
             </a>
             <a href="#" class="press-card">
               <div class="press-card-inner">
                 <p class="press-card-hero">Horizon lines that refuse to resolve</p>
                 <span class="press-card-spacer" aria-hidden="true"></span>
-                <p class="press-card-subtitle">The New York Times · Jan 2025</p>
+                <p class="press-card-subtitle">Le Monde · Jan 2025</p>
                 <p class="press-card-excerpt">The critic argues that his landscapes withhold closure on purpose: skies melt into fields until figure and ground trade places.</p>
               </div>
             </a>
             <a href="#" class="press-card">
               <div class="press-card-inner">
-                <p class="press-card-hero">In the studio with Sun Dog</p>
+                <p class="press-card-hero">In the studio with Sacha Elron</p>
                 <span class="press-card-spacer" aria-hidden="true"></span>
-                <p class="press-card-subtitle">The New York Times · Sep 2024</p>
+                <p class="press-card-subtitle">frieze · Sep 2024</p>
                 <p class="press-card-excerpt">Canvases lean against the wall like doors ajar; he scrapes, waits, and returns days later. Patience, he says, is the only shortcut.</p>
               </div>
             </a>
@@ -1381,7 +1391,7 @@
               <div class="press-card-inner">
                 <p class="press-card-hero">Color fields and the weight of twilight</p>
                 <span class="press-card-spacer" aria-hidden="true"></span>
-                <p class="press-card-subtitle">The New York Times · Mar 2024</p>
+                <p class="press-card-subtitle">The Art Newspaper · Mar 2024</p>
                 <p class="press-card-excerpt">Dusk is a recurring character in this work—neither day nor night, it lets violet and umber do the emotional lifting without a single figure.</p>
               </div>
             </a>
@@ -1707,7 +1717,7 @@
             }
           }
           if (artUrl) {
-            roomArt.src = artUrl;
+            roomArt.src = 'images/artist-page/View-in-room.png';
             roomArt.alt = imgEl.alt ? imgEl.alt + ', in a room setting' : 'Artwork in a room setting';
           }
         } else if (!roomMode && roomArt) {

@@ -107,21 +107,22 @@ button { font-family: var(--font); cursor: pointer; }
   gap: 1.25rem;
   max-width: var(--max);
   margin: 0 auto;
-  padding: .5rem var(--gutter); /* mobile compact */
-  /* Pas d’interpolation sur backdrop-filter (souvent irrégulière) : le flou s’applique avec l’état .scrolled */
+  padding: .5rem var(--gutter);
+  background: rgba(255, 255, 255, 0);
+  border: 0.2px solid transparent;
+  box-shadow: 0 0 0 transparent;
   transition: max-width 0.48s cubic-bezier(0.22, 1, 0.36, 1),
     gap 0.48s cubic-bezier(0.22, 1, 0.36, 1),
     padding 0.48s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.48s cubic-bezier(0.22, 1, 0.36, 1),
     border-radius 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-    border 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.48s cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* Même blanc laiteux que la navbar en scroll (toutes largeurs) */
 .site-header.scrolled .header-inner {
-  background: linear-gradient(145deg, rgba(255, 255, 255, .72) 0%, rgba(255, 252, 250, .68) 40%, rgba(255, 250, 246, .65) 70%, rgba(255, 255, 255, .7) 100%);
-  -webkit-backdrop-filter: blur(40px) saturate(2) brightness(1.05) contrast(0.98);
-  backdrop-filter: blur(40px) saturate(2) brightness(1.05) contrast(0.98);
+  background: rgba(255, 255, 255, 0.96);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  backdrop-filter: blur(20px) saturate(1.8);
 }
 @media (min-width: 1025px) {
   .header-inner {
@@ -132,12 +133,8 @@ button { font-family: var(--font); cursor: pointer; }
     gap: 0.75rem;
     padding: .65rem var(--gutter);
     border-radius: 18px;
-    box-shadow: 0 8px 48px rgba(0, 0, 0, .08), 0 2px 16px rgba(0, 0, 0, .04);
-    border: 0.2px solid rgba(0, 0, 0, 0);
-    border-image: none;
-    background: linear-gradient(145deg, rgba(255, 255, 255, .72) 0%, rgba(255, 252, 250, .68) 40%, rgba(255, 250, 246, .65) 70%, rgba(255, 255, 255, .7) 100%);
-    -webkit-backdrop-filter: blur(40px) saturate(2) brightness(1.05) contrast(0.98);
-    backdrop-filter: blur(40px) saturate(2) brightness(1.05) contrast(0.98);
+    box-shadow: 0 8px 48px rgba(0,0,0,.08), 0 2px 16px rgba(0,0,0,.04);
+    border: 0.2px solid rgba(0,0,0,0.06);
   }
 }
 

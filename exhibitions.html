@@ -117,7 +117,7 @@
             </figure>
             <div class="card-body">
               <p class="card-location">Gstaad</p>
-              <p class="card-artist">Sun Dog</p>
+              <p class="card-artist">Sacha Elron</p>
               <h3 class="card-title">Still Life, Living Form</h3>
               <p class="card-date">Feb 12 — Mar 22, 2026</p>
             </div>
@@ -1655,7 +1655,7 @@
 
       /* Même ordre que la grille artists.html */
       var galleryArtists = [
-        'Sun Dog',
+        'Sacha Elron',
         'Audrey Plen',
         'Béatrice Arès',
         'Camille Nord',
@@ -1768,7 +1768,7 @@
 
         var artistEl = li.querySelector('.card-artist');
         if (artistEl) {
-          if (idx === 0) artistEl.textContent = 'Sun Dog';
+          if (idx === 0) artistEl.textContent = 'Sacha Elron';
           else if (isFirstUpcoming) artistEl.textContent = 'Audrey Plen';
           else artistEl.textContent = galleryArtists[idx % galleryArtists.length];
         }
@@ -1788,6 +1788,14 @@
       });
     })();
   </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Live data from Gallery-OS dashboard (Sanity)
+       Remplace le contenu statique ci-dessus par les expositions
+       publiées dans le dashboard (publishOnWebsite == true).
+       ═════════════════════════════════════════════════════════════════ -->
+  <script>window.GALLERY_API = window.GALLERY_API || 'http://localhost:3000';</script>
+  <script src="scripts/exhibitions-live.js" defer></script>
 </body>
 </html>
 
