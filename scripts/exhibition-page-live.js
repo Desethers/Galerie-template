@@ -37,8 +37,9 @@
 
   function imgTag(url, alt, w, h) {
     if (!url) return ''
-    var src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'w=' + (w || 1200) + '&auto=format'
-    return '<img src="' + src + '" alt="' + esc(alt) + '" width="' + (w || 1200) + '" height="' + (h || 1600) + '" loading="lazy" decoding="async" />'
+    var W = w || 2400  // 2400 px covers retina screens up to ~1200 px container width
+    var src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'w=' + W + '&q=90&auto=format'
+    return '<img src="' + src + '" alt="' + esc(alt) + '" width="' + W + '" height="' + (h || '') + '" loading="lazy" decoding="async" />'
   }
 
   function captionHtml(aw) {
@@ -91,7 +92,7 @@
       rightHtml = (
         '<article class="exh-work">' +
           '<figure class="exh-work__figure">' +
-            imgTag(raw.imageUrl, raw.artist + ', ' + raw.title) +
+            imgTag(raw.imageUrl, raw.artist + ', ' + raw.title, 1400) +
             '<figcaption' + (figcaptionCls ? ' class="' + figcaptionCls + '"' : '') + '>' +
               captionHtml(raw) +
               inquireBtn(raw, exhTitle) +
@@ -115,7 +116,7 @@
       '<div class="exh-page__column exh-works-grid--pair">' +
         '<article class="exh-work">' +
           '<figure class="exh-work__figure">' +
-            imgTag(aw.imageUrl, aw.artist + ', ' + aw.title) +
+            imgTag(aw.imageUrl, aw.artist + ', ' + aw.title, 1400) +
             '<figcaption' + (figcaptionLeftCls ? ' class="' + figcaptionLeftCls + '"' : '') + '>' +
               captionHtml(aw) +
               inquireBtn(aw, exhTitle) +

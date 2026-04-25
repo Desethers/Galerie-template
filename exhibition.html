@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exhibition – Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" id="page-meta-desc" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0;
+      margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+    .exh-page__column {
+      width: 100%; max-width: var(--max);
+      margin-left: auto; margin-right: auto;
+      padding-left: var(--gutter); padding-right: var(--gutter);
+      box-sizing: border-box;
+    }
+    .exh-page { padding-bottom: 2rem; }
+    .exh-page-breadcrumb {
+      padding-top: calc(var(--header-height, 4rem) + 0.75rem);
+      padding-bottom: 1rem; font-size: 0.82rem; color: var(--muted);
+    }
+    .exh-page-breadcrumb a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+    .exh-page-breadcrumb a:hover { color: var(--black); }
+    .exh-page-intro { border-top: none; border-bottom: none; padding-top: 1.25rem; padding-bottom: 2.25rem; }
+    .exh-page-hero { padding-top: 2rem; padding-bottom: 2rem; }
+    .exh-page-hero img { width: 100%; height: auto; display: block; }
+    .exh-page-hero__caption {
+      display: block; margin: 0.65rem 0 0; font-size: 11px; font-weight: 400;
+      font-style: normal; line-height: 1.45; color: var(--muted); max-width: 42rem;
+    }
+    .exh-page-hero__caption em { font-style: italic; }
+    .exh-page-split { display: grid; gap: 2.5rem; align-items: start; }
+    @media (min-width: 900px) {
+      .exh-page-split { grid-template-columns: minmax(220px, 320px) minmax(0, 1fr); gap: 3.5rem; }
+    }
+    .exh-page-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1.15; color: var(--black); margin: 0 0 1.25rem;
+    }
+    .exh-page-title em { font-style: italic; font-weight: inherit; }
+    .exh-page-aside {
+      display: flex; flex-direction: column; gap: 1rem;
+      font-size: 0.88rem; line-height: 1.5; color: var(--text);
+    }
+    .exh-page-aside-label {
+      font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted); margin: 0 0 0.2rem;
+    }
+    .exh-page-aside p { margin: 0; }
+    .exh-page-aside a.artist-link { text-decoration: underline; text-underline-offset: 3px; color: var(--black); }
+    .exh-page-aside-actions {
+      display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.5rem; margin-top: 0.5rem;
+    }
+    .exh-page-aside-actions--primary { margin-top: 0.75rem; }
+    .exh-page-intro .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 36px; padding: 4px 1.2rem; border: 1px solid var(--black);
+      border-radius: 999px; font-size: 0.76rem; font-weight: 400; letter-spacing: 0.02em;
+      background: var(--black); color: var(--white); transition: background 0.15s, color 0.15s;
+    }
+    .exh-page-intro .btn-primary:hover { background: var(--white); color: var(--black); }
+    .exh-page-aside-actions .btn-primary,
+    .exh-page-aside-actions .btn-outline {
+      width: 100%; max-width: 12.5rem; box-sizing: border-box;
+      min-height: 36px; padding: 4px 1.2rem; font-size: 0.76rem;
+      font-weight: 400; letter-spacing: 0.02em;
+    }
+    .exh-page-aside-back { margin: 0.85rem 0 0; font-size: 0.82rem; }
+    .exh-page-aside-back a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+    .exh-page-aside-back a:hover { color: var(--black); }
+    .exh-page-main p { font-size: 0.95rem; line-height: 1.65; color: var(--text); }
+    .exh-page-lede { margin: 0 0 1.25rem; max-width: 52ch; }
+    .exh-page-body { max-width: 52ch; }
+    @media (min-width: 1025px) { .exh-page-lede, .exh-page-body { max-width: 68ch; } }
+    .exh-page-body p { margin: 0 0 1rem; }
+    .exh-page-section { padding-top: 0; padding-bottom: 0; }
+    .content-section.exh-exhibition-works { padding: 0; background: var(--white); }
+    .exh-exhibition-statement {
+      padding-top: clamp(2.25rem, 4.5vw, 3.25rem);
+      padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+      text-align: center;
+    }
+    .exh-exhibition-statement__heading { margin: 0 0 1rem; }
+    .exh-exhibition-statement__lead {
+      font-size: 0.95rem; line-height: 1.65; color: var(--text);
+      margin: 0 auto 1.1rem; max-width: 52ch; text-wrap: balance;
+    }
+    .exh-exhibition-statement__cta { margin: 0.35rem auto 0; display: flex; justify-content: center; }
+
+    /* Exhibition text modal */
+    .bio-modal-overlay {
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      padding: clamp(1rem, 4vw, 2rem); z-index: 9999;
+      background: rgba(0,0,0,0); opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.38s ease, background-color 0.38s ease, visibility 0s linear 0.38s;
+    }
+    .bio-modal-overlay.open {
+      background: rgba(0,0,0,0.52); opacity: 1; visibility: visible; pointer-events: auto;
+      transition: opacity 0.38s ease, background-color 0.38s ease, visibility 0s linear 0s;
+    }
+    .bio-modal {
+      position: relative; display: flex; flex-direction: column; background: var(--white);
+      border-radius: clamp(26px, 5vw, 40px); overflow: hidden;
+      width: min(94vw, 620px); max-width: 620px;
+      min-height: min(92vh, max(68vh, calc(min(94vw, 620px) * 1.34)));
+      max-height: min(92vh, 1100px); border: none; padding: 0;
+      color: var(--text); box-sizing: border-box;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.14), 0 12px 24px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+      transform: scale(0.94) translateY(18px); opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease;
+    }
+    .bio-modal-overlay.open .bio-modal { transform: scale(1) translateY(0); opacity: 1; }
+    .bio-modal-scroll {
+      flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: clamp(2.25rem,5vw,3rem) clamp(2rem,4.5vw,2.75rem) clamp(2rem,4vw,2.5rem);
+    }
+    .bio-modal-close {
+      position: absolute; top: 1.15rem; right: 1.4rem; background: none; border: none;
+      font-size: 1.6rem; font-weight: 300; line-height: 1; color: var(--text);
+      cursor: pointer; padding: 0.3rem; opacity: 0.6; z-index: 2;
+    }
+    .bio-modal-close:hover { opacity: 1; }
+    .bio-modal-header { margin: 0 0 1.5rem; }
+    .bio-modal-name {
+      font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 400;
+      letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 0.35rem;
+    }
+    .bio-modal-meta { font-size: 0.82rem; color: var(--muted); margin: 0; }
+    .bio-modal-content p { font-size: 0.93rem; line-height: 1.7; margin: 0 0 1rem; }
+    .bio-modal-content h2, .bio-modal-content h3 { font-size: 0.9rem; font-weight: 500; margin: 1.5rem 0 0.5rem; }
+    .bio-modal-content blockquote { border-left: 2px solid var(--muted); padding-left: 1rem; margin: 1rem 0; font-style: italic; }
+
+    /* Artworks */
+    .exh-works-list { display: flex; flex-direction: column; }
+    .exh-work { width: 100%; }
+    .exh-work--full { }
+    .exh-work__figure { margin: 0; padding: 0; background: var(--white); }
+    .exh-work__figure img { width: 100%; height: auto; display: block; }
+    .exh-work__figure figcaption { margin-top: 1rem; max-width: 42rem; }
+    .exh-work__artist { display: block; font-size: 12px; font-weight: 500; color: var(--text); margin: 0 0 0.15rem; letter-spacing: 0.02em; line-height: 1.25; }
+    .exh-work__title-line { margin: 0 0 0.35rem; font-size: 12px; font-weight: 400; color: var(--black); letter-spacing: 0.02em; line-height: 1.35; }
+    .exh-work__title { display: inline; font-weight: 500; }
+    .exh-work__title-sep { font-weight: 400; }
+    .exh-work__date { display: inline; font-size: inherit; font-weight: 500; color: var(--black); }
+    .exh-work__medium, .exh-work__dimensions { display: block; font-size: 12px; color: var(--muted); line-height: 1.45; margin: 0; }
+    .exh-work__medium { margin-bottom: 0.08rem; }
+    .exh-page-footer-cta {
+      padding-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+    }
+    .exh-page-footer-cta__link {
+      display: inline; font-size: 0.82rem; letter-spacing: 0.03em; color: var(--text);
+      text-decoration: none; border: none; background: none; padding: 0; min-height: 0;
+    }
+    .exh-page-footer-cta__link:hover { color: var(--black); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Inquiry modal */
+    .inquiry-modal-overlay {
+      position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
+      padding: clamp(1rem,4vw,2rem); background: rgba(0,0,0,0); opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.35s ease, background-color 0.35s ease, visibility 0s linear 0.35s;
+    }
+    .inquiry-modal-overlay.open {
+      background: rgba(0,0,0,0.55); opacity: 1; visibility: visible; pointer-events: auto;
+      transition: opacity 0.35s ease, background-color 0.35s ease, visibility 0s linear 0s;
+    }
+    .inquiry-modal {
+      position: relative; width: min(94vw,520px); max-height: min(92vh,720px); overflow: auto;
+      background: var(--white); color: var(--black);
+      padding: clamp(1.75rem,4vw,2.5rem) clamp(1.5rem,4vw,2.25rem);
+      box-sizing: border-box;
+      box-shadow: 0 28px 56px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
+      transform: scale(0.96) translateY(12px); opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
+    }
+    .inquiry-modal-overlay.open .inquiry-modal { transform: scale(1) translateY(0); opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .inquiry-modal-overlay, .inquiry-modal { transition-duration: 0.01ms !important; }
+    }
+    .inquiry-modal__close {
+      position: absolute; top: 1.1rem; right: 1.25rem; display: inline-flex; align-items: center;
+      gap: 0.35rem; margin: 0; padding: 0.25rem 0; border: none; background: none;
+      font: inherit; font-size: 0.82rem; letter-spacing: 0.02em; color: var(--text); cursor: pointer;
+    }
+    .inquiry-modal__close span[aria-hidden="true"] { font-size: 1.15rem; font-weight: 300; line-height: 1; opacity: 0.75; }
+    .inquiry-modal__close:hover { color: var(--black); }
+    .inquiry-modal__title { margin: 0 2.5rem 0.65rem 0; font-size: clamp(1.15rem,2.8vw,1.45rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; color: var(--black); }
+    .inquiry-modal__lead { margin: 0 0 1.75rem; font-size: 0.88rem; line-height: 1.5; color: var(--text); }
+    .inquiry-modal__grid { display: grid; grid-template-columns: 1fr; gap: 1.1rem 1.25rem; }
+    @media (min-width: 480px) { .inquiry-modal__grid { grid-template-columns: 1fr 1fr; } }
+    .inquiry-line-field { display: flex; align-items: flex-end; gap: 0.4rem; padding-bottom: 0.4rem; border-bottom: 1px solid #d4d4d4; }
+    .inquiry-line-field input { flex: 1; min-width: 0; border: none; padding: 0 0 0.1rem; margin: 0; background: transparent; font: inherit; font-size: 0.88rem; color: var(--black); }
+    .inquiry-line-field input::placeholder { color: #8a8a8a; }
+    .inquiry-line-field input:focus { outline: none; }
+    .inquiry-line-field:focus-within { border-bottom-color: var(--black); }
+    .inquiry-line-field__star { flex-shrink: 0; font-size: 0.85rem; color: #8a8a8a; line-height: 1; padding-bottom: 0.15rem; }
+    .inquiry-modal__textarea-wrap { margin-top: 1.35rem; }
+    .inquiry-modal__textarea-wrap textarea { display: block; width: 100%; min-height: 7.5rem; margin: 0; padding: 0.65rem 0.75rem; box-sizing: border-box; border: 1px solid #d4d4d4; border-radius: 2px; font: inherit; font-size: 0.88rem; color: var(--black); resize: vertical; }
+    .inquiry-modal__textarea-wrap textarea::placeholder { color: #8a8a8a; }
+    .inquiry-modal__textarea-wrap textarea:focus { outline: none; border-color: #9ca3af; }
+    .inquiry-modal__counter { display: block; margin-top: 0.4rem; font-size: 0.72rem; letter-spacing: 0.02em; color: #9ca3af; }
+    .inquiry-modal__actions { display: flex; justify-content: flex-end; margin-top: 1.5rem; }
+    .inquiry-modal__submit {
+      min-width: 7.5rem; padding: 0.45rem 1.5rem; border: 2px solid #3b6ea5; border-radius: 5px;
+      background: #f0f4fa; font: inherit; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em;
+      color: #b0b8c4; cursor: not-allowed; transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .inquiry-modal__submit:not(:disabled) { color: var(--black); cursor: pointer; }
+    .inquiry-modal__submit:not(:disabled):hover { background: #e4ecf6; border-color: #2d5a8a; }
+
+    /* Loading / error states */
+    .exh-loading {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 40vh; font-size: 0.88rem; color: var(--muted);
+    }
+    .exh-error {
+      padding: 4rem var(--gutter); text-align: center; color: var(--muted); font-size: 0.88rem;
+    }
+    .exh-error a { color: var(--text); text-decoration: underline; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body class="exh-page">
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">Galerie</a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="exhibitions.html">Exhibitions</a>
+        <a href="artists.html">Artists</a>
+        <a href="#">Fairs</a>
+        <a href="#">News</a>
+        <a href="index.html#about">About</a>
+      </nav>
+      <form class="header-search" role="search" onsubmit="return false" onclick="this.querySelector('input').focus()">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="search" placeholder="" aria-label="Search" />
+        <button type="button" class="header-search-clear" aria-label="Effacer la recherche" tabindex="-1"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+      </form>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-inner">
+        <form class="mobile-search" role="search" onsubmit="return false">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search" aria-label="Search" />
+        </form>
+        <a href="exhibitions.html">Exhibitions</a>
+        <a href="artists.html">Artists</a>
+        <a href="#">Fairs</a>
+        <a href="#">News</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Loading state -->
+    <div class="exh-loading" id="exhLoading" aria-live="polite" aria-label="Loading exhibition">
+      <span>Loading…</span>
+    </div>
+
+    <!-- Error state -->
+    <div class="exh-error" id="exhError" hidden>
+      <p>Exhibition not found. <a href="exhibitions.html">Back to exhibitions</a></p>
+    </div>
+
+    <!-- Page content — hidden until loaded -->
+    <div id="exhContent" hidden>
+
+      <nav class="exh-page__column exh-page-breadcrumb" aria-label="Breadcrumb">
+        <a href="exhibitions.html">Exhibitions</a>
+        <span aria-hidden="true"> — </span>
+        <span id="exhBreadcrumb"></span>
+      </nav>
+
+      <section class="content-section exh-page-intro" aria-labelledby="exh-title">
+        <div class="exh-page__column exh-page-split">
+
+          <aside class="exh-page-aside" aria-label="Exhibition details">
+            <div id="asideArtist">
+              <p class="exh-page-aside-label">Artist</p>
+              <p id="asideArtistName"></p>
+            </div>
+            <div>
+              <p class="exh-page-aside-label">Dates</p>
+              <p id="asideDates"></p>
+            </div>
+            <div id="asideLocationWrap">
+              <p class="exh-page-aside-label">Location</p>
+              <p id="asideLocation"></p>
+            </div>
+            <div class="exh-page-aside-actions exh-page-aside-actions--primary">
+              <a class="btn-primary" id="asideInquiryLink" href="mailto:inquiry@galerie.com">Artwork Inquiry</a>
+            </div>
+            <div class="exh-page-aside-actions" id="asideViewArtist">
+              <a class="btn-outline" id="asideViewArtistLink" href="#">View artist</a>
+            </div>
+            <p class="exh-page-aside-back"><a href="exhibitions.html">All exhibitions</a></p>
+          </aside>
+
+          <div class="exh-page-main">
+            <h1 id="exh-title" class="exh-page-title"></h1>
+            <p class="exh-page-lede" id="exhLede"></p>
+            <div class="exh-page-body" id="exhBody"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Hero image -->
+      <figure class="exh-page__column exh-page-hero" id="exhHero" hidden>
+        <img id="exhHeroImg" src="" alt="" width="1600" height="900" loading="eager" decoding="async" />
+        <figcaption class="exh-page-hero__caption" id="exhHeroCaption"></figcaption>
+      </figure>
+
+      <!-- Works section -->
+      <section class="content-section exh-page-section exh-exhibition-works" id="exhWorksSection" hidden aria-label="Works in this exhibition">
+        <div class="exh-page__column exh-exhibition-statement">
+          <h2 class="section-title exh-exhibition-statement__heading">Works</h2>
+          <p class="exh-exhibition-statement__lead" id="exhWorksLead"></p>
+          <div class="exh-exhibition-statement__cta" id="exhTextCtaWrap" hidden>
+            <a href="#exhibition-text" class="btn-outline" id="exhTextCta">Read exhibition text</a>
+          </div>
+        </div>
+        <div class="exh-works-list" id="exhWorksList"></div>
+      </section>
+
+      <div class="exh-page__column exh-page-footer-cta">
+        <a class="exh-page-footer-cta__link" href="exhibitions.html">← Back to exhibitions</a>
+      </div>
+
+    </div><!-- /exhContent -->
+  </main>
+
+  <!-- Exhibition text modal -->
+  <div class="bio-modal-overlay" id="exhibitionTextModalOverlay" role="presentation" aria-hidden="true">
+    <div class="bio-modal" role="dialog" aria-modal="true" aria-labelledby="exhibitionTextModalTitle">
+      <button type="button" class="bio-modal-close" id="exhibitionTextModalClose" aria-label="Close exhibition text">&times;</button>
+      <div class="bio-modal-scroll">
+        <div class="bio-modal-content" id="exhibitionTextModalContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Artwork inquiry modal -->
+  <div class="inquiry-modal-overlay" id="artworkInquiryModalOverlay" role="presentation" aria-hidden="true">
+    <div class="inquiry-modal" role="dialog" aria-modal="true" aria-labelledby="inquiryModalTitle" aria-describedby="inquiryModalLead">
+      <button type="button" class="inquiry-modal__close" id="artworkInquiryModalClose" aria-label="Close inquiry form">
+        <span aria-hidden="true">×</span> Close
+      </button>
+      <h2 id="inquiryModalTitle" class="inquiry-modal__title">Interested in this work?</h2>
+      <p id="inquiryModalLead" class="inquiry-modal__lead">
+        To learn more about this artwork, please provide your contact information.
+      </p>
+      <form class="inquiry-modal__form" id="artworkInquiryForm" novalidate>
+        <div class="inquiry-modal__grid">
+          <label class="inquiry-line-field">
+            <span class="visually-hidden">First Name</span>
+            <input type="text" name="firstName" placeholder="First Name" autocomplete="given-name" required />
+            <span class="inquiry-line-field__star" aria-hidden="true">*</span>
+          </label>
+          <label class="inquiry-line-field">
+            <span class="visually-hidden">Last Name</span>
+            <input type="text" name="lastName" placeholder="Last Name" autocomplete="family-name" required />
+            <span class="inquiry-line-field__star" aria-hidden="true">*</span>
+          </label>
+          <label class="inquiry-line-field">
+            <span class="visually-hidden">Email</span>
+            <input type="email" name="email" placeholder="Email" autocomplete="email" required />
+            <span class="inquiry-line-field__star" aria-hidden="true">*</span>
+          </label>
+          <label class="inquiry-line-field">
+            <span class="visually-hidden">Phone Number</span>
+            <input type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" />
+          </label>
+        </div>
+        <div class="inquiry-modal__textarea-wrap">
+          <label class="visually-hidden" for="inquiryComments">Comments &amp; Additional Interests</label>
+          <textarea id="inquiryComments" name="comments" maxlength="300" placeholder="Comments &amp; Additional Interests" rows="5"></textarea>
+          <span class="inquiry-modal__counter" id="inquiryCharCount" aria-live="polite">300 characters remaining</span>
+        </div>
+        <div class="inquiry-modal__actions">
+          <button type="submit" class="inquiry-modal__submit" disabled>Inquire</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-brand">Galerie</p>
+      <nav class="footer-social" aria-label="Follow us">
+        <a href="#" title="Facebook" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="#" title="Instagram" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-12.881z"/></svg>
+        </a>
+        <a href="#" title="Artsy" aria-label="Artsy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.75 17.5h-1.5v-6h-1.5V10h3v7.5zm-.75-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </a>
+        <a href="#" title="X" aria-label="X (Twitter)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </nav>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#">The Gallery</a>
+        <a href="#">Jobs</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility</a>
+        <span class="footer-copy">© 2026</span>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ── Site scripts ──────────────────────────────────────────────────────── -->
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    toggle?.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      mobileNav.setAttribute('aria-hidden', String(!open));
+    });
+  </script>
+  <script>
+    (function () {
+      var header = document.querySelector('.site-header');
+      if (!header) return;
+      function setHeaderVar() {
+        document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+      }
+      function updateHeader() {
+        header.classList.toggle('scrolled', window.scrollY > 24);
+      }
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      window.addEventListener('resize', setHeaderVar);
+      updateHeader();
+      setHeaderVar();
+    })();
+  </script>
+  <script>
+    document.querySelectorAll('.header-search-clear').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var form = btn.closest('.header-search');
+        var input = form && form.querySelector('input[type="search"]');
+        if (input) { input.value = ''; input.focus(); form.classList.remove('has-value'); }
+      });
+    });
+    document.querySelectorAll('.header-search input[type="search"]').forEach(function (input) {
+      var form = input.closest('.header-search');
+      function updateHasValue() { form.classList.toggle('has-value', input.value.length > 0); }
+      input.addEventListener('input', updateHasValue);
+      input.addEventListener('focus', updateHasValue);
+      updateHasValue();
+    });
+  </script>
+
+  <!-- ── Exhibition data loader ─────────────────────────────────────────────── -->
+  <script>window.GALLERY_API = window.GALLERY_API || 'https://gallery-os-ten.vercel.app';</script>
+  <script>
+  (function () {
+    'use strict';
+
+    var GALLERY_API = (window.GALLERY_API || 'https://gallery-os-ten.vercel.app').replace(/\/$/, '');
+    var CONTACT_EMAIL = 'inquiry@galerie.com';
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    function esc(str) {
+      return (str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function artistName(a) {
+      return a.displayName || ((a.firstName || '') + ' ' + (a.lastName || '')).trim();
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      var d = new Date(iso + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function imgSrc(obj, w) {
+      if (!obj || !obj.url) return '';
+      var sep = obj.url.indexOf('?') === -1 ? '?' : '&';
+      return obj.url + sep + 'w=' + (w || 1200) + '&auto=format&fit=crop';
+    }
+
+    // ── Parse slug from URL ──────────────────────────────────────────────────
+    var slug = new URLSearchParams(window.location.search).get('slug');
+
+    if (!slug) {
+      showError();
+      return;
+    }
+
+    // ── Fetch ────────────────────────────────────────────────────────────────
+    fetch(GALLERY_API + '/api/public/exhibitions/' + encodeURIComponent(slug), { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (exh) {
+        if (exh && exh.error) throw new Error(exh.error);
+        render(exh);
+      })
+      .catch(function (err) {
+        console.warn('[exhibition] failed to load:', err.message);
+        showError();
+      });
+
+    // ── Error state ──────────────────────────────────────────────────────────
+    function showError() {
+      document.getElementById('exhLoading').hidden = true;
+      document.getElementById('exhError').hidden = false;
+    }
+
+    // ── Render ───────────────────────────────────────────────────────────────
+    function render(exh) {
+      var artists = exh.artists || [];
+      var primaryArtist = artists[0] || null;
+      var primaryName = primaryArtist ? artistName(primaryArtist) : '';
+
+      // <title> and meta
+      var pageTitle = primaryName
+        ? primaryName + ' — ' + exh.title + ' – Exhibitions – Galerie'
+        : exh.title + ' – Exhibitions – Galerie';
+      document.title = pageTitle;
+      document.getElementById('page-meta-desc').setAttribute('content',
+        (primaryName ? primaryName + '. ' : '') + exh.title + '. ' + (exh.subtitle || ''));
+
+      // Breadcrumb
+      document.getElementById('exhBreadcrumb').textContent = exh.title;
+
+      // Aside — Artist
+      var artistNameEl = document.getElementById('asideArtistName');
+      if (primaryName) {
+        var artistHref = primaryArtist && primaryArtist.slug
+          ? 'artist-' + primaryArtist.slug + '.html'
+          : '#';
+        artistNameEl.innerHTML = '<a class="artist-link" href="' + esc(artistHref) + '">' + esc(primaryName) + '</a>';
+        if (artists.length > 1) {
+          artists.slice(1).forEach(function (a) {
+            var n = artistName(a);
+            artistNameEl.insertAdjacentHTML('beforeend', '<br>' + esc(n));
+          });
+        }
+      } else {
+        document.getElementById('asideArtist').hidden = true;
+      }
+
+      // Aside — Dates
+      var datesEl = document.getElementById('asideDates');
+      if (exh.startDate && exh.endDate) {
+        datesEl.textContent = formatDate(exh.startDate) + ' — ' + formatDate(exh.endDate);
+      } else if (exh.startDate) {
+        datesEl.textContent = 'From ' + formatDate(exh.startDate);
+      }
+
+      // Aside — Location
+      var locEl = document.getElementById('asideLocation');
+      var venue = exh.venue;
+      if (venue && (venue.name || venue.city)) {
+        var locParts = [venue.name, venue.city].filter(Boolean);
+        locEl.textContent = locParts.join(', ');
+      } else {
+        document.getElementById('asideLocationWrap').hidden = true;
+      }
+
+      // Aside — Inquiry CTA
+      var inquirySubject = 'Inquire — ' + exh.title + (primaryName ? ' — ' + primaryName : '');
+      document.getElementById('asideInquiryLink').setAttribute(
+        'href', 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(inquirySubject)
+      );
+
+      // Aside — View artist button
+      if (primaryArtist && primaryArtist.slug) {
+        document.getElementById('asideViewArtistLink').setAttribute('href', 'artist-' + primaryArtist.slug + '.html');
+      } else {
+        document.getElementById('asideViewArtist').hidden = true;
+      }
+
+      // H1
+      var h1 = document.getElementById('exh-title');
+      if (primaryName) {
+        h1.innerHTML = esc(primaryName) + ' — <em>' + esc(exh.title) + '</em>';
+      } else {
+        h1.textContent = exh.title;
+      }
+
+      // Lede — subtitle, or first sentence of curatorTextHtml/pressReleaseHtml
+      var ledeEl = document.getElementById('exhLede');
+      if (exh.subtitle) {
+        ledeEl.textContent = exh.subtitle;
+      } else {
+        // Extract first <p> text from curatorText or pressRelease
+        var tmpDiv = document.createElement('div');
+        tmpDiv.innerHTML = exh.curatorTextHtml || exh.pressReleaseHtml || '';
+        var firstP = tmpDiv.querySelector('p');
+        if (firstP) ledeEl.textContent = firstP.textContent;
+        else ledeEl.hidden = true;
+      }
+
+      // Body — pressRelease (shortened: first 2 paragraphs + "contact the gallery" link)
+      var bodyEl = document.getElementById('exhBody');
+      var bodyHtml = exh.pressReleaseHtml || '';
+      if (bodyHtml) {
+        var bodyDiv = document.createElement('div');
+        bodyDiv.innerHTML = bodyHtml;
+        var allP = bodyDiv.querySelectorAll('p');
+        var excerpt = '';
+        allP.forEach(function (p, i) { if (i < 2) excerpt += '<p>' + p.innerHTML + '</p>'; });
+        excerpt += '<p>Private viewing and availability: <a class="artist-link" href="mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Private viewing — ' + exh.title) + '">contact the gallery</a>.</p>';
+        bodyEl.innerHTML = excerpt;
+      } else {
+        bodyEl.innerHTML = '<p>For press images, checklist, and media inquiries, please <a class="artist-link" href="mailto:' + CONTACT_EMAIL + '">contact the gallery</a>.</p>';
+      }
+
+      // Hero image
+      var heroFig = document.getElementById('exhHero');
+      if (exh.mainImage && exh.mainImage.url) {
+        document.getElementById('exhHeroImg').setAttribute('src', imgSrc(exh.mainImage, 1600));
+        document.getElementById('exhHeroImg').setAttribute('alt', exh.mainImage.alt || (primaryName ? primaryName + ', ' + exh.title : exh.title));
+        var captionParts = ['Installation view'];
+        if (primaryName) captionParts.push(primaryName + ' : <em>' + esc(exh.title) + '</em>');
+        if (venue && venue.name) captionParts.push(venue.name);
+        if (venue && venue.city) captionParts.push(venue.city);
+        if (exh.startDate) captionParts.push(new Date(exh.startDate + 'T12:00:00').getFullYear());
+        document.getElementById('exhHeroCaption').innerHTML = captionParts.join(', ');
+        heroFig.hidden = false;
+      }
+
+      // Works section
+      var artworks = exh.artworks || [];
+      var worksSection = document.getElementById('exhWorksSection');
+      if (artworks.length > 0) {
+        var worksList = document.getElementById('exhWorksList');
+        var worksLead = document.getElementById('exhWorksLead');
+        worksLead.textContent = artworks.length === 1
+          ? 'One work presented in this exhibition.'
+          : artworks.length + ' works presented in this exhibition.';
+
+        artworks.forEach(function (item) {
+          var aw = item.artwork;
+          if (!aw) return;
+          var awArtistName = aw.artist ? artistName(aw.artist) : primaryName;
+          var awImg = imgSrc(aw.mainImage, 1200);
+
+          var article = document.createElement('article');
+          article.className = 'exh-work exh-work--full';
+
+          var inner = '<div class="exh-page__column">';
+          inner += '<figure class="exh-work__figure">';
+
+          if (awImg) {
+            inner += '<img src="' + esc(awImg) + '" alt="' + esc(awArtistName + (aw.title ? ', ' + aw.title : '')) + '" loading="lazy" decoding="async" />';
+          }
+
+          inner += '<figcaption>';
+          if (awArtistName) inner += '<p class="exh-work__artist">' + esc(awArtistName) + '</p>';
+          if (aw.title || aw.year) {
+            inner += '<p class="exh-work__title-line">';
+            if (aw.title) inner += '<span class="exh-work__title">' + esc(aw.title) + '</span>';
+            if (aw.title && aw.year) inner += '<span class="exh-work__title-sep">, </span>';
+            if (aw.year) inner += '<span class="exh-work__date">' + esc(aw.year) + '</span>';
+            inner += '</p>';
+          }
+          if (aw.mediumText) inner += '<p class="exh-work__medium">' + esc(aw.mediumText) + '</p>';
+          if (aw.dimensionsText) inner += '<p class="exh-work__dimensions">' + esc(aw.dimensionsText) + '</p>';
+          if (item.wallLabel) inner += '<p class="exh-work__medium" style="margin-top:.5rem">' + esc(item.wallLabel) + '</p>';
+          inner += '</figcaption>';
+          inner += '</figure>';
+          inner += '</div>';
+
+          article.innerHTML = inner;
+          worksList.appendChild(article);
+        });
+
+        worksSection.hidden = false;
+      }
+
+      // Exhibition text modal CTA — show if pressRelease or curatorText exists
+      var fullText = exh.pressReleaseHtml || exh.curatorTextHtml || '';
+      if (fullText) {
+        document.getElementById('exhTextCtaWrap').hidden = false;
+        setupTextModal(exh, fullText, h1.textContent);
+      }
+
+      // Reveal page
+      document.getElementById('exhLoading').hidden = true;
+      document.getElementById('exhContent').hidden = false;
+    }
+
+    // ── Exhibition text modal ─────────────────────────────────────────────────
+    function setupTextModal(exh, html, titleText) {
+      var overlay = document.getElementById('exhibitionTextModalOverlay');
+      var closeBtn = document.getElementById('exhibitionTextModalClose');
+      var content = document.getElementById('exhibitionTextModalContent');
+      var cta = document.getElementById('exhTextCta');
+      var dialogPanel = overlay && overlay.querySelector('.bio-modal');
+
+      if (!overlay || !cta) return;
+
+      function openModal() {
+        content.innerHTML = '';
+        // Header
+        var header = document.createElement('div');
+        header.className = 'bio-modal-header';
+        var titleEl = document.createElement('h2');
+        titleEl.className = 'bio-modal-name';
+        titleEl.id = 'exhibitionTextModalTitle';
+        titleEl.textContent = titleText;
+        header.appendChild(titleEl);
+        content.appendChild(header);
+        // Body
+        content.insertAdjacentHTML('beforeend', html);
+
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        if (dialogPanel) dialogPanel.setAttribute('aria-labelledby', 'exhibitionTextModalTitle');
+        setTimeout(function () { closeBtn && closeBtn.focus(); }, 50);
+      }
+
+      function closeModal() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        cta.focus();
+      }
+
+      cta.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+      closeBtn && closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+      });
+    }
+
+    // ── Inquiry modal ─────────────────────────────────────────────────────────
+    (function () {
+      var overlay = document.getElementById('artworkInquiryModalOverlay');
+      var closeBtn = document.getElementById('artworkInquiryModalClose');
+      var submitBtn = document.querySelector('#artworkInquiryForm .inquiry-modal__submit');
+      var textarea = document.getElementById('inquiryComments');
+      var counter = document.getElementById('inquiryCharCount');
+      var requiredInputs = document.querySelectorAll('#artworkInquiryForm input[required]');
+      var currentTrigger = null;
+
+      function checkValid() {
+        var allFilled = Array.from(requiredInputs).every(function (i) { return i.value.trim().length > 0; });
+        if (submitBtn) submitBtn.disabled = !allFilled;
+      }
+
+      requiredInputs.forEach(function (i) { i.addEventListener('input', checkValid); });
+      if (textarea && counter) {
+        textarea.addEventListener('input', function () {
+          var rem = 300 - textarea.value.length;
+          counter.textContent = rem + ' character' + (rem === 1 ? '' : 's') + ' remaining';
+        });
+      }
+
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-inquiry-work], .exh-work__inquiry');
+        if (!btn) return;
+        e.preventDefault();
+        currentTrigger = btn;
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        setTimeout(function () { closeBtn && closeBtn.focus(); }, 50);
+      });
+
+      function closeModal() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        if (currentTrigger) currentTrigger.focus();
+      }
+
+      closeBtn && closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+      });
+    })();
+
+  })();
+  </script>
+
+</body>
+</html>
