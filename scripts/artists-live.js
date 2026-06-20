@@ -1,11 +1,11 @@
 /**
- * Artists Live — Merge strategy
+ * Artists Live — API-driven rendering
  * ─────────────────────────────────────────────────────────────────────────
- * Enrichit la grille statique avec les données Gallery-OS/Sanity.
- * Ne remplace JAMAIS tout le grid : le HTML statique reste la source de
- * vérité pour le roster et les images locales. Sanity peut mettre à jour :
- *   • L'image portrait si elle existe dans le studio
- *   • Le lien href si la page artiste existe (voir PAGE_MAP)
+ * Remplace le grid statique par les données Gallery-OS/Sanity.
+ * L'API est la source de vérité pour le roster des artistes.
+ *
+ *   • API disponible → le grid est vidé et reconstruit depuis Sanity
+ *   • API indisponible → fallback silencieux, le HTML statique reste affiché
  *
  * Inclure dans artists.html :
  *   <script>window.GALLERY_API = 'https://ton-dashboard.vercel.app';</script>
@@ -18,13 +18,26 @@
   const API_URL  = API_BASE + '/api/public/artists'
 
   /**
-   * Mapping slug Sanity → page HTML existante.
-   * Ajouter une entrée ici quand une nouvelle page artiste est créée.
+   * Chaque artiste possède une page dynamique générique : artist.html?slug=…
+   * artist-page-live.js hydrate la page depuis Gallery OS — plus aucun mapping
+   * manuel à maintenir.
    */
-  const PAGE_MAP = {
-    'sacha-elron': 'artist-a1.html',
-    // 'sun-dog':     'artist-sun-dog.html',
-    // 'ethan-kwan':  'artist-ethan-kwan.html',
+  function artistHref(artist) {
+    return artist.slug ? 'artist.html?slug=' + encodeURIComponent(artist.slug) : '#'
+  }
+
+  // ── Utilitaires ─────────────────────────────────────────────────────────
+
+  function escHtml(str) {
+    return (str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+  }
+
+  function artistName(a) {
+    return a.displayName || ((a.firstName || '') + ' ' + (a.lastName || '')).trim()
   }
 
   function imgUrl(artist, w) {
@@ -34,13 +47,26 @@
     return url + sep + 'w=' + (w || 800) + '&h=' + (w || 800) + '&fit=crop&auto=format'
   }
 
-  function artistName(a) {
-    return a.displayName || ((a.firstName || '') + ' ' + (a.lastName || '')).trim()
+  function cardHTML(artist) {
+    const name  = escHtml(artistName(artist))
+    const img   = imgUrl(artist, 800)
+    const href  = artistHref(artist)
+    const cls   = 'artist-card'
+
+    return (
+      '<a href="' + href + '" class="' + cls + '" role="listitem"' +
+          (artist.slug ? ' data-artist-slug="' + escHtml(artist.slug) + '"' : '') + '>' +
+        '<figure class="artist-card-img">' +
+          (img
+            ? '<img src="' + img + '" alt="' + name + '" width="800" height="800" loading="lazy" decoding="async" />'
+            : '<div style="width:100%;aspect-ratio:1/1;background:#f4f4f5"></div>') +
+        '</figure>' +
+        '<h2>' + name + '</h2>' +
+      '</a>'
+    )
   }
 
-  function normName(str) {
-    return (str || '').toLowerCase().replace(/\s+/g, ' ').trim()
-  }
+  // ── Fetch & render ───────────────────────────────────────────────────────
 
   async function load() {
     let data
@@ -50,7 +76,7 @@
       data = await res.json()
     } catch (err) {
       console.warn('[artists-live] API indisponible, grille statique conservée :', err.message)
-      return  // ← on garde le HTML statique intact
+      return
     }
 
     if (!Array.isArray(data) || data.length === 0) return
@@ -58,35 +84,10 @@
     const grid = document.querySelector('.artists-grid')
     if (!grid) return
 
-    // Index des cartes statiques par nom normalisé
-    const cardByName = {}
-    grid.querySelectorAll('.artist-card').forEach(function (card) {
-      const h2 = card.querySelector('h2')
-      if (h2) cardByName[normName(h2.textContent)] = card
-    })
-
+    // API disponible → elle est source de vérité pour le roster
+    grid.innerHTML = ''
     data.forEach(function (artist) {
-      const name = artistName(artist)
-      const card = cardByName[normName(name)]
-      if (!card) return  // artiste Sanity absent du roster statique → on ne touche rien
-
-      // 1. Portrait Sanity disponible → on swape l'image locale
-      const img = imgUrl(artist, 800)
-      if (img) {
-        const fig = card.querySelector('figure')
-        if (fig) {
-          fig.innerHTML =
-            '<img src="' + img + '" alt="' + name +
-            '" width="800" height="800" loading="lazy" decoding="async" />'
-        }
-      }
-
-      // 2. Page artiste connue → on met à jour le lien
-      const href = PAGE_MAP[artist.slug]
-      if (href) card.setAttribute('href', href)
-
-      // 3. Slug pour usage futur (filtres, analytics…)
-      if (artist.slug) card.dataset.artistSlug = artist.slug
+      grid.insertAdjacentHTML('beforeend', cardHTML(artist))
     })
 
     document.dispatchEvent(new CustomEvent('artists:loaded', { detail: data }))

@@ -1,12 +1,11 @@
 /**
- * Exhibitions Live — Merge strategy
+ * Exhibitions Live — API-driven rendering
  * ─────────────────────────────────────────────────────────────────────────
- * Enrichit les listes statiques (déjà distribuées par buildLists()) avec
- * les données Gallery-OS/Sanity. Ne remplace JAMAIS une liste entière :
- *   • Exhibition Sanity reconnue (même titre) → image swapée si dispo, href mis à jour
- *   • Exhibition Sanity avec image, absente du statique → insérée en tête de liste
- *   • Exhibition Sanity sans image, absente du statique → ignorée (statique suffit)
- *   • API indisponible → fallback silencieux, buildLists() a déjà tout distribué
+ * Remplace les listes statiques par les données Gallery-OS/Sanity.
+ * L'API est la source de vérité pour les trois statuts (Current, Upcoming, Past).
+ *
+ *   • API disponible → les 3 listes sont vidées et reconstruites depuis Sanity
+ *   • API indisponible → fallback silencieux, le statique buildLists() reste affiché
  *
  * Inclure dans exhibitions.html :
  *   <script>window.GALLERY_API = 'https://ton-dashboard.vercel.app';</script>
@@ -89,7 +88,7 @@
     )
   }
 
-  // ── Fetch & merge ────────────────────────────────────────────────────────
+  // ── Fetch & render ───────────────────────────────────────────────────────
 
   async function load() {
     let data
@@ -99,46 +98,39 @@
       data = await res.json()
     } catch (err) {
       console.warn('[exhibitions-live] API indisponible, grille statique conservée :', err.message)
-      return  // buildLists() a déjà distribué le statique — rien à faire
+      return
     }
 
     if (!Array.isArray(data) || data.length === 0) return
 
-    // Current et Upcoming : le statique est la source de vérité — on n'y touche pas.
-    // Seul Past est enrichi par Sanity (images mises à jour, nouvelles expos ajoutées).
-    const listPast = document.getElementById('exhListPast')
-    if (!listPast) return
+    const listCurrent  = document.getElementById('exhListCurrent')
+    const listUpcoming = document.getElementById('exhListUpcoming')
+    const listPast     = document.getElementById('exhListPast')
 
-    // Index des cartes Past statiques par titre normalisé
-    const cardByTitle = {}
-    listPast.querySelectorAll(':scope > li').forEach(function (li) {
-      const titleEl = li.querySelector('.card-title, h3.card-title')
-      if (titleEl) cardByTitle[normTitle(titleEl.textContent)] = li
-    })
+    if (!listCurrent || !listUpcoming || !listPast) return
+
+    // API disponible → elle est source de vérité pour les 3 listes
+    listCurrent.innerHTML  = ''
+    listUpcoming.innerHTML = ''
+    listPast.innerHTML     = ''
 
     data.forEach(function (exh) {
-      if (exh.status !== 'past') return  // Current/Upcoming : on ignore complètement
+      const li       = document.createElement('li')
+      const year     = exh.startDate ? new Date(exh.startDate).getFullYear().toString() : ''
+      const location = (exh.venue && exh.venue.city) ? exh.venue.city.toLowerCase() : ''
 
-      const img  = imgUrl(exh, 800)
-      const href = PAGE_MAP[exh.slug] || (exh.slug ? 'exhibition.html?slug=' + exh.slug : null)
-      const staticLi = cardByTitle[normTitle(exh.title || '')]
+      li.dataset.status = exh.status || 'past'
+      if (year)     li.dataset.year     = year
+      if (location) li.dataset.location = location
+      li.innerHTML = cardInnerHTML(exh)
 
-      if (staticLi) {
-        // Carte Past statique trouvée : enrichir si Sanity a une image
-        if (img) {
-          const fig = staticLi.querySelector('figure')
-          if (fig) fig.innerHTML = '<img src="' + img + '" alt="' + escHtml(exh.title || '') + '" loading="lazy" />'
-        }
-        if (href) {
-          const anchor = staticLi.querySelector('a.card')
-          if (anchor) anchor.setAttribute('href', href)
-        }
-      }
-      // Nouvelle expo Past non présente dans le statique → ignorée pour l'instant
+      if (exh.status === 'current')       listCurrent.appendChild(li)
+      else if (exh.status === 'upcoming') listUpcoming.appendChild(li)
+      else                                listPast.appendChild(li)
     })
 
-    // Re-déclencher les filtres pour que applyFilters() prenne en compte les cartes ajoutées
-    var activePill = document.querySelector('.exh-pill.active')
+    // Re-déclencher le filtre actif pour que applyFilters() prenne en compte les nouvelles cartes
+    const activePill = document.querySelector('.exh-pill.active')
     if (activePill) activePill.dispatchEvent(new MouseEvent('click', { bubbles: true }))
 
     document.dispatchEvent(new CustomEvent('exhibitions:loaded', { detail: data }))
